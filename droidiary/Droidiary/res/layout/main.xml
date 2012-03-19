@@ -76,11 +76,12 @@
             android:layout_below="@+id/relativeLayout1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="88dp" >
-
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:text="@string/copyright"
