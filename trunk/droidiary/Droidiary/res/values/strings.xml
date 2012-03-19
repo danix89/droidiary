@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, DroidiaryActivity!</string>
+    <string name="app_name">Droidiary</string>
+    <string name="titolo">Droidiary</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Entra</string>
+    <string name="titoloRubrica">Menù Rubrica</string><string name="reset">Cancella</string>
+    
+
+</resources>
