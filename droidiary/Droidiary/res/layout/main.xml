@@ -86,8 +86,8 @@
                 android:layout_alignParentTop="true"
                 android:text="@string/copyright"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@string/copyright"
-                android:textSize="18" />
+                android:textColor="#FF0000"
+                />
 
         </RelativeLayout>
 
