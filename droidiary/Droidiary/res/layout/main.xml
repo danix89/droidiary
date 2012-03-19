@@ -3,11 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/portrait" >
 
         <TextView
             android:id="@+id/textView1"
@@ -15,68 +16,54 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="Androidiary"
+            android:layout_marginTop="18dp"
+            android:text="@string/titolo"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="87dp"
-            android:layout_toLeftOf="@+id/textView1"
-            android:text="Login" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button1"
-            android:layout_alignBottom="@+id/button1"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="72dp"
-            android:text="Cancel" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_below="@+id/textView1"
-            android:layout_marginTop="74dp"
-            android:text="Username"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_centerVertical="true"
-            android:text="Password"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
         <EditText
             android:id="@+id/editText1"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView3"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignRight="@+id/button2"
-            android:layout_marginLeft="21dp"
-            android:layout_toRightOf="@+id/textView3" />
-
+            android:layout_alignParentRight="true"
+            android:inputType="textPersonName"
+            android:text="@string/username" />
+
+        <Button
+            android:id="@+id/Button01"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/login" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/Button01"
+            android:layout_alignBottom="@+id/Button01"
+            android:layout_marginLeft="24dp"
+            android:layout_toRightOf="@+id/Button01"
+            android:text="@string/reset" />
+
         <EditText
             android:id="@+id/editText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText1"
-            android:layout_alignRight="@+id/editText1"
-            android:layout_centerVertical="true" >
+            android:layout_above="@+id/Button01"
+            android:layout_marginBottom="42dp"
+            android:layout_toLeftOf="@+id/button1"
+            android:inputType="textPassword"
+            android:text="@string/password" >
 
             <requestFocus />
         </EditText>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
     </RelativeLayout>
 
 </LinearLayout>
