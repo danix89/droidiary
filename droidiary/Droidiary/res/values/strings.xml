@@ -8,6 +8,8 @@
     <string name="password">Password</string>
     <string name="login">Entra</string>
     <string name="titoloRubrica">Menù Rubrica</string><string name="reset">Cancella</string>
+    <string name="pass">Password</string>
+    <string name="copyright">App realizzata da Pirone Mario e Addesa Salvatore</string>
     
 
 </resources>
