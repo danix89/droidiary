@@ -4,89 +4,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="@string/titoloRubrica"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/menunuovocontatto"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="39dp"
+        android:text="@string/menunuovocontatto" />
+
+    <Button
+        android:id="@+id/menumodificacontatto"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/menunuovocontatto"
+        android:layout_below="@+id/menunuovocontatto"
+        android:layout_marginTop="48dp"
+        android:text="@string/menumodificacontatto" />
+
+    <Button
+        android:id="@+id/menueliminacontatto"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/menumodificacontatto"
+        android:layout_below="@+id/menumodificacontatto"
+        android:layout_marginTop="46dp"
+        android:text="@string/menueliminacontatto" />
+
+    <Button
+        android:id="@+id/menuricercacontatto"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/menueliminacontatto"
+        android:layout_below="@+id/menueliminacontatto"
+        android:layout_marginTop="56dp"
+        android:text="@string/menuricercacontatto" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            android:text="@string/titoloRubrica"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#000000" />
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/menunuovocontatto"
+        android:layout_toLeftOf="@+id/menumodificacontatto"
+        android:src="@drawable/apply" />
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView1"
-            android:layout_below="@+id/textView1"
-            android:layout_marginTop="38dp"
-            android:text="nuovo contatto" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/menuricercacontatto"
+        android:layout_alignLeft="@+id/imageView3"
+        android:src="@drawable/cancel" />
 
-        <Button
-            android:id="@+id/Button01"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_alignRight="@+id/button1"
-            android:layout_below="@+id/button1"
-            android:layout_marginTop="50dp"
-            android:text="modifica contatto" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/menueliminacontatto"
+        android:layout_alignLeft="@+id/imageView2"
+        android:src="@drawable/modify" />
 
-        <Button
-            android:id="@+id/Button02"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/Button01"
-            android:layout_alignRight="@+id/Button01"
-            android:layout_below="@+id/Button01"
-            android:layout_marginTop="58dp"
-            android:text="elimina contatto" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignTop="@+id/menuricercacontatto"
+        android:src="@drawable/cerca" />
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/Button01"
-            android:layout_toLeftOf="@+id/Button01"
-            android:src="@drawable/modify" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView1"
-            android:layout_alignTop="@+id/Button02"
-            android:src="@drawable/cancel" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView1"
-            android:layout_alignTop="@+id/button1"
-            android:src="@drawable/apply" />
-
-
-
-        <Button
-            android:id="@+id/Button03"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/Button02"
-            android:layout_alignRight="@+id/Button02"
-            android:layout_below="@+id/Button02"
-            android:layout_marginTop="42dp"
-            android:text="ricerca contatto" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView2"
-            android:layout_alignTop="@+id/Button03"
-            android:src="@drawable/cerca" />
-
-    </RelativeLayout>
+</RelativeLayout>
