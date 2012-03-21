@@ -64,7 +64,7 @@
         android:layout_alignRight="@+id/relativeLayout1"
         android:layout_below="@+id/relativeLayout1"
         android:text="@string/reset" />
-
+
     <Button
         android:id="@+id/entra"
         android:layout_width="115dp"
