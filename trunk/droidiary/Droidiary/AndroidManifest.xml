@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu"></activity>
+        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity"></activity>
+        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity"></activity>
     </application>
 
 </manifest>
