@@ -17,7 +17,7 @@ public class DroidiaryActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginp);
         
-        /*Button b = (Button) findViewById(R.id.entra);
+        Button b = (Button) findViewById(R.id.entra);
         b.setOnClickListener(new OnClickListener() 
         						{
         							public void onClick(View arg0) {
@@ -25,7 +25,7 @@ public class DroidiaryActivity extends Activity{
         								startActivity(intent);
         							}
         						}
-        					);*/
+        					);
         	
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();

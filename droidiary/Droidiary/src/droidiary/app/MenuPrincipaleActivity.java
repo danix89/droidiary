@@ -12,7 +12,7 @@ public class MenuPrincipaleActivity extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loginp);
+        setContentView(R.layout.menuprincipalep);
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuPrincipaleActivity.setAppFont(mContainer, mFont);
