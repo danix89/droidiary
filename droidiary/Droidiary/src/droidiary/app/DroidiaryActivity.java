@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class DroidiaryActivity extends Activity{
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         DroidiaryActivity.setAppFont(mContainer, mFont);
     }
-    
+
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
     {
         if (mContainer == null || mFont == null) return;

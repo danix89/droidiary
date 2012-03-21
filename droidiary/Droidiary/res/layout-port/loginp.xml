@@ -56,21 +56,24 @@
 
         <requestFocus />
     </EditText>
-
+
     <Button
         android:id="@+id/cancella"
         android:layout_width="115dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignRight="@+id/relativeLayout1"
         android:layout_below="@+id/relativeLayout1"
+        android:background="@drawable/button_background_normal"
         android:text="@string/reset" />
-
+
     <Button
         android:id="@+id/entra"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cancella"
         android:layout_alignLeft="@+id/password"
         android:layout_below="@+id/relativeLayout1"
+        android:background="@drawable/button_background_normal"
         android:text="@string/login" />
 
 </RelativeLayout>
