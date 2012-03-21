@@ -12,7 +12,7 @@ public class DroidiaryActivity extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loginp);
+        setContentView(R.layout.loginl);
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         DroidiaryActivity.setAppFont(mContainer, mFont);
