@@ -14,7 +14,11 @@
     <string name="menumodificaappuntamento">Modifica Appuntamento</string>
     <string name="menueeliminaappuntamento">Elimina Appuntamento</string>
     <string name="menucercaappuntamento">Cerca Appuntamento</string>
-    <string name="titolomenu">Menu Principale</string>
+    <string name="titolomenu">Menù Principale</string>
+    <string name="menunuovocontatto">Nuovo Contatto</string>
+    <string name="menumodificacontatto">Modifica Contatto</string>
+    <string name="menueliminacontatto">Elimina Contatto</string>
+    <string name="menuricercacontatto">Ricerca Contatto</string>
     
     
 
