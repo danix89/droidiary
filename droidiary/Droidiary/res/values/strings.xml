@@ -10,6 +10,10 @@
     <string name="titoloRubrica">Menù Rubrica</string><string name="reset">Cancella</string>
     <string name="pass">Password</string>
     <string name="titoloAppuntamenti">Menù Appuntamenti</string><string name="copyright">App realizzata da Pirone Mario e Addesa Salvatore</string>
+    <string name="menunuovoappuntamento">Nuovo Appuntamento</string>
+    <string name="menumodificaappuntamento">Modifica Appuntamento</string>
+    <string name="menueeliminaappuntamento">Elimina Appuntamento</string>
+    <string name="menucercaappuntamento">Cerca Appuntamento</string>
     
     
 
