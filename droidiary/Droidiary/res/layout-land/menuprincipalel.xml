@@ -3,7 +3,25 @@
     android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/agendalandscape" >
+    android:background="@drawable/agendalandscape2" >
+
+    <Button
+        android:id="@+id/buttonmenurubrica"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="97dp"
+        android:layout_marginRight="14dp"
+        android:text="@string/menurubrica" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/buttonmenurubrica"
+        android:layout_toLeftOf="@+id/buttonmenurubrica"
+        android:src="@drawable/appuntamenti" />
 
     <TextView
         android:id="@+id/menuprincipale"
@@ -12,45 +30,25 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="26dp"
-        android:layout_marginTop="18dp"
-        android:text="Menù Principale"
+        android:layout_marginTop="44dp"
+        android:text="@string/titolomenu"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000" />
-
-    <Button
-        android:id="@+id/buttonamenuppuntamenti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/menuprincipale"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="62dp"
-        android:text="Menù Appuntamenti" />
-
-    <Button
-        android:id="@+id/buttonmenurubrica"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonamenuppuntamenti"
-        android:layout_alignBottom="@+id/buttonamenuppuntamenti"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="27dp"
-        android:text="Menù Rubrica" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/menuprincipale"
-        android:layout_alignTop="@+id/buttonamenuppuntamenti"
+        android:layout_alignTop="@+id/imageView1"
         android:src="@drawable/rubrica" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
+
+    <Button
+        android:id="@+id/buttonmenuppuntamenti"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/buttonmenurubrica"
-        android:layout_marginRight="15dp"
-        android:layout_toLeftOf="@+id/buttonmenurubrica"
-        android:src="@drawable/appuntamenti" />
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView2"
+        android:text="@string/menuappuntamenti" />
 
 </RelativeLayout>

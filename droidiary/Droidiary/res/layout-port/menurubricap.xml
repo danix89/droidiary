@@ -3,24 +3,12 @@
     android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/agendaportrait" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:text="@string/titoloRubrica"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000" />
+    android:background="@drawable/agendaportrait2" >
 
     <RelativeLayout
         android:id="@+id/menu"
         android:layout_width="250dp"
         android:layout_height="400dp"
-        android:layout_alignTop="@+id/textView1"
         android:layout_centerHorizontal="true" >
 
         <ImageView
@@ -28,8 +16,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="25dp"
             android:src="@drawable/cerca" />
+
+        <Button
+            android:id="@+id/menumodificacontatto"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/menumodificacontatto" />
 
         <Button
             android:id="@+id/menueliminacontatto"
@@ -37,33 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/imageView4"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="40dp"
-            android:text="@string/menueliminacontatto" />
-
-        <Button
-            android:id="@+id/menumodificacontatto"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/menueliminacontatto"
-            android:layout_alignParentRight="true"
             android:layout_marginBottom="29dp"
-            android:text="@string/menumodificacontatto" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/menumodificacontatto"
-            android:layout_marginBottom="48dp"
-            android:src="@drawable/apply" />
-
-        <Button
-            android:id="@+id/menunuovocontatto"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/imageView3"
-            android:text="@string/menunuovocontatto" />
+            android:text="@string/menueliminacontatto" />
 
         <ImageView
             android:id="@+id/imageView1"
@@ -81,15 +51,42 @@
             android:layout_alignTop="@+id/menueliminacontatto"
             android:src="@drawable/cancel" />
 
+        <Button
+            android:id="@+id/menunuovocontatto"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/menumodificacontatto"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="37dp"
+            android:text="@string/menunuovocontatto" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/menunuovocontatto"
+            android:src="@drawable/apply" />
+
+        <Button
+            android:id="@+id/menuricercacontatto"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageView4"
+            android:text="@string/menuricercacontatto" />
+
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/menuricercacontatto"
-        android:layout_width="180dp"
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/menu"
+        android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/menu"
-        android:layout_marginBottom="36dp"
-        android:text="@string/menuricercacontatto" />
+        android:layout_marginTop="44dp"
+        android:text="@string/titoloRubrica"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000" />
 
 </RelativeLayout>
