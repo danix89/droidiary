@@ -3,18 +3,7 @@
     android:id="@+id/relativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/agendaportrait" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
-        android:text="@string/titolomenu"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000" />
+    android:background="@drawable/agendaportrait2" >
 
     <Button
         android:id="@+id/appuntamenti"
@@ -23,7 +12,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="36dp"
-        android:text="Appuntamenti" />
+        android:text="@string/menuappuntamenti" />
 
     <ImageView
         android:id="@+id/imageView1"
@@ -49,6 +38,17 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/appuntamenti"
         android:layout_alignTop="@+id/imageView2"
-        android:text="Rubrica" />
+        android:text="@string/menurubrica" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rubrica"
+        android:layout_alignRight="@+id/rubrica"
+        android:layout_marginBottom="46dp"
+        android:text="@string/titolomenu"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000" />
 
 </RelativeLayout>
