@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu"></activity>
-        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity"></activity>
-        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity"></activity>
+        <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu" android:screenOrientation="portrait"></activity>
+        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity" android:screenOrientation="portrait"></activity>
+        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
