@@ -12,7 +12,7 @@ public class MenuAppuntamentiActivity extends Activity {
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menuappuntamentip);
+        setContentView(R.layout.menuappuntamenti);
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuAppuntamentiActivity.setAppFont(mContainer, mFont);

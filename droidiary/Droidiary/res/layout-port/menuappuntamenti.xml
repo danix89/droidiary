@@ -107,13 +107,15 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/relativeLayout4"
-        android:layout_alignRight="@+id/relativeLayout4"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="27dp"
+        android:layout_marginRight="18dp"
         android:text="@string/titoloAppuntamenti"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:textSize="18dp" />
 
 </RelativeLayout>

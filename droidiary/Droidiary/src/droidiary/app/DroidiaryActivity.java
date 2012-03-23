@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ public class DroidiaryActivity extends Activity{
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.loginp);
+        setContentView(R.layout.login);
         
         Button b = (Button) findViewById(R.id.entra);
         b.setOnClickListener(new OnClickListener() 

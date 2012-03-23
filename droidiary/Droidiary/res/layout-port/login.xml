@@ -5,53 +5,45 @@
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
-    </RelativeLayout>
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/relativeLayout1"
-        android:layout_alignRight="@+id/relativeLayout1"
-        android:layout_marginBottom="39dp"
-        android:inputType="textPersonName"
-        android:text="@string/username" />
-
     <EditText
         android:id="@+id/password"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/relativeLayout1"
-        android:layout_alignRight="@+id/relativeLayout1"
-        android:layout_marginBottom="26dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:inputType="textPassword"
         android:text="@string/pass" >
 
         <requestFocus />
     </EditText>
-
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:layout_marginBottom="38dp"
+        android:inputType="textPersonName"
+        android:text="@string/username" />
+
     <Button
         android:id="@+id/cancella"
         android:layout_width="115dp"
         android:layout_height="50dp"
-        android:layout_alignRight="@+id/relativeLayout1"
-        android:layout_below="@+id/relativeLayout1"
+        android:layout_alignRight="@+id/password"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="34dp"
         android:background="@drawable/button_background_normal"
         android:text="@string/reset" />
-
+
     <Button
         android:id="@+id/entra"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/cancella"
         android:layout_alignLeft="@+id/password"
-        android:layout_below="@+id/relativeLayout1"
+        android:layout_alignTop="@+id/cancella"
         android:background="@drawable/button_background_normal"
         android:text="@string/login" />
 
@@ -61,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/username"
         android:layout_alignRight="@+id/username"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/titolo"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"
