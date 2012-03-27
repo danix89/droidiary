@@ -16,12 +16,8 @@ public class MenuRubricaActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menurubrica);
-        final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
-        final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
-        MenuRubricaActivity.setAppFont(mContainer, mFont);
         
-        
-        Button nuovoContatto = (Button) findViewById(R.id.buttonnuovocontatto);
+        Button nuovoContatto = (Button) findViewById(R.id.menunuovocontatto);
         nuovoContatto.setOnClickListener(new OnClickListener() 
         						{
         							public void onClick(View arg0) {
@@ -30,6 +26,11 @@ public class MenuRubricaActivity extends Activity {
         							}
         						}
         					);
+    
+        final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
+        final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
+        MenuRubricaActivity.setAppFont(mContainer, mFont);
+    
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
