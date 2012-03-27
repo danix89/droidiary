@@ -1,10 +1,13 @@
 package droidiary.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MenuRubricaActivity extends Activity {
@@ -16,6 +19,17 @@ public class MenuRubricaActivity extends Activity {
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
+        
+        
+        Button nuovoContatto = (Button) findViewById(R.id.buttonnuovocontatto);
+        nuovoContatto.setOnClickListener(new OnClickListener() 
+        						{
+        							public void onClick(View arg0) {
+        								Intent intent = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
+        								startActivity(intent);
+        							}
+        						}
+        					);
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)

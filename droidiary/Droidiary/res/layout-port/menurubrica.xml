@@ -85,7 +85,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/menu"
         android:layout_marginTop="44dp"
-        android:text="@string/titoloRubrica"
+        android:text="@string/menurubrica"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000" />
 

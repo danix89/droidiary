@@ -1,44 +1,21 @@
 package droidiary.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class MenuPrincipaleActivity extends Activity {
+public class NuovoContattoActivity extends Activity {
     /** Called when the activity is first created. */
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menuprincipale);
+        setContentView(R.layout.menuaggiungicontatto);
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
-        MenuPrincipaleActivity.setAppFont(mContainer, mFont);
-        
-        Button rubrica = (Button) findViewById(R.id.rubrica);
-        rubrica.setOnClickListener(new OnClickListener() 
-        						{
-        							public void onClick(View arg0) {
-        								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuRubricaActivity.class);
-        								startActivity(intent);
-        							}
-        						}
-        					);
-        
-        Button appuntamento = (Button) findViewById(R.id.appuntamenti);
-        appuntamento.setOnClickListener(new OnClickListener() 
-        						{
-        							public void onClick(View arg0) {
-        								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuAppuntamentiActivity.class);
-        								startActivity(intent);
-        							}
-        						}
-        					);
+        MenuRubricaActivity.setAppFont(mContainer, mFont);
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
