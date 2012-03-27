@@ -21,6 +21,15 @@
     <string name="menuricercacontatto">Ricerca Contatto</string>
     <string name="menuappuntamenti">Appuntamenti</string>
     <string name="menurubrica">Rubrica</string>
+    <string name="salvacontatto">Salva</string>
+    <string name="cancella">Cancella</string>
+    <string name="casa">Casa:</string>
+    <string name="cellulare">Cellulare:</string>
+    <string name="citta">Città:</string>
+    <string name="cognome">Cognome</string>
+    <string name="email">Email:</string>
+    <string name="nome">Nome:</string>
+    <string name="telefono">Telefono</string>
     
     
 

@@ -15,10 +15,10 @@ public class DroidiaryActivity extends Activity{
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.menurubrica);
         
-        Button b = (Button) findViewById(R.id.entra);
-        b.setOnClickListener(new OnClickListener() 
+        Button entra = (Button) findViewById(R.id.entra);
+        entra.setOnClickListener(new OnClickListener() 
         						{
         							public void onClick(View arg0) {
         								Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
