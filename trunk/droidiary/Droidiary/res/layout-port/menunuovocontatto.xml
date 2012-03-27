@@ -100,24 +100,23 @@
         android:layout_centerVertical="true" >
 
         <EditText
-            android:id="@+id/EditText01"
+            android:id="@+id/telefonocasacontatto"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="phone" 
-			android:textSize="12dp"/>
+            android:inputType="phone"
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/TextView03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/EditText01"
+            android:layout_toLeftOf="@+id/telefonocasacontatto"
             android:text="@string/casa"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" 
-            />
+            android:textColor="#000000" />
 
     </RelativeLayout>
 
@@ -129,23 +128,24 @@
         android:layout_below="@+id/relativeLayout2" >
 
         <EditText
-            android:id="@+id/cellularecontatto"
+            android:id="@+id/telefonocellularecontatto"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:inputType="phone" 
-            android:textSize="12dp"/>
+            android:inputType="phone"
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/cellularecontatto"
+            android:layout_toLeftOf="@+id/telefonocellularecontatto"
             android:text="@string/cellulare"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -161,19 +161,8 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" 
+            android:layout_alignParentTop="true"
             android:inputType="text" />
-
-        <TextView
-            android:id="@+id/citta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/cittacontatto"
-            android:layout_alignBottom="@+id/cittacontatto"
-            android:layout_alignParentLeft="true"
-            android:text="@string/citta"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/emailcontatto"
@@ -184,12 +173,23 @@
             android:inputType="textEmailAddress" />
 
         <TextView
+            android:id="@+id/citta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/cittacontatto"
+            android:layout_alignBottom="@+id/cittacontatto"
+            android:layout_toLeftOf="@+id/cittacontatto"
+            android:text="@string/citta"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <TextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/emailcontatto"
             android:layout_alignBottom="@+id/emailcontatto"
-            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/citta"
             android:text="@string/email"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000" />
@@ -205,7 +205,7 @@
         android:layout_marginTop="22dp" >
 
         <Button
-            android:id="@+id/Button01"
+            android:id="@+id/salva"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
