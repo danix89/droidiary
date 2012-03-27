@@ -15,21 +15,19 @@ public class DroidiaryActivity extends Activity{
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menurubrica);
-        
-        Button entra = (Button) findViewById(R.id.entra);
-        entra.setOnClickListener(new OnClickListener() 
-        						{
-        							public void onClick(View arg0) {
-        								Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-        								startActivity(intent);
-        							}
-        						}
-        					);
-        	
+        setContentView(R.layout.login);
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         DroidiaryActivity.setAppFont(mContainer, mFont);
+        
+        Button entra = (Button) findViewById(R.id.entra);
+        entra.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
+				startActivity(intent);
+			}
+		});
     }
 
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
