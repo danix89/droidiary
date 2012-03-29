@@ -1,10 +1,13 @@
 package droidiary.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MenuAppuntamentiActivity extends Activity {
@@ -16,6 +19,17 @@ public class MenuAppuntamentiActivity extends Activity {
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuAppuntamentiActivity.setAppFont(mContainer, mFont);
+        
+        
+        Button nuovoAppuntamento = (Button) findViewById(R.id.menunuovoappuntamento);
+        nuovoAppuntamento.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) 
+			{
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, NuovoAppuntamentoActivity.class);
+				startActivity(intent);				
+			}
+		});
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
