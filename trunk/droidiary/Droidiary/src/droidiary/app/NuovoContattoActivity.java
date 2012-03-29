@@ -37,7 +37,7 @@ public class NuovoContattoActivity extends Activity {
 			     String cellulare= txtcellulare.getText().toString();
 			     EditText txtmail= (EditText) findViewById(R.id.emailcontatto);
 			     String email=txtmail.getText().toString();
-			     if(nome.equals("") || cognome.equals("") || telefonoCasa.equals("") || cellulare.equals("")|| email.equals("")){
+			     if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || cellulare.equals("Cellulare:")|| email.equals("Email:")){
 			    	Toast.makeText(getApplicationContext(),  "Controlla tutti i campi", Toast.LENGTH_LONG).show();
 			     }else{ 
 			    	 onClickSalva();
