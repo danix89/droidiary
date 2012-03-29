@@ -30,6 +30,15 @@
     <string name="email">Email:</string>
     <string name="nome">Nome:</string>
     <string name="telefono">Telefono</string>
+    <string name="nomeappuntamento">Nome</string>
+    <string name="prioritàappuntamento">Priorità</string>
+    <string name="coordinateappuntamento">Coordinate</string>
+    <string name="luogoappuntamento">Luogo</string>
+    <string name="indirizzoappuntamento">Indirizzo</string>
+    <string name="dataappuntamento">dd/mm/aaaa</string>
+    <string name="oraappuntamento">hh:mm</string>
+    <string name="nuovoappuntamento">Nuovo Appuntamento</string><string name="statoappuntamento">Stato</string>
+    
     
     
 
