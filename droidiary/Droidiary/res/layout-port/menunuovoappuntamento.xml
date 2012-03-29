@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agendaportrait2" >
+
+    <EditText
+        android:id="@+id/nomeAppuntamento"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:text="@string/nomeappuntamento" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/priorita"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/nomeAppuntamento"
+        android:layout_below="@+id/nomeAppuntamento"
+        android:prompt="@string/prioritaappuntamento" />
+
+    <TextView
+        android:id="@+id/coordinatetextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/priorita"
+        android:text="@string/coordinateappuntamento"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/luogotext"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/coordinatetextview"
+        android:ems="10"
+        android:text="@string/luogoappuntamento" />
+
+    <EditText
+        android:id="@+id/indirizzotext"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/luogotext"
+        android:ems="10"
+        android:text="@string/indirizzoappuntamento" />
+
+    <EditText
+        android:id="@+id/datatext"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/indirizzotext"
+        android:ems="10"
+        android:text="@string/dataappuntamento" />
+
+    <EditText
+        android:id="@+id/oratext"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/datatext"
+        android:ems="10"
+        android:text="@string/oraappuntamento" />
+
+    <TextView
+        android:id="@+id/nuovoappuntamentotextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="39dp"
+        android:text="@string/nuovoappuntamento"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/infotextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/oratext"
+        android:text="@string/infoappuntamento"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <Spinner
+        android:id="@+id/stato"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/infotextview"
+        android:prompt="@string/prioritaappuntamento" />
+
+    <Button
+        android:id="@+id/salva"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/infotextview"
+        android:text="@string/salvacontatto" />
+
+    <Button
+        android:id="@+id/cancella"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/salva"
+        android:text="@string/cancella" />
+
+</RelativeLayout>

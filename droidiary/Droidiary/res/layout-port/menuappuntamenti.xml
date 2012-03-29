@@ -39,7 +39,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/apply" />
-
+
             <Button
                 android:id="@+id/menunuovoappuntamento"
                 android:layout_width="180dp"
@@ -47,6 +47,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:text="@string/menunuovoappuntamento" />
+
         </RelativeLayout>
 
         <RelativeLayout
