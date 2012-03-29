@@ -31,14 +31,23 @@
     <string name="nome">Nome:</string>
     <string name="telefono">Telefono</string>
     <string name="nomeappuntamento">Nome</string>
-    <string name="prioritàappuntamento">Priorità</string>
+    <string name="prioritaappuntamento">Priorità</string>
+    <string-array name="priorita_array">
+    	<item>Alta</item>
+        <item>Bassa</item>
+    </string-array>
     <string name="coordinateappuntamento">Coordinate</string>
     <string name="luogoappuntamento">Luogo</string>
     <string name="indirizzoappuntamento">Indirizzo</string>
     <string name="dataappuntamento">dd/mm/aaaa</string>
     <string name="oraappuntamento">hh:mm</string>
-    <string name="nuovoappuntamento">Nuovo Appuntamento</string><string name="statoappuntamento">Stato</string>
-    
+    <string name="nuovoappuntamento">Nuovo Appuntamento</string>
+    <string name="statoappuntamento">Stato</string>
+    <string-array name="stato_array">
+    	<item>In corso</item>
+        <item>Completato</item>
+    </string-array>
+    <string name="infoappuntamento">Info</string>
     
     
 
