@@ -23,6 +23,7 @@
         <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="fullSensor"></activity>
         <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
         <activity android:name="ModificaContattoActivity" android:label="@string/menumodificacontatto" android:screenOrientation="fullSensor"></activity>
+        <activity android:screenOrientation="fullSensor" android:name="NuovoAppuntamentoActivity" android:label="@string/nuovoappuntamento"></activity>
     </application>
 
 </manifest>
