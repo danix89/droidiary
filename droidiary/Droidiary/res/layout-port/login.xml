@@ -5,55 +5,61 @@
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:inputType="textPassword"
-        android:text="@string/pass" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/password"
-        android:layout_alignLeft="@+id/password"
-        android:layout_marginBottom="39dp"
-        android:inputType="textPersonName"
-        android:text="@string/username" />
-
-    <Button
-        android:id="@+id/cancella"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_alignRight="@+id/password"
-        android:layout_below="@+id/password"
-        android:layout_marginTop="64dp"
-        android:text="@string/reset" />
-
-    <Button
-        android:id="@+id/entra"
-        android:layout_width="115dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cancella"
-        android:layout_alignLeft="@+id/password"
-        android:text="@string/login" />
-
     <TextView
         android:id="@+id/titolo"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/username"
-        android:layout_marginTop="48dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp"
         android:text="@string/titolo"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000"
         android:textSize="28dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="240dp"
+        android:layout_height="170dp"
+        android:layout_alignRight="@+id/titolo"
+        android:layout_below="@+id/titolo"
+        android:layout_marginTop="27dp" >
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:inputType="textPersonName"
+            android:text="@string/username" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/username"
+            android:inputType="textPassword"
+            android:text="@string/pass" />
+
+        <Button
+            android:id="@+id/entra"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="@string/login" />
+
+        <Button
+            android:id="@+id/cancella"
+            android:layout_width="115dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/reset" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
