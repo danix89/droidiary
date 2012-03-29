@@ -11,17 +11,18 @@
         android:label="@string/app_name" >
         <activity
             android:name=".DroidiaryActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:screenOrientation="fullSensor" android:launchMode="standard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu" android:screenOrientation="portrait"></activity>
-        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity" android:screenOrientation="portrait"></activity>
-        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica"></activity>
+        <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu" android:screenOrientation="fullSensor"></activity>
+        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity" android:screenOrientation="fullSensor"></activity>
+        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="fullSensor"></activity>
+        <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
+        <activity android:name="ModificaContattoActivity" android:label="@string/menumodificacontatto" android:screenOrientation="fullSensor"></activity>
     </application>
 
 </manifest>

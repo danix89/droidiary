@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
-
+
     <TextView
         android:id="@+id/titolo"
         android:layout_width="150dp"
@@ -25,7 +25,7 @@
         android:layout_alignRight="@+id/titolo"
         android:layout_below="@+id/titolo"
         android:layout_marginTop="27dp" >
-
+
         <EditText
             android:id="@+id/username"
             android:layout_width="240dp"
@@ -34,7 +34,7 @@
             android:layout_alignParentTop="true"
             android:inputType="textPersonName"
             android:text="@string/username" />
-
+
         <EditText
             android:id="@+id/password"
             android:layout_width="240dp"
@@ -51,7 +51,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:text="@string/login" />
-
+
         <Button
             android:id="@+id/cancella"
             android:layout_width="115dp"

@@ -5,72 +5,83 @@
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
 
-    <Button
-        android:id="@+id/appuntamenti"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="36dp"
-        android:text="@string/menuappuntamenti" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/appuntamenti"
-        android:layout_marginRight="37dp"
-        android:layout_toLeftOf="@+id/appuntamenti"
-        android:src="@drawable/appuntamenti" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView1"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_marginBottom="48dp"
-        android:src="@drawable/rubrica" />
-
-    <Button
-        android:id="@+id/rubrica"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/appuntamenti"
-        android:layout_alignTop="@+id/imageView2"
-        android:text="@string/menurubrica" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rubrica"
-        android:layout_alignRight="@+id/rubrica"
-        android:layout_marginBottom="46dp"
-        android:text="@string/titolomenu"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appuntamenti"
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:text="Prossimi Appuntamenti"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000"
-        android:textSize="12dp" />
-
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="30dp" >
+        android:layout_marginBottom="15dp" >
 
-    </ListView>
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true" >
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Prossimi Appuntamenti"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="260dp"
+        android:layout_height="200dp"
+        android:layout_above="@+id/relativeLayout3"
+        android:layout_alignLeft="@+id/relativeLayout3"
+        android:layout_marginBottom="23dp" >
+
+        <Button
+            android:id="@+id/appuntamenti"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/menuappuntamenti" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/appuntamenti" />
+
+        <Button
+            android:id="@+id/rubrica"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/menurubrica" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/rubrica"
+            android:src="@drawable/rubrica" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/titolomenu"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000" />
+    </RelativeLayout>
 
 </RelativeLayout>
