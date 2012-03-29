@@ -50,17 +50,27 @@
         android:text="@string/titolomenu"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000000" />
-
-    <EditText
-        android:id="@+id/avvisoappuntamenti"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_alignRight="@+id/appuntamenti"
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/appuntamenti"
-        android:layout_marginTop="28dp"
-        android:inputType="textMultiLine" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="Prossimi Appuntamenti"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        android:textSize="12dp" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="30dp" >
 
-    </EditText>
+    </ListView>
 
 </RelativeLayout>

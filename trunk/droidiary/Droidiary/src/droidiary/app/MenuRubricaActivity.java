@@ -21,12 +21,33 @@ public class MenuRubricaActivity extends Activity {
         nuovoContatto.setOnClickListener(new OnClickListener() 
         						{
         							public void onClick(View arg0) {
-        								Intent intent = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
-        								startActivity(intent);
+        								Intent nuovo = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
+        								startActivity(nuovo);
+        							}
+        						}
+        					);
+        
+        Button modificaContatto = (Button) findViewById(R.id.menumodificacontatto);
+        modificaContatto.setOnClickListener(new OnClickListener() 
+        						{
+        							public void onClick(View arg0) {
+        								Intent modifica = new Intent(MenuRubricaActivity.this, ModificaContattoActivity.class);
+        								startActivity(modifica);
+        							}
+        						}
+        					);
+        
+        /*Button eliminaContatto = (Button) findViewById(R.id.menueliminacontatto);
+        eliminaContatto.setOnClickListener(new OnClickListener() 
+        						{
+        							public void onClick(View arg0) {
+        								Intent elimina = new Intent(MenuRubricaActivity.this, EliminaContattoActivity.class);
+        								startActivity(elimina);
         							}
         						}
         					);
     
+    */
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
