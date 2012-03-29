@@ -6,6 +6,7 @@
     android:background="@drawable/agendaportrait2" >
 
     <TextView
+        
         android:id="@+id/titolo"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
