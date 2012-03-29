@@ -50,7 +50,7 @@
             android:text="@string/reset" />
 
     </RelativeLayout>
-
+
     <TextView
         android:id="@+id/titolo"
         android:layout_width="150dp"
