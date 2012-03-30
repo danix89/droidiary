@@ -1,4 +1,4 @@
-package droidiary.app;
+package droidiary.db;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -45,18 +45,15 @@ public class Account {
         return c;
     }
 	
+	/**
+	 * ritorna l'intera riga tramite ricerca di user e psw
+	 * @param db
+	 * @param s
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Cursor getAccountByUserPsw(SQLiteDatabase db, String[] s) throws SQLException {
 		Cursor c= db.rawQuery("select * from account where username= ? and password= ?", s);
-		return c;
-	}
-	
-	public static Cursor getUsername(SQLiteDatabase db, String[] s) throws SQLException {
-		Cursor c= db.rawQuery("select username from account where username= ? and password= ?", s);
-		return c;
-	}
-	
-	public static Cursor getPassword(SQLiteDatabase db, String[] s) throws SQLException {
-		Cursor c= db.rawQuery("select password from account where username= ? and password= ?", s);
 		return c;
 	}
 	

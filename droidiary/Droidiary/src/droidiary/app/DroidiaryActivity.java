@@ -1,5 +1,7 @@
 package droidiary.app;
 
+import droidiary.db.Account;
+import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
