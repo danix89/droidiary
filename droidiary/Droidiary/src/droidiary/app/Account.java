@@ -22,6 +22,15 @@ public class Account {
 	}
 	
 	/**
+	 * ritorna la lista di tutti gli account
+	 * @param db
+	 * @return
+	 */
+	 public static Cursor getAllAccount(SQLiteDatabase db){
+	        return db.query(TABELLA, COLONNE, null, null, null, null, null);
+	    }
+	
+	/**
 	 * metodo che ritorno l'account con id uguale a quello passato come parametro
 	 * @param db
 	 * @param id

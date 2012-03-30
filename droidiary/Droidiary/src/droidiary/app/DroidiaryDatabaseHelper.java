@@ -37,7 +37,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 														"cognome VARCHAR(15) NOT NULL, citta VARCHAR(15), cellulare VARCHAR(11), numerocasa VARCHAR(11)," +
 														" mail VARCHAR(11), FOREIGN KEY(id_account) REFERENCES account(_id));";
 	private static final String CREATE_TABLE_APPUNTAMENTO = "create table appuntamento(_id integer PRIMARY KEY AUTOINCREMENT, id_contatto INT(4), id_account INT(4) NOT NULL," +
-			   												"data/ora DATETIME NOT NULL, citta VARCHAR(15), FOREIGN KEY(id_account) REFERENCES account(id_account)," +
+			   												"data_ora DATETIME NOT NULL, citta VARCHAR(15), FOREIGN KEY(id_account) REFERENCES account(id_account)," +
 			   												"FOREIGN KEY(id_contatto) REFERENCES contatto(_id));";
 }
 

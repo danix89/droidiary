@@ -24,7 +24,6 @@
         <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
         <activity android:name="ModificaContattoActivity" android:label="@string/menumodificacontatto" android:screenOrientation="fullSensor"></activity>
         <activity android:screenOrientation="fullSensor" android:name="NuovoAppuntamentoActivity" android:label="@string/nuovoappuntamento"></activity>
-        <activity android:name="AboutActivity" android:screenOrientation="fullSensor" android:label="@layout/about"></activity>
     </application>
 
 </manifest>

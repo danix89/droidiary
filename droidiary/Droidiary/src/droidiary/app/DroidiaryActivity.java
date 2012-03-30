@@ -29,6 +29,8 @@ public class DroidiaryActivity extends Activity{
         
         dbd = new DroidiaryDatabaseHelper(this); //collegamento database
         db= dbd.getWritableDatabase(); //apertura database
+        Account.insertAccount(db, "marpir", "m0001");
+		Account.insertAccount(db, "saladd", "s0002");
         
         Button entra = (Button) findViewById(R.id.entra);
         
@@ -36,19 +38,16 @@ public class DroidiaryActivity extends Activity{
 			
 		public void onClick(View v) {
 				
-				
-				
 				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 				EditText txtpsw = (EditText)findViewById(R.id.password);
-				
-				Account.insertAccount(db, "marpir", "m0001");
-				Account.insertAccount(db, "saladd", "s0002");
-				
+
 				String[] arg= {txtnome.getText().toString(), txtpsw.getText().toString()};
 				System.out.println(txtnome.getText().toString());
+				Cursor c= Account.getAccountByUserPsw(db, arg);
 				
-				if (Account.getAccountByUserPsw(db, arg) != null)
+				if (c != null)
 				{
+					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
 					startActivity(intent);
 				}
