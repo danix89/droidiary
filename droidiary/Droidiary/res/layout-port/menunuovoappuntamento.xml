@@ -38,7 +38,6 @@
             android:layout_alignBottom="@+id/pickDate"
             android:layout_alignParentLeft="true"
             android:paddingLeft="4dip"
-            android:text="Data"
             android:textColor="#000000"
             android:textSize="18dp" />
 
@@ -50,7 +49,6 @@
             android:layout_alignBottom="@+id/pickTime"
             android:layout_alignParentLeft="true"
             android:paddingLeft="4dip"
-            android:text="Ora"
             android:textColor="#000000"
             android:textSize="18dp" />
 
@@ -61,7 +59,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:ems="10"
+            android:textSize="12dp"
             android:text="@string/luogoappuntamento" />
 
         <EditText
@@ -71,7 +69,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/luogoappuntamento"
-            android:ems="10"
+            android:textSize="12dp"
             android:text="@string/indirizzoappuntamento" >
 
             <requestFocus />
