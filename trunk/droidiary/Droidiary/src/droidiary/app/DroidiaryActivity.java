@@ -28,12 +28,15 @@ public class DroidiaryActivity extends Activity{
         //fine codice per il font
         
         dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+        db= dbd.getWritableDatabase(); //apertura database
+        
         Button entra = (Button) findViewById(R.id.entra);
+        
         entra.setOnClickListener(new OnClickListener() {
 			
 		public void onClick(View v) {
 				
-				SQLiteDatabase db= dbd.getWritableDatabase(); //apertura database
+				
 				
 				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 				EditText txtpsw = (EditText)findViewById(R.id.password);
@@ -46,13 +49,12 @@ public class DroidiaryActivity extends Activity{
 				
 				if (Account.getAccountByUserPsw(db, arg) != null)
 				{
-					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
+					startActivity(intent);
 				}
 				else
 				{
-					
-					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-					startActivity(intent);
+					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
@@ -84,4 +86,5 @@ public class DroidiaryActivity extends Activity{
     }
     
     private DroidiaryDatabaseHelper dbd;
+    private SQLiteDatabase db;
 }

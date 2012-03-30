@@ -32,11 +32,11 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	
 	private static final String DB_NAME = "droidiary";
 	private static final int DB_VERSION = 1;
-	private static final String CREATE_TABLE_ACCOUNT = "create table account(_id INT(4) PRIMARY KEY AUTOINCREMENT, username VARCHAR(6) NOT NULL, password VARCHAR(5) NOT NULL);";
-	private static final String CREATE_TABLE_CONTATTO = "create table contatto(_id INT(4) PRIMARY KEY AUTOINCREMENT, id_account INT(4) NOT NULL, nome VARCHAR(15) NOT NULL, " +
+	private static final String CREATE_TABLE_ACCOUNT = "create table account(_id integer PRIMARY KEY AUTOINCREMENT, username VARCHAR(6) NOT NULL, password VARCHAR(5) NOT NULL);";
+	private static final String CREATE_TABLE_CONTATTO = "create table contatto(_id integer PRIMARY KEY AUTOINCREMENT, id_account INT(4) NOT NULL, nome VARCHAR(15) NOT NULL, " +
 														"cognome VARCHAR(15) NOT NULL, citta VARCHAR(15), cellulare VARCHAR(11), numerocasa VARCHAR(11)," +
 														" mail VARCHAR(11), FOREIGN KEY(id_account) REFERENCES account(_id));";
-	private static final String CREATE_TABLE_APPUNTAMENTO = "create table appuntamento(_id INT(4) PRIMARY KEY AUTOINCREMENT, id_contatto INT(4), id_account INT(4) NOT NULL," +
+	private static final String CREATE_TABLE_APPUNTAMENTO = "create table appuntamento(_id integer PRIMARY KEY AUTOINCREMENT, id_contatto INT(4), id_account INT(4) NOT NULL," +
 			   												"data/ora DATETIME NOT NULL, citta VARCHAR(15), FOREIGN KEY(id_account) REFERENCES account(id_account)," +
 			   												"FOREIGN KEY(id_contatto) REFERENCES contatto(_id));";
 }
