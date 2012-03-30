@@ -22,12 +22,6 @@ public class NuovoAppuntamentoActivity extends Activity{
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         DroidiaryActivity.setAppFont(mContainer, mFont);
-        
-        Spinner spinner = (Spinner) findViewById(R.id.priorita);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.priorita_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
     }
 
     
