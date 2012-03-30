@@ -4,116 +4,132 @@
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
 
-    <EditText
-        android:id="@+id/nomeAppuntamento"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="260dp"
+        android:layout_height="150dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="64dp"
-        android:ems="10"
-        android:text="@string/nomeappuntamento" >
+        android:layout_centerVertical="true"
+        android:layout_marginRight="14dp" >
 
-        <requestFocus />
-    </EditText>
+        <Button
+            android:id="@+id/pickTime"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="4dip"
+            android:text="Inserisci Ora" />
 
-    <Spinner
-        android:id="@+id/priorita"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/nomeAppuntamento"
-        android:layout_below="@+id/nomeAppuntamento"
-        android:prompt="@string/prioritaappuntamento" />
+        <Button
+            android:id="@+id/pickDate"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_above="@+id/pickTime"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="4dip"
+            android:text="Inserisci Data" />
 
-    <TextView
-        android:id="@+id/coordinatetextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/priorita"
-        android:text="@string/coordinateappuntamento"
-        android:textColor="#000000"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/dataDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/pickDate"
+            android:layout_alignBottom="@+id/pickDate"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="4dip"
+            android:text="Data"
+            android:textColor="#000000"
+            android:textSize="18dp" />
 
-    <EditText
-        android:id="@+id/luogotext"
-        android:layout_width="180dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/coordinatetextview"
-        android:ems="10"
-        android:text="@string/luogoappuntamento" />
+        <TextView
+            android:id="@+id/oraDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/pickTime"
+            android:layout_alignBottom="@+id/pickTime"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="4dip"
+            android:text="Ora"
+            android:textColor="#000000"
+            android:textSize="18dp" />
 
-    <EditText
-        android:id="@+id/indirizzotext"
-        android:layout_width="180dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/luogotext"
-        android:ems="10"
-        android:text="@string/indirizzoappuntamento" />
+        <EditText
+            android:id="@+id/luogoappuntamento"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:ems="10"
+            android:text="@string/luogoappuntamento" />
 
-    <EditText
-        android:id="@+id/datatext"
-        android:layout_width="180dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/indirizzotext"
-        android:ems="10"
-        android:text="@string/dataappuntamento" />
+        <EditText
+            android:id="@+id/indirizzoappuntamento"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/luogoappuntamento"
+            android:ems="10"
+            android:text="@string/indirizzoappuntamento" >
 
-    <EditText
-        android:id="@+id/oratext"
-        android:layout_width="180dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/datatext"
-        android:ems="10"
-        android:text="@string/oraappuntamento" />
+            <requestFocus />
+        </EditText>
 
-    <TextView
-        android:id="@+id/nuovoappuntamentotextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="39dp"
-        android:text="@string/nuovoappuntamento"
-        android:textColor="#000000"
-        android:textSize="18dp" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/infotextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/oratext"
-        android:text="@string/infoappuntamento"
-        android:textColor="#000000"
-        android:textSize="18dp" />
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="260dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/relativeLayout1"
+        android:layout_alignLeft="@+id/relativeLayout1" >
 
-    <Spinner
-        android:id="@+id/stato"
-        android:layout_width="180dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/infotextview"
-        android:prompt="@string/prioritaappuntamento" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/menunuovoappuntamento"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000" />
 
-    <Button
-        android:id="@+id/salva"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/infotextview"
-        android:text="@string/salvacontatto" />
+        <EditText
+            android:id="@+id/descrizioneappuntamento"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="31dp"
+            android:inputType="textMultiLine"
+            android:text="Descrizione" />
 
-    <Button
-        android:id="@+id/cancella"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/salva"
-        android:text="@string/cancella" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="260dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_below="@+id/relativeLayout1" >
+
+        <Button
+            android:id="@+id/salva"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="@string/salvacontatto" />
+
+        <Button
+            android:id="@+id/cancella"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/cancella" />
+    </RelativeLayout>
 
 </RelativeLayout>
