@@ -41,6 +41,16 @@ public class Account {
 		return c;
 	}
 	
+	public static Cursor getUsername(SQLiteDatabase db, String[] s) throws SQLException {
+		Cursor c= db.rawQuery("select username from account where username= ? and password= ?", s);
+		return c;
+	}
+	
+	public static Cursor getPassword(SQLiteDatabase db, String[] s) throws SQLException {
+		Cursor c= db.rawQuery("select password from account where username= ? and password= ?", s);
+		return c;
+	}
+	
 	public static final String ID= "_id";
 	public static final String USERNAME= "username";
 	public static final String PASSWORD= "password";
