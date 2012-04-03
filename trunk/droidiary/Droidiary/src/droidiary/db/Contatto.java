@@ -1,8 +1,46 @@
 package droidiary.db;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 public class Contatto {
 
+	/**
+	 * inserisce un nuovo contatto
+	 * @param db
+	 * @param id_a
+	 * @param nome
+	 * @param cognome
+	 * @param citta
+	 * @param cell
+	 * @param ncasa
+	 * @param mail
+	 */
+	public static void insertContatto(SQLiteDatabase db, String id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	{
+		ContentValues v= new ContentValues();
+		v.put(ID_ACCOUNT, id_a);
+		v.put(NOME, nome);
+		v.put(COGNOME, cognome);
+		v.put(CITTA, citta);
+		v.put(CELLULARE, cell);
+		v.put(NUMEROCASA, ncasa);
+		v.put(MAIL, mail);
+		
+		db.insert(TABELLA, null, v);
+	}
 	
+	/**
+	 * ritorna tutti i contatti dell' account
+	 * @param db
+	 * @param s
+	 * @return
+	 */
+	public static Cursor getAllContatto(SQLiteDatabase db, String[] s){
+		Cursor c= db.rawQuery("select * from contatto where id_account= ?", s);
+		return c;
+    }
 	
 	public static final String ID= "_id";
 	public static final String ID_ACCOUNT= "id_account";
