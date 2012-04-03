@@ -31,8 +31,8 @@ public class DroidiaryActivity extends Activity{
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db= dbd.getWritableDatabase(); //apertura database
-		Account.insertAccount(db, "marpir", "m0001");
-		Account.insertAccount(db, "saladd", "s0002");
+		/*Account.insertAccount(db, "marpir", "m0001");
+		Account.insertAccount(db, "saladd", "s0002");*/
 
 		Button entra = (Button) findViewById(R.id.entra);
 
