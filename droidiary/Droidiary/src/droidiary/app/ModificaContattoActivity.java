@@ -35,9 +35,7 @@ public class ModificaContattoActivity extends ListActivity{
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
-        
-        ListView listaContatti = getListView();
-        
+            
         
         //recupero parametri passati da attivit� precedente
         int idAccount= getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
