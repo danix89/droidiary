@@ -75,6 +75,10 @@ public class NuovoAppuntamentoActivity extends Activity{
 			public void onClick(View v) {
 				EditText descrizione= (EditText) findViewById(R.id.descrizioneappuntamento);
 				descrizione.setText("");
+				EditText luogo= (EditText) findViewById(R.id.luogoappuntamento);
+				luogo.setText("");
+				EditText indirizzo= (EditText) findViewById(R.id.indirizzoappuntamento);
+				indirizzo.setText("");
 				
 			}
 		});
