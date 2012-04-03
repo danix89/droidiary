@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agendaportrait2" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="230dp"
+        android:layout_height="150dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="19dp"
+        android:layout_marginTop="21dp" >
+
+        <TextView
+            android:id="@+id/titolo"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Visualizza Contatto"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/cognomecontatto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/nomecontatto"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:inputType="textPersonName"
+            android:text="Tassotti" />
+
+        <EditText
+            android:id="@+id/nomecontatto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/titolo"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:inputType="textPersonName"
+            android:text="Pierluigi" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="230dp"
+        android:layout_height="110dp"
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_centerVertical="true" >
+
+        <EditText
+            android:id="@+id/telefonocellularecontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:inputType="phone"
+            android:text="3332654879"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/telefonocasacontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/telefonocellularecontatto"
+            android:layout_alignParentLeft="true"
+            android:inputType="phone"
+            android:text="0815558468"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/telefono"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="230dp"
+        android:layout_height="120dp"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_marginTop="20dp" >
+
+        <EditText
+            android:id="@+id/cittacontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:inputType="text"
+            android:text="Castellammare di Stabia" />
+
+        <EditText
+            android:id="@+id/emailcontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/cittacontatto"
+            android:inputType="textEmailAddress"
+            android:text="pierluigit@inwind.it" />
+
+        <Button
+            android:id="@+id/salva"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/emailcontatto"
+            android:text="Indietro" />
+
+        <Button
+            android:id="@+id/cancella"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignBaseline="@+id/salva"
+            android:layout_alignBottom="@+id/salva"
+            android:layout_alignParentLeft="true"
+            android:text="Modifica" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/relativeLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="42dp"
+        android:src="@drawable/rubrica" />
+
+</RelativeLayout>
