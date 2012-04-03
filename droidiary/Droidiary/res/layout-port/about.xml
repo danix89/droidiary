@@ -8,10 +8,10 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="35dp"
         android:text="Sviluppatori"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#44aeff" />
@@ -21,8 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="34dp"
+        android:layout_toLeftOf="@+id/textView1"
         android:text="Mario Pirone"
         android:textColor="#000000"
         android:textSize="20dp" />
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:text="Salvatore Addesa"
         android:textColor="#000000"
         android:textSize="20dp" />
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextView01"
         android:layout_below="@+id/TextView01"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="23dp"
         android:text="Marco Isolato"
         android:textColor="#000000"
         android:textSize="20dp" />
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextView02"
         android:layout_below="@+id/TextView02"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="31dp"
         android:text="Daniele Iannone"
         android:textColor="#000000"
         android:textSize="20dp" />
