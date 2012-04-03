@@ -5,29 +5,41 @@ import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ListActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class ModificaContattoActivity extends ListActivity {
+
+public class ModificaContattoActivity extends ListActivity{
+
+
     /** Called when the activity is first created. */
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.menulistacontatti);
+
         setContentView(R.layout.menuvisualizzacontatto);
+
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
         
-        //recupero parametri passati da attività precedente
+        ListView listaContatti = getListView();
+        
+        
+        //recupero parametri passati da attivitï¿½ precedente
         int idAccount= getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
         
         dbd = new DroidiaryDatabaseHelper(this); //collegamento database
