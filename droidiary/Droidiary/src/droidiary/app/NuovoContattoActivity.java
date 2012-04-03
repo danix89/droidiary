@@ -55,7 +55,7 @@ public class NuovoContattoActivity extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Vuoi Salvare il Contatto?")
                .setCancelable(false)
-               .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+               .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                         inserisciContatto();
                    }
