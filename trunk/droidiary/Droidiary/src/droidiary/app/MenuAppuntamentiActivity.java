@@ -30,6 +30,16 @@ public class MenuAppuntamentiActivity extends Activity {
 				startActivity(intent);				
 			}
 		});
+        
+        Button modificaAppuntamento = (Button) findViewById(R.id.menumodificaappuntamento);
+        nuovoAppuntamento.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) 
+			{
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, NuovoAppuntamentoActivity.class);
+				startActivity(intent);				
+			}
+		});
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)

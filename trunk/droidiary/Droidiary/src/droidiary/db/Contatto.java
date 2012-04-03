@@ -38,7 +38,7 @@ public class Contatto {
 	 * @return
 	 */
 	public static Cursor getAllContatto(SQLiteDatabase db, String[] s){
-		Cursor c= db.rawQuery("select * from contatto where id_account= ?", s);
+		Cursor c= db.rawQuery("select nome, cognome from contatto where id_account= ?", s);
 		return c;
     }
 	

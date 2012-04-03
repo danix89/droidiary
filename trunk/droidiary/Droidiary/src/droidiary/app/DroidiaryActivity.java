@@ -49,7 +49,9 @@ public class DroidiaryActivity extends Activity{
 
 				if (c.moveToFirst()){
 						Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
+						int codUtente= c.getInt(1);
 						Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
+						intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 						startActivity(intent);
 				}else{
 						Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
