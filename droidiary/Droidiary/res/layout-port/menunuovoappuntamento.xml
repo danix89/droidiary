@@ -29,7 +29,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:inputType="textMultiLine"
-            android:text="Descrizione" />
+            android:hint="Descrizione" />
 
     </RelativeLayout>
 
@@ -118,7 +118,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="14dp"
             android:inputType="textMultiLine"
-            android:text="Luogo" />
+            android:hint="Luogo" />
 
         <EditText
             android:id="@+id/indirizzoappuntamento"
@@ -127,7 +127,7 @@
             android:layout_above="@+id/luogoappuntamento"
             android:layout_alignParentLeft="true"
             android:inputType="textMultiLine"
-            android:text="Indirizzo" >
+            android:hint="Indirizzo" >
 
             <requestFocus />
         </EditText>
