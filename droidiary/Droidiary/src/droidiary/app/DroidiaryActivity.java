@@ -39,12 +39,13 @@ public class DroidiaryActivity extends Activity{
 
 		entra.setOnClickListener(new OnClickListener() {
 
+			
 			public void onClick(View v) {
 
-				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
+				txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				
-				EditText txtpsw = (EditText)findViewById(R.id.password);
+				txtpsw = (EditText)findViewById(R.id.password);
 				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
 			
 				String[] arg= {txtnome.getText().toString(), txtpsw.getText().toString()};
@@ -62,7 +63,14 @@ public class DroidiaryActivity extends Activity{
 			}
 		});
 
-
+		Button cancella = (Button) findViewById(R.id.cancella);
+		cancella.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				txtnome.setText("");
+				txtpsw.setText("");
+			}
+		});
 	}
 
 	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
@@ -90,4 +98,7 @@ public class DroidiaryActivity extends Activity{
 
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
+	private EditText txtnome;
+	private EditText txtpsw;
+
 }
