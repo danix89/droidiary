@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -31,7 +31,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:inputType="textPersonName"
-            android:text="@string/cognome" />
+            android:hint="@string/cognome" />
 
         <EditText
             android:id="@+id/nomecontatto"
@@ -40,12 +40,12 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:inputType="textPersonName"
-            android:text="@string/nome" />
+            android:hint="@string/nome" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="110dp"
         android:layout_alignLeft="@+id/relativeLayout1"
         android:layout_centerVertical="true" >
@@ -57,7 +57,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:inputType="phone"
-            android:text="@string/cellulare"
+            android:hint="@string/cellulare"
             android:textSize="18dp" />
 
         <EditText
@@ -67,7 +67,7 @@
             android:layout_above="@+id/telefonocellularecontatto"
             android:layout_alignParentLeft="true"
             android:inputType="phone"
-            android:text="@string/casa"
+            android:hint="@string/casa"
             android:textSize="18dp" />
 
         <TextView
@@ -83,7 +83,7 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="120dp"
         android:layout_alignLeft="@+id/relativeLayout2"
         android:layout_below="@+id/relativeLayout2"
@@ -96,7 +96,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:inputType="text"
-            android:text="@string/citta" />
+            android:hint="@string/citta" />
 
         <EditText
             android:id="@+id/emailcontatto"
@@ -105,7 +105,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/cittacontatto"
             android:inputType="textEmailAddress"
-            android:text="@string/email" />
+            android:hint="@string/email" />
 
         <Button
             android:id="@+id/salva"

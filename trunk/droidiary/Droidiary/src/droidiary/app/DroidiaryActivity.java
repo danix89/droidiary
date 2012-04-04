@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,8 +42,10 @@ public class DroidiaryActivity extends Activity{
 			public void onClick(View v) {
 
 				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
-				EditText txtpsw = (EditText)findViewById(R.id.password);
+				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				
+				EditText txtpsw = (EditText)findViewById(R.id.password);
+				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
 			
 				String[] arg= {txtnome.getText().toString(), txtpsw.getText().toString()};
 				Cursor c= Account.getAccountByUserPsw(db, arg);

@@ -37,7 +37,7 @@ public class ModificaContattoActivity extends ListActivity{
         MenuRubricaActivity.setAppFont(mContainer, mFont);
             
         
-        //recupero parametri passati da attivit� precedente
+        //recupero parametri passati da attivita' precedente
         int idAccount= getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
         
         dbd = new DroidiaryDatabaseHelper(this); //collegamento database
