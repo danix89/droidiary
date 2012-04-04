@@ -32,11 +32,31 @@ public class MenuAppuntamentiActivity extends Activity {
 		});
         
         Button modificaAppuntamento = (Button) findViewById(R.id.menumodificaappuntamento);
-        nuovoAppuntamento.setOnClickListener(new OnClickListener() {
+        modificaAppuntamento.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) 
 			{
-				Intent intent = new Intent(MenuAppuntamentiActivity.this, NuovoAppuntamentoActivity.class);
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, ModificaAppuntamentoActivity.class);
+				startActivity(intent);				
+			}
+		});
+        
+        Button eliminaAppuntamento = (Button) findViewById(R.id.menueliminaappuntamento);
+        eliminaAppuntamento.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) 
+			{
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, EliminaAppuntamentoActivity.class);
+				startActivity(intent);				
+			}
+		});
+        
+        Button cercaAppuntamento = (Button) findViewById(R.id.menucercaappuntamento);
+        cercaAppuntamento.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) 
+			{
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, CercaAppuntamentoActivity.class);
 				startActivity(intent);				
 			}
 		});
