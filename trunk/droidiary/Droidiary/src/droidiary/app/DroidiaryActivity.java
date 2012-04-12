@@ -42,10 +42,10 @@ public class DroidiaryActivity extends Activity{
 			
 			public void onClick(View v) {
 
-				txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
+				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				
-				txtpsw = (EditText)findViewById(R.id.password);
+				EditText txtpsw = (EditText)findViewById(R.id.password);
 				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
 			
 				String[] arg= {txtnome.getText().toString(), txtpsw.getText().toString()};
@@ -67,12 +67,10 @@ public class DroidiaryActivity extends Activity{
 		cancella.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				if(!txtnome.getText().equals("")){
-					txtnome.setText("");
-				}
-				if(!txtpsw.getText().equals("")){
+				EditText txtnome = (EditText)findViewById(R.id.username);
+				EditText txtpsw = (EditText)findViewById(R.id.password);
+				txtnome.setText("");
 				txtpsw.setText("");
-				}
 			}
 		});
 	}
@@ -102,7 +100,6 @@ public class DroidiaryActivity extends Activity{
 
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
-	private EditText txtnome;
-	private EditText txtpsw;
+
 
 }
