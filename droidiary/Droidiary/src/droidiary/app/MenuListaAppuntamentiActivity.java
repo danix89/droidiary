@@ -1,58 +1,27 @@
 package droidiary.app;
 
-import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
-import android.app.ListActivity;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
-
-public class ModificaContattoActivity extends ListActivity{
-
-
-    /** Called when the activity is first created. */
+public class MenuListaAppuntamentiActivity {
 	
-    public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.menulistacontatti);
         
+
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
-            
-        
-        //recupero parametri passati da attivita' precedente
-        int idAccount= getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
-        
-        dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db= dbd.getWritableDatabase(); //apertura database
-		
-        ListView listaContatti = (ListView)findViewById(R.id.listacontatti);
-        String[]contatti=null;
-        
-        String[] arg= {Integer.toString(idAccount)};
-		Cursor c= Contatto.getAllContatto(db, arg);
-		
-		int i=0;
-		while(c.moveToNext())
-		{
-			contatti[i]= c.getString(3);
-			i++;
-		}
-		
-		listaContatti.setAdapter(new ArrayAdapter<String>(this, android.R.id.list, contatti));
-    }
-    
-    public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
+	}
+	
+	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
     {
         if (mContainer == null || mFont == null) return;
 
