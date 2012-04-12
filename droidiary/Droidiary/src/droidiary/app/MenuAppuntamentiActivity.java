@@ -36,7 +36,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			
 			public void onClick(View v) 
 			{
-				Intent intent = new Intent(MenuAppuntamentiActivity.this, ModificaAppuntamentoActivity.class);
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuListaAppuntamentiActivity.class);
 				startActivity(intent);				
 			}
 		});
@@ -46,7 +46,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			
 			public void onClick(View v) 
 			{
-				Intent intent = new Intent(MenuAppuntamentiActivity.this, EliminaAppuntamentoActivity.class);
+				Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuListaAppuntamentiActivity.class);
 				startActivity(intent);				
 			}
 		});

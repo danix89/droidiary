@@ -31,7 +31,7 @@ public class MenuRubricaActivity extends Activity {
         modificaContatto.setOnClickListener(new OnClickListener() 
         						{
         							public void onClick(View arg0) {
-        								Intent modifica = new Intent(MenuRubricaActivity.this, ModificaContattoActivity.class);
+        								Intent modifica = new Intent(MenuRubricaActivity.this, MenuListaContattiActivity.class);
         								startActivity(modifica);
         							}
         						}

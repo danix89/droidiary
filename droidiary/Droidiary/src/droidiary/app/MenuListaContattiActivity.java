@@ -10,12 +10,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MenuListaAppuntamentiActivity extends Activity {
+public class MenuListaContattiActivity extends Activity {
     /** Called when the activity is first created. */
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menulistaappuntamenti);
+        setContentView(R.layout.menulistacontatti);
         
        
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
