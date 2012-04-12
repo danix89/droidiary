@@ -67,8 +67,12 @@ public class DroidiaryActivity extends Activity{
 		cancella.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				txtnome.setText("");
+				if(!txtnome.getText().equals("")){
+					txtnome.setText("");
+				}
+				if(!txtpsw.getText().equals("")){
 				txtpsw.setText("");
+				}
 			}
 		});
 	}
