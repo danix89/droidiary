@@ -17,21 +17,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity><activity android:name="AboutActivity" android:label="About"></activity><activity android:name="CercaAppuntamentoActivity" android:label="Cerca Appuntamento"></activity>
-        <activity android:name="EliminaAppuntamentoActivity" android:label="Elimina Appuntamento"></activity><activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="fullSensor"></activity><activity android:name="MenuListaAppuntamentiActivity" android:label="Appuntamenti"></activity><activity android:name="MenuListaContattiActivity" android:label="Lista Contatti"></activity><activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu" android:screenOrientation="fullSensor"></activity>
+        </activity>
+        <activity android:name="AboutActivity" android:label="About"></activity><activity android:name="CercaAppuntamentoActivity" android:label="Cerca Appuntamento"></activity>
+        <activity android:name="EliminaAppuntamentoActivity" android:label="Elimina Appuntamento"></activity>
+        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="fullSensor"></activity>
+        <activity android:name="MenuListaAppuntamentiActivity" android:label="Appuntamenti"></activity>
+        <activity android:name="MenuListaContattiActivity" android:label="Lista Contatti"></activity>
+        <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu" android:screenOrientation="fullSensor"></activity>
         <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity" android:screenOrientation="fullSensor"></activity>
-        <activity android:name="MenuVisualizzaAppuntamentoActivity" android:label="Appuntamento"></activity><activity android:name="MenuVisualizzaContattoActivity" android:label="Contatto"></activity><activity android:screenOrientation="fullSensor" android:name="NuovoAppuntamentoActivity" android:label="@string/nuovoappuntamento"></activity><activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
+        <activity android:name="MenuVisualizzaAppuntamentoActivity" android:label="Appuntamento"></activity>
+        <activity android:name="MenuVisualizzaContattoActivity" android:label="Contatto"></activity>
+        <activity android:screenOrientation="fullSensor" android:name="NuovoAppuntamentoActivity" android:label="@string/nuovoappuntamento"></activity>
+        <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
+        </application>
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-    </application>
-
-</manifest>
+        </manifest>    
