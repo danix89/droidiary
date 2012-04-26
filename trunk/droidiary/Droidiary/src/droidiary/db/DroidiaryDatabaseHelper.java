@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,7 +15,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 
 	
 	public DroidiaryDatabaseHelper(Context context) {
-	super(context, DB_NAME, null, DB_VERSION);
+	super(context, DB_NAME, null, 1);
 	this.myContext= context;
 	}
 	
@@ -99,14 +100,34 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
         return checkDB != null ? true : false;
     }
 	
+	public void openDataBase() throws SQLException{
+		 
+    	//Open the database
+        String myPath = DB_PATH + DB_NAME;
+    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+ 
+    }
+ 
+    @Override
+	public synchronized void close() {
+ 
+    	    if(myDataBase != null)
+    		    myDataBase.close();
+ 
+    	    super.close();
+ 
+	}
+	
+	
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
 		
 		
 	}
 	
 	private final Context myContext;
-	private static final String DB_PATH= "/assets/database/";
-	private static final String DB_NAME = "droidiary";
+	private SQLiteDatabase myDataBase;
+	private static String DB_PATH= "/data/data/droidiary.app/database/";
+	private static String DB_NAME = "droidiary";
 	private static final int DB_VERSION = 1;
 	/*private static final String CREATE_TABLE_ACCOUNT = "create table account IF NOT EXISTS (_id integer PRIMARY KEY AUTOINCREMENT, username VARCHAR(6) NOT NULL, password VARCHAR(5) NOT NULL);";
 	private static final String CREATE_TABLE_CONTATTO = "create table contatto IF NOT EXISTS (_id integer PRIMARY KEY AUTOINCREMENT, id_account INT(4) NOT NULL, nome VARCHAR(15) NOT NULL, " +
