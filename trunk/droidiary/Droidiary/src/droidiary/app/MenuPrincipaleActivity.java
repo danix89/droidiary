@@ -20,11 +20,14 @@ public class MenuPrincipaleActivity extends Activity {
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuPrincipaleActivity.setAppFont(mContainer, mFont);
         
+        final int codUtente = getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
+        
         Button rubrica = (Button) findViewById(R.id.rubrica);
         rubrica.setOnClickListener(new OnClickListener() 
         						{
         							public void onClick(View arg0) {
         								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuRubricaActivity.class);
+        								intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
         								startActivity(intent);
         							}
         						}
@@ -35,6 +38,7 @@ public class MenuPrincipaleActivity extends Activity {
         						{
         							public void onClick(View arg0) {
         								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuAppuntamentiActivity.class);
+        								intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
         								startActivity(intent);
         							}
         						}
