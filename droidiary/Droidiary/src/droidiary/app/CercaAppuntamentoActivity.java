@@ -1,22 +1,34 @@
 package droidiary.app;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class CercaAppuntamentoActivity extends Activity{
+public class CercaAppuntamentoActivity extends ListActivity{
     /** Called when the activity is first created. */
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menuappuntamenti);
+        setContentView(R.layout.menulistaappuntamenti);
         final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuAppuntamentiActivity.setAppFont(mContainer, mFont);
         
+        final int codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
+        
+        /*
+        setListAdapter(new ArrayAdapter<String>(this, R.layout.menulistaappuntamenti, COUNTRIES));
+
+        ListView lv = getListView();
+        lv.setTextFilterEnabled(true);
+        */
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
@@ -42,4 +54,7 @@ public class CercaAppuntamentoActivity extends Activity{
         }
     }
     
+    static final String[] COUNTRIES = new String[] {
+        "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra",
+        "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda"};
 }

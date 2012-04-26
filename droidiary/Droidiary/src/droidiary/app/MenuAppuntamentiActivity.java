@@ -20,6 +20,7 @@ public class MenuAppuntamentiActivity extends Activity {
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuAppuntamentiActivity.setAppFont(mContainer, mFont);
         
+        final int codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
         
         Button nuovoAppuntamento = (Button) findViewById(R.id.menunuovoappuntamento);
         nuovoAppuntamento.setOnClickListener(new OnClickListener() {
@@ -27,6 +28,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			public void onClick(View v) 
 			{
 				Intent intent = new Intent(MenuAppuntamentiActivity.this, NuovoAppuntamentoActivity.class);
+				intent.putExtra("droidiary.app.MenuAppuntamentiActivity", codUtente);
 				startActivity(intent);				
 			}
 		});
@@ -37,6 +39,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			public void onClick(View v) 
 			{
 				Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuListaAppuntamentiActivity.class);
+				intent.putExtra("droidiary.app.MenuAppuntamentiActivity", codUtente);
 				startActivity(intent);				
 			}
 		});
@@ -47,6 +50,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			public void onClick(View v) 
 			{
 				Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuListaAppuntamentiActivity.class);
+				intent.putExtra("droidiary.app.MenuAppuntamentiActivity", codUtente);
 				startActivity(intent);				
 			}
 		});
@@ -57,6 +61,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			public void onClick(View v) 
 			{
 				Intent intent = new Intent(MenuAppuntamentiActivity.this, CercaAppuntamentoActivity.class);
+				intent.putExtra("droidiary.app.MenuAppuntamentiActivity", codUtente);
 				startActivity(intent);				
 			}
 		});
