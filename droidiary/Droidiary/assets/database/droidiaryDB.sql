@@ -41,8 +41,8 @@ INSERT INTO `account` (`_id`, `username`,`password`) VALUES
 
 DROP TABLE IF EXISTS `contatto`;
 create table `contatto`(
-`_id` INT(4) PRIMARY KEY,
-`id_account` INT(4) NOT NULL,
+`_id` integer PRIMARY KEY,
+`id_account` integer NOT NULL,
 `nome` VARCHAR(15) NOT NULL,
 `cognome` VARCHAR(15) NOT NULL,
 `citta` VARCHAR(15),
@@ -69,9 +69,9 @@ INSERT INTO `contatto` (`_id`,`id_account`,`nome`,`cognome`,`citta`, `cellulare`
 
 DROP TABLE IF EXISTS `appuntamento`;
 create table `appuntamento`(
-`_id` INT(4) PRIMARY KEY,
-`id_contatto` INT(4),
-`id_account` INT(4) NOT NULL,
+`_id` integer PRIMARY KEY,
+`id_contatto` integer,
+`id_account` integer NOT NULL,
 `data_ora` DATETIME NOT NULL,
 `citta` VARCHAR(15),
 FOREIGN KEY(`id_account`) REFERENCES account(`_id`),
