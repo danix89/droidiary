@@ -1,10 +1,13 @@
 package droidiary.app;
 
+import java.io.IOException;
+
 import droidiary.db.Account;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,43 +33,62 @@ public class DroidiaryActivity extends Activity{
 		DroidiaryActivity.setAppFont(mContainer, mFont);
 		//fine codice per il font
 
-		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db= dbd.getWritableDatabase(); //apertura database
-		/*Account.insertAccount(db, "marpir", "m0001");
-		Account.insertAccount(db, "saladd", "s0002");*/
+		dbd = new Account(this); //collegamento database
+		db= dbd.getWritableDatabase();
+		try {
+
+			dbd.createDataBase();
+
+		} catch (IOException ioe) {
+
+			throw new Error("Unable to create database");
+
+		}
+
+		try {
+
+			dbd.openDataBase();
+
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
 
 		Button entra = (Button) findViewById(R.id.entra);
 
 		entra.setOnClickListener(new OnClickListener() {
 
-			
+
 			public void onClick(View v) {
 
 				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-				
+
 				EditText txtpsw = (EditText)findViewById(R.id.password);
 				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
-			
-				
+
+
 				String[] arg= {txtnome.getText().toString(), txtpsw.getText().toString()};
+				
+				System.out.println(arg[0]+"-"+arg[1]);
 				Cursor c= Account.getAccountByUserPsw(db, arg);
 
 				if (c.moveToFirst()){
-						Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
-						int codUtente= c.getInt(1);
-						Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-						intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
-						startActivity(intent);
+					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
+					int codUtente= c.getInt(1);
+					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
+					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
+					startActivity(intent);
 				}else{
-						Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
-					}
+					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
+				}
 			}
 		});
 
 		Button cancella = (Button) findViewById(R.id.cancella);
 		cancella.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				EditText txtnome = (EditText)findViewById(R.id.username);
 				EditText txtpsw = (EditText)findViewById(R.id.password);
@@ -101,6 +123,4 @@ public class DroidiaryActivity extends Activity{
 
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
-
-
 }

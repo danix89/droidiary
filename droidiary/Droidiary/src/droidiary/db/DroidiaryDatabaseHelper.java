@@ -19,10 +19,12 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	this.myContext= context;
 	}
 	
-	public void onCreate(SQLiteDatabase db) {}
+	public void onCreate(SQLiteDatabase db) {
+		this.myDataBase=db;
+	}
 	
 	
-	public void createDB() throws IOException{
+	public void createDataBase() throws IOException{
 		
 		boolean dbExist = checkDataBase();
 		 
@@ -30,7 +32,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
                 //se esiste allora niente..
         }else{
  
-                //..altrmenti lo creiamo
+                //..altrimenti lo creiamo
                 this.getReadableDatabase();
  
                 try {
@@ -57,28 +59,47 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 
 	private void copyDataBase() throws IOException{
 		 
-        //apre il db esistente
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
+    	//Open your local db as the input stream
+    	InputStream myInput = myContext.getAssets().open(DB_NAME);
  
-        //
-        String outFileName = DB_PATH + DB_NAME;
+    	// Path to the just created empty db
+    	String outFileName = DB_PATH + DB_NAME;
  
-        //apre il db vuoto
-        OutputStream myOutput = new FileOutputStream(outFileName);
+    	//Open the empty db as the output stream
+    	OutputStream myOutput = new FileOutputStream(outFileName);
  
-        //
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = myInput.read(buffer))>0){
-                myOutput.write(buffer, 0, length);
-        }
+    	//transfer bytes from the inputfile to the outputfile
+    	byte[] buffer = new byte[1024];
+    	int length;
+    	while ((length = myInput.read(buffer))>0){
+    		myOutput.write(buffer, 0, length);
+    	}
  
-        myOutput.flush();
-        myOutput.close();
-        myInput.close();
+    	//Close the streams
+    	myOutput.flush();
+    	myOutput.close();
+    	myInput.close();
  
     }
-	
+ 
+    public void openDataBase() throws SQLException{
+ 
+    	//Open the database
+        String myPath = DB_PATH + DB_NAME;
+    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+ 
+    }
+ 
+    @Override
+	public synchronized void close() {
+ 
+    	    if(myDataBase != null)
+    		    myDataBase.close();
+ 
+    	    super.close();
+ 
+	}
+ 
 	//controlla se il database esiste
 	private boolean checkDataBase(){
 		 
@@ -108,8 +129,9 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	}
 	
 	private final Context myContext;
-	private static String DB_PATH= "/data/data/droidiary.app/database/";
+	private static String DB_PATH= "/data/data/droidiary.app/databases/";
 	private static String DB_NAME = "droidiary";
+	private SQLiteDatabase myDataBase;
 	/*private static final String CREATE_TABLE_ACCOUNT = "create table account IF NOT EXISTS (_id integer PRIMARY KEY AUTOINCREMENT, username VARCHAR(6) NOT NULL, password VARCHAR(5) NOT NULL);";
 	private static final String CREATE_TABLE_CONTATTO = "create table contatto IF NOT EXISTS (_id integer PRIMARY KEY AUTOINCREMENT, id_account INT(4) NOT NULL, nome VARCHAR(15) NOT NULL, " +
 														"cognome VARCHAR(15) NOT NULL, citta VARCHAR(15), cellulare VARCHAR(11), numerocasa VARCHAR(11)," +
