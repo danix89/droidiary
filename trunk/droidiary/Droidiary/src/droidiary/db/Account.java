@@ -58,7 +58,7 @@ public class Account extends DroidiaryDatabaseHelper{
 	 * @throws SQLException
 	 */
 	public static Cursor getAccountByUserPsw(SQLiteDatabase db, String[] s) throws SQLException {
-		Cursor c= db.rawQuery("select username, password from account where username=? and password=?", s);
+		Cursor c= db.rawQuery("select username,password from account where username='?' and password='?'", s);
 		return c;
 	}
 	
