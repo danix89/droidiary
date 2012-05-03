@@ -1,5 +1,6 @@
 package droidiary.db;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +30,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 		boolean dbExist = checkDataBase();
 		 
         if(dbExist){
-                //se esiste allora niente..
+        	System.out.println("Database esiste");
         }else{
  
                 //..altrimenti lo creiamo
@@ -37,9 +38,9 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
  
                 try {
  
-                        copyDataBase();
+                        copyDataBase(DB_NAME_MY, DB_NAME);
  
-                } catch (IOException e) {
+                } catch (Exception e) {
  
                         throw new Error("Errore nella creazione della copia del database");
  
@@ -57,40 +58,64 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 		*/
 	}
 
-	private void copyDataBase() throws IOException{
-		 
-    	//Open your local db as the input stream
-    	InputStream myInput = myContext.getAssets().open(DB_NAME);
- 
-    	// Path to the just created empty db
-    	String outFileName = DB_PATH + DB_NAME;
- 
-    	//Open the empty db as the output stream
-    	OutputStream myOutput = new FileOutputStream(outFileName);
- 
-    	//transfer bytes from the inputfile to the outputfile
-    	byte[] buffer = new byte[1024];
-    	int length;
-    	while ((length = myInput.read(buffer))>0){
-    		myOutput.write(buffer, 0, length);
-    	}
- 
-    	//Close the streams
-    	myOutput.flush();
-    	myOutput.close();
-    	myInput.close();
- 
-    }
+	/**
+	 * Copies your database from your local assets-folder to the just created empty database in the
+	 * system folder, from where it can be accessed and handled.
+	 * This is done by transfering bytestream.
+	 * */
+	private void copyDataBase(String assetfile,String DB) {
+
+	    //Open your local db as the input stream
+	    InputStream myInput = null;
+	    //Open the empty db as the output stream
+	    OutputStream myOutput = null;
+	    try {
+	        myInput = myContext.getAssets().open(assetfile);
+
+	        // Path to the just created empty db
+	        String outFileName = DB_PATH + DB;
+
+	        myOutput = new FileOutputStream(outFileName);
+
+	        //transfer bytes from the inputfile to the outputfile
+	        byte[] buffer = new byte[1024];
+	        int length;
+	        while ((length = myInput.read(buffer))>0){
+	            myOutput.write(buffer, 0, length);
+	        }
+
+
+	        System.out.println("***************************************");
+	        System.out.println("####### Data base copied ##############");
+	        System.out.println("***************************************");
+
+
+	    } catch (FileNotFoundException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	     }
+	          finally{
+	          //Close the streams
+	          try {
+	        myOutput.flush();
+	        myOutput.close();
+	        myInput.close();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	 }
+	}
  
     public void openDataBase() throws SQLException{
- 
-    	//Open the database
         String myPath = DB_PATH + DB_NAME;
     	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
  
     }
- 
-    @Override
+
 	public synchronized void close() {
  
     	    if(myDataBase != null)
@@ -131,6 +156,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	private final Context myContext;
 	private static String DB_PATH= "/data/data/droidiary.app/databases/";
 	private static String DB_NAME = "droidiary";
+	private static String DB_NAME_MY="droidiary";
 	private SQLiteDatabase myDataBase;
 	/*private static final String CREATE_TABLE_ACCOUNT = "create table account IF NOT EXISTS (_id integer PRIMARY KEY AUTOINCREMENT, username VARCHAR(6) NOT NULL, password VARCHAR(5) NOT NULL);";
 	private static final String CREATE_TABLE_CONTATTO = "create table contatto IF NOT EXISTS (_id integer PRIMARY KEY AUTOINCREMENT, id_account INT(4) NOT NULL, nome VARCHAR(15) NOT NULL, " +

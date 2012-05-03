@@ -34,7 +34,7 @@ public class DroidiaryActivity extends Activity{
 		//fine codice per il font
 
 		dbd = new Account(this); //collegamento database
-		db= dbd.getWritableDatabase();
+		db=dbd.getWritableDatabase();
 		try {
 
 			dbd.createDataBase();
@@ -46,7 +46,7 @@ public class DroidiaryActivity extends Activity{
 		}
 
 		try {
-
+			System.out.println("Database doesn't exist");
 			dbd.openDataBase();
 
 		}catch(SQLException sqle){
@@ -73,10 +73,10 @@ public class DroidiaryActivity extends Activity{
 				
 				System.out.println(arg[0]+"-"+arg[1]);
 				Cursor c= Account.getAccountByUserPsw(db, arg);
-
 				if (c.moveToFirst()){
 					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 					int codUtente= c.getInt(1);
+					
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 					startActivity(intent);
