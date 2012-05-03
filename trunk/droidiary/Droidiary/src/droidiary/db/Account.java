@@ -1,11 +1,16 @@
 package droidiary.db;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class Account {
+public class Account extends DroidiaryDatabaseHelper{
+
+	public Account(Context context) {
+		super(context);
+	}
 
 	/**
 	 * metodo per inserire nuovo account
@@ -53,7 +58,7 @@ public class Account {
 	 * @throws SQLException
 	 */
 	public static Cursor getAccountByUserPsw(SQLiteDatabase db, String[] s) throws SQLException {
-		Cursor c= db.rawQuery("select * from account where username= ? and password= ?", s);
+		Cursor c= db.rawQuery("select username, password from account where username=? and password=?", s);
 		return c;
 	}
 	
