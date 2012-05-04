@@ -68,10 +68,11 @@ public class DroidiaryActivity extends Activity{
 				Cursor c= Account.getAccountByUserPsw(db, arg);
 				if (c.moveToFirst()){
 					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
-					int codUtente= c.getInt(1);
-					
+					int codUtente= c.getInt(0);
+					System.out.println(codUtente);
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
+					dbd.close();
 					startActivity(intent);
 				}else{
 					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
