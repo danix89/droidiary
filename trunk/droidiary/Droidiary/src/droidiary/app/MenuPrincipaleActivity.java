@@ -1,7 +1,14 @@
 package droidiary.app;
 
+import java.io.IOException;
+
+import droidiary.db.Account;
+import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +27,32 @@ public class MenuPrincipaleActivity extends Activity {
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuPrincipaleActivity.setAppFont(mContainer, mFont);
         
+        dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		db=dbd.getWritableDatabase();
+		try {
+			dbd.createDataBase();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
+		}
+
+		try {
+			dbd.openDataBase();
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
+		
         final int codUtente = getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
+        
+        Cursor c= Account.getAccountById(db, codUtente);
+        TextView utente = (TextView) findViewById(R.id.Utente);
+        
+        while(c.moveToNext()){
+        String nome=c.getString(0);
+        String cognome=c.getString(1);
+        utente.setText("Utente: " + nome + "." + cognome);
+        }
         
         Button rubrica = (Button) findViewById(R.id.rubrica);
         rubrica.setOnClickListener(new OnClickListener() 
@@ -68,4 +100,7 @@ public class MenuPrincipaleActivity extends Activity {
         }
     }
     
+    
+	private DroidiaryDatabaseHelper dbd;
+	private SQLiteDatabase db;
 }

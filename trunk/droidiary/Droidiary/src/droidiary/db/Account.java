@@ -43,10 +43,7 @@ public class Account extends DroidiaryDatabaseHelper{
 	 * @throws SQLException
 	 */
 	public static Cursor getAccountById(SQLiteDatabase db, long id) throws SQLException {
-        Cursor c = db.query(true, TABELLA, COLONNE, ID + "=" + id, null, null, null, null, null);
-        if (c != null) {
-            c.moveToFirst();
-        }
+		Cursor c= db.rawQuery("select nome, cognome from contatto where _id='"+id+"' and id_account='"+id+"'", null);
         return c;
     }
 	
@@ -58,7 +55,7 @@ public class Account extends DroidiaryDatabaseHelper{
 	 * @throws SQLException
 	 */
 	public static Cursor getAccountByUserPsw(SQLiteDatabase db, String[] s) throws SQLException {
-		Cursor c= db.rawQuery("select username, password from account where username='"+s[0]+"' and password='"+s[1]+"'", null);
+		Cursor c= db.rawQuery("select * from account where username='"+s[0]+"' and password='"+s[1]+"'", null);
 		return c;
 	}
 	
