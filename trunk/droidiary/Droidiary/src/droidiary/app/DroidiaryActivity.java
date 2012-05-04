@@ -33,22 +33,16 @@ public class DroidiaryActivity extends Activity{
 		DroidiaryActivity.setAppFont(mContainer, mFont);
 		//fine codice per il font
 
-		dbd = new Account(this); //collegamento database
+		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
 		try {
-
 			dbd.createDataBase();
-
 		} catch (IOException ioe) {
-
 			throw new Error("Unable to create database");
-
 		}
 
 		try {
-			System.out.println("Database doesn't exist");
 			dbd.openDataBase();
-
 		}catch(SQLException sqle){
 
 			throw sqle;
@@ -69,9 +63,8 @@ public class DroidiaryActivity extends Activity{
 				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 
-				String[] arg= {txtnome.getText().toString(), txtpsw.getText().toString()};
-				
-				System.out.println(arg[0]+"-"+arg[1]);
+				String[] arg={txtnome.getText().toString(), txtpsw.getText().toString()};
+								
 				Cursor c= Account.getAccountByUserPsw(db, arg);
 				if (c.moveToFirst()){
 					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
