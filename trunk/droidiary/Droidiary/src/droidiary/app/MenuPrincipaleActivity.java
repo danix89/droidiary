@@ -1,9 +1,7 @@
 package droidiary.app;
 
 import java.io.IOException;
-
 import droidiary.db.Account;
-import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,12 +10,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class MenuPrincipaleActivity extends Activity {
@@ -56,6 +52,8 @@ public class MenuPrincipaleActivity extends Activity {
         String cognome=c.getString(1);
         utente.setText("Utente: " + nome + "." + cognome);
         }
+        
+        
         
         Button rubrica = (Button) findViewById(R.id.rubrica);
         rubrica.setOnClickListener(new OnClickListener() 

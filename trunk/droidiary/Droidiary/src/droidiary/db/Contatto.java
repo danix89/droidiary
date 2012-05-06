@@ -1,6 +1,5 @@
 package droidiary.db;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -17,18 +16,10 @@ public class Contatto {
 	 * @param ncasa
 	 * @param mail
 	 */
-	public static void insertContatto(SQLiteDatabase db, String id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static Cursor insertContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
-		ContentValues v= new ContentValues();
-		v.put(ID_ACCOUNT, id_a);
-		v.put(NOME, nome);
-		v.put(COGNOME, cognome);
-		v.put(CITTA, citta);
-		v.put(CELLULARE, cell);
-		v.put(NUMEROCASA, ncasa);
-		v.put(MAIL, mail);
-		
-		db.insert(TABELLA, null, v);
+		Cursor c= db.rawQuery("INSERT INTO contatto (id_account,nome,cognome,citta,cellulare, numeroCasa,mail)VALUES ('"+id_a+"', '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')", null);
+		return c;
 	}
 	
 	/**
@@ -48,7 +39,7 @@ public class Contatto {
 	public static final String COGNOME= "cognome";
 	public static final String CITTA= "citta";
 	public static final String CELLULARE= "cellulare";
-	public static final String NUMEROCASA= "numerocasa";
+	public static final String NUMEROCASA= "numeroCasa";
 	public static final String MAIL= "mail";
 	public static final String TABELLA = "contatto";
     public static final String[] COLONNE = new String[]{ID, ID_ACCOUNT, NOME, COGNOME, CITTA, CELLULARE, NUMEROCASA, MAIL};
