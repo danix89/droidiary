@@ -1,8 +1,16 @@
 package droidiary.app;
 
+import java.io.IOException;
+
+import droidiary.db.Contatto;
+import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -23,21 +31,24 @@ public class NuovoContattoActivity extends Activity {
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
     
+        codUtente = getIntent().getExtras().getInt("droidiary.app.MenuRubricaActivity");
            
         Button salva=(Button)findViewById(R.id.salva);
         salva.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				 EditText txtnome = (EditText)findViewById(R.id.nomecontatto);
-			     String nome = txtnome.getText().toString();
+			     nome = txtnome.getText().toString();
 			     EditText txtcognome = (EditText)findViewById(R.id.cognomecontatto);
-			     String cognome = txtcognome.getText().toString();
+			     cognome = txtcognome.getText().toString();
 			     EditText txtcasa = (EditText)findViewById(R.id.telefonocasacontatto);
-			     String telefonoCasa = txtcasa.getText().toString();
+			     telefonoCasa = txtcasa.getText().toString();
 			     EditText txtcellulare = (EditText) findViewById(R.id.telefonocellularecontatto);
-			     String cellulare= txtcellulare.getText().toString();
+			     cellulare= txtcellulare.getText().toString();
 			     EditText txtmail= (EditText) findViewById(R.id.emailcontatto);
-			     String email=txtmail.getText().toString();
-			     if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || cellulare.equals("Cellulare:")|| email.equals("Email:")){
+			     email=txtmail.getText().toString();
+			     EditText txtcitta= (EditText) findViewById(R.id.cittacontatto);
+			     citta=txtcitta.getText().toString();
+			     if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || cellulare.equals("Cellulare:")|| email.equals("Email:") || citta.equals("Città:")){
 			    	Toast.makeText(getApplicationContext(),  "Controlla tutti i campi", Toast.LENGTH_LONG).show();
 			     }else{ 
 			    	 onClickSalva();
@@ -71,8 +82,31 @@ public class NuovoContattoActivity extends Activity {
     }
     
     
-    public static final void inserisciContatto(){
+    public void inserisciContatto(){
+    	dbd = new DroidiaryDatabaseHelper(this);
+		db=dbd.getWritableDatabase();
+		try {
+			dbd.createDataBase();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
+		}
+
+		try {
+			dbd.openDataBase();
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
     	
+		Cursor res=Contatto.insertContatto(db, codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
+		if (res.moveToFirst()){
+			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(NuovoContattoActivity.this, MenuRubricaActivity.class);
+			intent.putExtra("droidiary.app.NuovoContattoActivity", codUtente);
+			startActivity(intent);
+			
+		}
     	
     }
     
@@ -99,4 +133,8 @@ public class NuovoContattoActivity extends Activity {
         }
     }
     
+    private DroidiaryDatabaseHelper dbd;
+	private SQLiteDatabase db;
+	private int codUtente;
+	String nome, cognome, telefonoCasa, email, cellulare, citta;
 }
