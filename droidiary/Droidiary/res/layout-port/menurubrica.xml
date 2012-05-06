@@ -83,7 +83,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="15dp"
-            android:text="lol"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000"
             android:textSize="14dp" />

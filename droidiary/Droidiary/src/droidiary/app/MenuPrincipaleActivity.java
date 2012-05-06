@@ -43,6 +43,7 @@ public class MenuPrincipaleActivity extends Activity {
 		}
 		
         codUtente = getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
+        System.out.println("Parametro Passato:" + codUtente);
         
         Cursor c= Account.getAccountById(db, codUtente);
         TextView utente = (TextView) findViewById(R.id.Utente);
@@ -61,6 +62,7 @@ public class MenuPrincipaleActivity extends Activity {
         							public void onClick(View arg0) {
         								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuRubricaActivity.class);
         								intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
+        								dbd.close();
         								startActivity(intent);
         							}
         						}
@@ -72,6 +74,7 @@ public class MenuPrincipaleActivity extends Activity {
         							public void onClick(View arg0) {
         								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuAppuntamentiActivity.class);
         								intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
+        								dbd.close();
         								startActivity(intent);
         							}
         						}
