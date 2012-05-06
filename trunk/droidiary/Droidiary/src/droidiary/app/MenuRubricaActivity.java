@@ -25,6 +25,7 @@ public class MenuRubricaActivity extends Activity {
         setContentView(R.layout.menurubrica);
         
         codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActiviry");
+        System.out.println("Parametro:"+codUtente);
         
         dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
