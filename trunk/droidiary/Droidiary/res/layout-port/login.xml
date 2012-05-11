@@ -4,50 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
-
-    <TextView
-        
-        android:id="@+id/titolo"
-        android:layout_width="150dp"
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/logo" />
+
+    <Button
+        android:id="@+id/about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_marginBottom="38dp"
+        android:background="@color/transparent" />
+
+    <TextView
+        android:id="@+id/titolo"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/app_name"
+        android:gravity="center_horizontal|center"
+        android:text="Benvenuto su Droidiary"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000"
-        android:textSize="28dp" />
-
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="240dp"
         android:layout_height="180dp"
-        android:layout_alignRight="@+id/titolo"
-        android:layout_below="@+id/titolo"
-        android:layout_marginTop="48dp" >
-
+        android:layout_above="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp" >
+
         <EditText
             android:id="@+id/username"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:inputType="textPersonName"
-            android:hint="Username">
+            android:hint="Username"
+            android:inputType="textPersonName" >
 
             <requestFocus />
         </EditText>
-
+
         <EditText
             android:id="@+id/password"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/username"
-            android:inputType="textPassword"
-            android:hint="Password"/>
-
+            android:hint="Password"
+            android:inputType="textPassword" />
+
         <Button
             android:id="@+id/entra"
             android:layout_width="115dp"
@@ -55,7 +73,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:text="@string/login" />
-
+
         <Button
             android:id="@+id/cancella"
             android:layout_width="115dp"
@@ -63,26 +81,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:text="@string/reset" />
-
     </RelativeLayout>
-    
-		<ImageView
-			android:id="@+id/imageView1"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"
-			android:layout_centerHorizontal="true"
-			android:layout_marginBottom="44dp"
-			android:src="@drawable/logo" />
-		<Button
-			android:id="@+id/about"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignLeft="@+id/imageView1"
-			android:layout_alignParentBottom="true"
-			android:layout_alignRight="@+id/imageView1"
-			android:layout_alignTop="@+id/imageView1"
-			android:layout_marginBottom="38dp"
-			android:background="@color/transparent" />
 
 </RelativeLayout>
