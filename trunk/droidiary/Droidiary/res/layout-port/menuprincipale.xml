@@ -5,46 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/rubrica" />
-
-        <Button
-            android:id="@+id/rubrica"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/menurubrica" />
-
-        <Button
-            android:id="@+id/appuntamenti"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/rubrica"
-            android:layout_marginTop="26dp"
-            android:text="@string/menuappuntamenti" />
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignTop="@+id/appuntamenti"
-            android:src="@drawable/appuntamenti" />
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/Utente"
         android:layout_width="wrap_content"
@@ -56,5 +16,50 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="250dp"
+        android:layout_height="200sp"
+        android:layout_below="@+id/Utente"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="76dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/appuntamenti" />
+
+        <Button
+            android:id="@+id/appuntamenti"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/imageView1"
+            android:layout_marginTop="22dp"
+            android:text="@string/menuappuntamenti" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="center"
+            android:src="@drawable/rubrica" />
+
+        <Button
+            android:id="@+id/rubrica"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="20dp"
+            android:text="@string/menurubrica" />
+    </RelativeLayout>
 
 </RelativeLayout>
