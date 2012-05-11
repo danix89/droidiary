@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,13 +49,20 @@ public class DroidiaryActivity extends Activity{
 			throw sqle;
 
 		}
-
+		
+		final RadioButton online= (RadioButton) findViewById(R.id.online);
+		final RadioButton offline=(RadioButton) findViewById(R.id.offline);
+		
+		
 		Button entra = (Button) findViewById(R.id.entra);
 
+		
 		entra.setOnClickListener(new OnClickListener() {
 
 
 			public void onClick(View v) {
+				
+				if(offline.isChecked()){
 
 				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
@@ -77,6 +85,10 @@ public class DroidiaryActivity extends Activity{
 				}else{
 					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 				}
+			}else if(online.isChecked()){
+				Toast.makeText(getApplicationContext(), "Funzionalità online non implementata", Toast.LENGTH_LONG).show();
+				
+			}
 			}
 		});
 
