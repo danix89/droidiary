@@ -66,7 +66,7 @@ public class DroidiaryActivity extends Activity{
 				String[] arg={txtnome.getText().toString(), txtpsw.getText().toString()};
 								
 				Cursor c= Account.getAccountByUserPsw(db, arg);
-				if (c.moveToFirst()){
+				if(c.moveToFirst()){
 					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 					int codUtente= c.getInt(0);
 					System.out.println(codUtente);
@@ -97,24 +97,22 @@ public class DroidiaryActivity extends Activity{
 		if (mContainer == null || mFont == null) return;
 
 		final int mCount = mContainer.getChildCount();
-
-		// Loop through all of the children.
+		
 		for (int i = 0; i < mCount; ++i)
 		{
 			final View mChild = mContainer.getChildAt(i);
 			if (mChild instanceof TextView)
 			{
-				// Set the font if it is a TextView.
+
 				((TextView) mChild).setTypeface(mFont);
 			}
 			else if (mChild instanceof ViewGroup)
 			{
-				// Recursively attempt another ViewGroup.
+
 				setAppFont((ViewGroup) mChild, mFont);
 			}
 		}
 	}
-
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 }
