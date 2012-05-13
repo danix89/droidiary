@@ -4,93 +4,64 @@
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="230dp"
-        android:layout_height="150dp"
+    <TextView
+        android:id="@+id/Contatto"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="19dp"
-        android:layout_marginTop="21dp" >
+        android:gravity="center_horizontal|center"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/titolo"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Visualizza Contatto"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#000000"
-            android:textSize="18dp" />
-
-        <EditText
-            android:id="@+id/cognomecontatto"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignLeft="@+id/nomecontatto"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:inputType="textPersonName"
-            android:text="Tassotti" />
+            android:src="@drawable/rubrica" />
 
         <EditText
             android:id="@+id/nomecontatto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/titolo"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:inputType="textPersonName"
-            android:text="Pierluigi" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="230dp"
-        android:layout_height="110dp"
-        android:layout_alignLeft="@+id/relativeLayout1"
-        android:layout_centerVertical="true" >
-
-        <EditText
-            android:id="@+id/telefonocellularecontatto"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:inputType="phone"
-            android:text="3332654879"
-            android:textSize="18dp" />
-
-        <EditText
-            android:id="@+id/telefonocasacontatto"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_above="@+id/telefonocellularecontatto"
-            android:layout_alignParentLeft="true"
-            android:inputType="phone"
-            android:text="0815558468"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cognomecontatto"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="@string/telefono"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
+            android:layout_marginTop="30dp"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/cognomecontatto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/nomecontatto"
+            android:layout_toRightOf="@+id/imageView1"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
         android:layout_width="230dp"
         android:layout_height="120dp"
-        android:layout_alignLeft="@+id/relativeLayout2"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_marginTop="20dp" >
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" >
 
         <EditText
             android:id="@+id/cittacontatto"
@@ -99,7 +70,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:inputType="text"
-            android:text="Castellammare di Stabia" />
+            android:text="" />
 
         <EditText
             android:id="@+id/emailcontatto"
@@ -108,7 +79,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/cittacontatto"
             android:inputType="textEmailAddress"
-            android:text="pierluigit@inwind.it" />
+            android:text="" />
 
         <Button
             android:id="@+id/elimina"
@@ -125,16 +96,54 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:text="Modifica" />
-
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@+id/relativeLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="42dp"
-        android:src="@drawable/rubrica" />
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="230dp"
+        android:layout_height="110dp"
+        android:layout_alignLeft="@+id/relativeLayout4"
+        android:layout_centerVertical="true" >
+
+        <EditText
+            android:id="@+id/telefonocellularecontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:inputType="phone"
+            android:text=""
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/telefonocasacontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/telefonocellularecontatto"
+            android:layout_alignParentLeft="true"
+            android:inputType="phone"
+            android:text=""
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/telefono"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout4"
+        android:layout_alignRight="@+id/relativeLayout4"
+        android:text="Città / email"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
 
 </RelativeLayout>
