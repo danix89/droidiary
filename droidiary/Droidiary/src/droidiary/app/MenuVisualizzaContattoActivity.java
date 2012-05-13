@@ -1,7 +1,14 @@
 package droidiary.app;
 
+import java.io.IOException;
+
+import droidiary.db.Account;
+import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +30,21 @@ public class MenuVisualizzaContattoActivity extends Activity {
         final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
         MenuRubricaActivity.setAppFont(mContainer, mFont);
         
+        contatto = getIntent().getExtras().getString("droidiary.app.MenuRubricaActivity");
+
+		System.out.println("Parametro Contatto:"+contatto);
+		
+		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		db=dbd.getWritableDatabase();
+		try {
+			dbd.openDataBase();
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
+
+		
         EditText nome= (EditText)findViewById(R.id.nomecontatto);
         nome.setFocusable(false);
         EditText cognome= (EditText)findViewById(R.id.cognomecontatto);
@@ -36,6 +58,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
         EditText email= (EditText)findViewById(R.id.emailcontatto);
         email.setFocusable(false);
        
+        
     
     }
     
@@ -61,5 +84,8 @@ public class MenuVisualizzaContattoActivity extends Activity {
             }
         }
     }
-    
+	private DroidiaryDatabaseHelper dbd;
+	private SQLiteDatabase db;
+	private int codUtente;
+	private String contatto;
 }

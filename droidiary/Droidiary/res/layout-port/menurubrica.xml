@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonaggiungicontatto"
         android:layout_below="@+id/EditText01"
-        android:layout_centerHorizontal="true" 
-        android:divider="#000">
+        android:layout_centerHorizontal="true"
+        android:divider="#000" >
 
     </ListView>
 
@@ -69,7 +69,7 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listacontatti"
+        android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/buttonaggiungicontatto"
         android:src="@drawable/apply" />
 

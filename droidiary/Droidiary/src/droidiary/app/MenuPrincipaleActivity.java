@@ -35,12 +35,6 @@ public class MenuPrincipaleActivity extends Activity {
         
         dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
-		
-		try {
-			dbd.createDataBase();
-		} catch (IOException ioe) {
-			throw new Error("Unable to create database");
-		}
 
 		try {
 			dbd.openDataBase();
