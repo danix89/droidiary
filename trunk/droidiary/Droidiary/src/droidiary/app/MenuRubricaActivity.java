@@ -7,6 +7,7 @@ import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,7 +27,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +37,7 @@ public class MenuRubricaActivity extends Activity {
 	/** Called when the activity is first created. */
 	private ListView lv;
 	private EditText et;
-	private String listview_array[] = { "ONE", "TWO", "THREE", "FOUR", "FIVE",
-			"SIX", "SEVEN", "EIGHT", "NINE", "TEN" };
+	private String listview_array[];
 	private ArrayList<String> array_sort= new ArrayList<String>();
 	int textlength=0;
 
@@ -50,12 +52,6 @@ public class MenuRubricaActivity extends Activity {
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
 		try {
-			dbd.createDataBase();
-		} catch (IOException ioe) {
-			throw new Error("Unable to create database");
-		}
-
-		try {
 			dbd.openDataBase();
 		}catch(SQLException sqle){
 
@@ -63,25 +59,27 @@ public class MenuRubricaActivity extends Activity {
 
 		}
 
+		//passaggio codice utente
+		
 		Cursor c= Account.getAccountById(db, codUtente);
-
-
 		TextView utente = (TextView) findViewById(R.id.Utente);
-
+		System.out.println("Codice:" + codUtente);
+		
 		while(c.moveToNext()){
 			String nome=c.getString(0);
 			String cognome=c.getString(1);
 			utente.setText("Utente: " + nome + " " + cognome);
 		}
 
-
-		//implementazione ricerca
-		lv = (ListView) findViewById(R.id.listacontatti);
-		et = (EditText) findViewById(R.id.EditText01);
+		lv=(ListView) findViewById(R.id.listacontatti);
+		Cursor contatti= Contatto.getContattiById(db, codUtente);
+		listview_array=getOneColumn(contatti);
+		
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listview_array));
-
-
+		
+		//implementazione ricerca
+		et = (EditText) findViewById(R.id.EditText01);
 		et.addTextChangedListener(new TextWatcher()
 		{
 			public void afterTextChanged(Editable s)
@@ -116,23 +114,25 @@ public class MenuRubricaActivity extends Activity {
 						android.R.layout.simple_list_item_1, array_sort));
 			}
 		});
-
+		
 		lv.setOnItemClickListener(
 				new OnItemClickListener()
 				{
 					public void onItemClick(AdapterView<?> arg0, View view,
 							int position, long id) {
 						Object o = lv.getItemAtPosition(position);
-						String appuntamento = o.toString();
-						Toast.makeText(getApplicationContext(), appuntamento, Toast.LENGTH_LONG).show();
+						String contatto = o.toString();
+						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
+						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
+						startActivity(intent);
+						Toast.makeText(getApplicationContext(), contatto, Toast.LENGTH_LONG).show();
 					}   
 				});
 
 
 
-
-
-		Button nuovoContatto = (Button) findViewById(R.id.buttonuovocontatto);
+		
+		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
 		nuovoContatto.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View arg0) {
@@ -142,19 +142,6 @@ public class MenuRubricaActivity extends Activity {
 			}
 		}
 				);
-
-		Button cercaContatto = (Button) findViewById(R.id.buttoncercacontatto);
-		nuovoContatto.setOnClickListener(new OnClickListener() 
-		{
-			public void onClick(View arg0) {
-				Intent intent = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
-				intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
-				startActivity(intent);
-			}
-		}
-				);
-
-
 
 		final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
 		final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
@@ -163,7 +150,6 @@ public class MenuRubricaActivity extends Activity {
 
 	}
 
-	private String contatti[] = { "Iphone", "Tutorials", "Gallery", "Android","item 1", "item 2", "item3", "item 4" };
 
 	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
 	{
@@ -186,6 +172,20 @@ public class MenuRubricaActivity extends Activity {
 				setAppFont((ViewGroup) mChild, mFont);
 			}
 		}
+	}
+	
+	
+	//tutto il risultato del cursore in un array
+	private String[] getOneColumn(Cursor cursor){ 
+		String myTitle = "";
+	    String[] myArray = null;            
+	    startManagingCursor(cursor);
+
+	    while(cursor.moveToNext()){
+	        myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+" "+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
+	    }   
+	    myArray = myTitle.split(";");     
+	    return myArray;
 	}
 
 	private DroidiaryDatabaseHelper dbd;
