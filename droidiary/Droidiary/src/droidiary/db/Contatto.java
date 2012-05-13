@@ -33,6 +33,13 @@ public class Contatto {
 		return c;
     }
 	
+	public static Cursor getDatiFromString(SQLiteDatabase db, String contatto){
+		String dati[]=contatto.split(" ");
+		
+		Cursor c= db.rawQuery("select nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'", null);
+		return c;
+    }
+	
 	public static final String ID= "_id";
 	public static final String ID_ACCOUNT= "id_account";
 	public static final String NOME= "nome";

@@ -125,7 +125,7 @@ public class MenuRubricaActivity extends Activity {
 						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
 						startActivity(intent);
-						Toast.makeText(getApplicationContext(), contatto, Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "Caricamento in Corso...", Toast.LENGTH_LONG).show();
 					}   
 				});
 
