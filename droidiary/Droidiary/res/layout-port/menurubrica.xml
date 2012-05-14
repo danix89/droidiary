@@ -24,7 +24,9 @@
         android:layout_above="@+id/buttonaggiungicontatto"
         android:layout_below="@+id/EditText01"
         android:layout_centerHorizontal="true"
-        android:divider="#000" >
+        android:divider="#000" 
+        android:textColor="#000000"
+        android:background="@color/transparent">
 
     </ListView>
 
