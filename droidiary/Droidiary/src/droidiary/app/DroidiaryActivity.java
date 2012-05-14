@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +88,7 @@ public class DroidiaryActivity extends Activity{
 					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 				}
 			}else if(online.isChecked()){
-				Toast.makeText(getApplicationContext(), "Funzionalità online non implementata", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Funzionalitï¿½ online non implementata", Toast.LENGTH_LONG).show();
 				
 			}
 			}
@@ -102,7 +104,17 @@ public class DroidiaryActivity extends Activity{
 				txtpsw.setText("");
 			}
 		});
+		
+		
+		ImageView img= (ImageView)findViewById(R.id.about);
+		img.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		    	Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
+		    	startActivity(intent);
+		    }
+		});
 	}
+
 
 	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
 	{
