@@ -7,8 +7,10 @@ import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -149,8 +151,17 @@ public class MenuRubricaActivity extends Activity {
 					}   
 				});
 
+		//pressione lunga
+		lv.setOnLongClickListener(new OnLongClickListener() {
+			
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
 		//implementazione click premuto
 
+		
 
 		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
 		nuovoContatto.setOnClickListener(new OnClickListener() 
@@ -169,7 +180,6 @@ public class MenuRubricaActivity extends Activity {
 
 
 	}
-
 
 	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
 	{
