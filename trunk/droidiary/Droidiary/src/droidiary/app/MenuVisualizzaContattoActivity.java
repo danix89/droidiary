@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.NumberKeyListener;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MenuVisualizzaContattoActivity extends Activity {
@@ -74,7 +76,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			        return new char[] {};
 			    }
 			});
-			EditText cellulare= (EditText)findViewById(R.id.telefonocellularecontatto);
+			cellulare= (EditText)findViewById(R.id.telefonocellularecontatto);
 			cellulare.setText(result.getString(3));
 			cellulare.setKeyListener(new NumberKeyListener() {
 			    public int getInputType() {
@@ -85,7 +87,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			        return new char[] {};
 			    }
 			});
-			EditText casa= (EditText)findViewById(R.id.telefonocasacontatto);
+			casa= (EditText)findViewById(R.id.telefonocasacontatto);
 			casa.setText(result.getString(4));
 			casa.setKeyListener(new NumberKeyListener() {
 			    public int getInputType() {
@@ -119,6 +121,22 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			    }
 			});
 		}
+		
+		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
+		img.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		    	Intent dialIntent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+(casa.getText()).toString()));
+		    	startActivity(dialIntent);
+		    }
+		});
+		
+		ImageView img1 = (ImageView) findViewById(R.id.chiamatacellulare);
+		img1.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		    	Intent dialIntent=new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+(cellulare.getText()).toString()));
+		    	startActivity(dialIntent);
+		    }
+		});
 	}
 
 	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
@@ -147,4 +165,5 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	private SQLiteDatabase db;
 	private int codUtente;
 	private String contatto;
+	private TextView casa, cellulare;
 }

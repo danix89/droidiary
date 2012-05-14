@@ -13,12 +13,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -60,11 +62,11 @@ public class MenuRubricaActivity extends Activity {
 		}
 
 		//passaggio codice utente
-		
+
 		Cursor c= Account.getAccountById(db, codUtente);
 		TextView utente = (TextView) findViewById(R.id.Utente);
 		System.out.println("Codice:" + codUtente);
-		
+
 		while(c.moveToNext()){
 			String nome=c.getString(0);
 			String cognome=c.getString(1);
@@ -74,10 +76,19 @@ public class MenuRubricaActivity extends Activity {
 		lv=(ListView) findViewById(R.id.listacontatti);
 		Cursor contatti= Contatto.getContattiById(db, codUtente);
 		listview_array=getOneColumn(contatti);
-		
+
 		lv.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, listview_array));
-		
+				android.R.layout.simple_list_item_1, listview_array){
+			public View getView(int position, View convertView,
+					ViewGroup parent) {
+				View view =super.getView(position, convertView, parent);
+				TextView textView=(TextView) view.findViewById(android.R.id.text1);
+				//colore degli item
+				textView.setTextColor(Color.BLACK);
+				return view;
+			}
+		});
+
 		//implementazione ricerca
 		et = (EditText) findViewById(R.id.EditText01);
 		et.addTextChangedListener(new TextWatcher()
@@ -114,7 +125,7 @@ public class MenuRubricaActivity extends Activity {
 						android.R.layout.simple_list_item_1, array_sort));
 			}
 		});
-		
+
 		lv.setOnItemClickListener(
 				new OnItemClickListener()
 				{
@@ -129,9 +140,9 @@ public class MenuRubricaActivity extends Activity {
 					}   
 				});
 
+		//implementazione click premuto
 
 
-		
 		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
 		nuovoContatto.setOnClickListener(new OnClickListener() 
 		{
@@ -173,19 +184,19 @@ public class MenuRubricaActivity extends Activity {
 			}
 		}
 	}
-	
-	
+
+
 	//tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
 		String myTitle = "";
-	    String[] myArray = null;            
-	    startManagingCursor(cursor);
+		String[] myArray = null;            
+		startManagingCursor(cursor);
 
-	    while(cursor.moveToNext()){
-	        myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+" "+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
-	    }   
-	    myArray = myTitle.split(";");     
-	    return myArray;
+		while(cursor.moveToNext()){
+			myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+" "+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
+		}   
+		myArray = myTitle.split(";");     
+		return myArray;
 	}
 
 	private DroidiaryDatabaseHelper dbd;
