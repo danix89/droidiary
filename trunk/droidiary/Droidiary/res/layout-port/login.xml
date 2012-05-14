@@ -66,8 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_below="@+id/password"
-            android:layout_centerHorizontal="true"
-            >
+            android:layout_centerHorizontal="true" >
 
             <RadioButton
                 android:id="@+id/online"
@@ -83,25 +82,16 @@
                 android:text="Modalità Offline"
                 android:textColor="#000" />
         </RadioGroup>
-
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:onClick="imageClick"
         android:src="@drawable/logo" />
-
-    <Button
-        android:id="@+id/about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_alignTop="@+id/imageView1"
-        android:background="@color/transparent" />
 
 </RelativeLayout>
