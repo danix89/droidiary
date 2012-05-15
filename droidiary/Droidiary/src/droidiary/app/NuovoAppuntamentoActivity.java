@@ -36,9 +36,6 @@ public class NuovoAppuntamentoActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menunuovoappuntamento);
-		final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
-		final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
-		DroidiaryActivity.setAppFont(mContainer, mFont);
 
 		// cattura di tutti i view del layout
         mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
@@ -161,28 +158,5 @@ public class NuovoAppuntamentoActivity extends Activity{
                     updateDate();
                 }
             };
-            
-          
-	
-	
-	public static final void setAppFont(ViewGroup mContainer, Typeface mFont){
-		if (mContainer == null || mFont == null) return;
-		final int mCount = mContainer.getChildCount();
-		// Loop through all of the children.
-		for (int i = 0; i < mCount; ++i)
-		{
-			final View mChild = mContainer.getChildAt(i);
-			if (mChild instanceof TextView)
-		{
-			// Set the font if it is a TextView.
-			((TextView) mChild).setTypeface(mFont);
-		}
-		else if (mChild instanceof ViewGroup)
-		{
-			// Recursively attempt another ViewGroup.
-			setAppFont((ViewGroup) mChild, mFont);
-		}
-	}
-}
 
 }

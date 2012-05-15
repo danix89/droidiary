@@ -3,35 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
-
+    
+    <TextView
+        android:id="@+id/Utente"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
+    
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="19dp"
-        android:layout_marginTop="21dp" >
-
-        <TextView
-            android:id="@+id/titolo"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/menunuovocontatto"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#000000"
-            android:textSize="18dp" />
+        android:layout_below="@+id/Utente"
+        android:layout_marginRight="19dp" >
 
         <EditText
             android:id="@+id/cognomecontatto"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_alignLeft="@+id/nomecontatto"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:inputType="textPersonName"
-            android:hint="@string/cognome" />
+            android:hint="@string/cognome"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/nomecontatto"
@@ -39,8 +40,29 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:inputType="textPersonName"
-            android:hint="@string/nome" />
+            android:layout_toRightOf="@+id/imageView1"
+            android:hint="@string/nome"
+            android:inputType="textPersonName" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/rubrica" />
+
+        <TextView
+            android:id="@+id/titolo"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_above="@+id/nomecontatto"
+            android:layout_alignParentLeft="true"
+            android:text="@string/menunuovocontatto"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
     </RelativeLayout>
 
     <RelativeLayout
