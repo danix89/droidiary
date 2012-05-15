@@ -5,7 +5,7 @@
     android:background="@drawable/agendaportrait2" >
 
     <TextView
-        android:id="@+id/Utente"
+        android:id="@+id/Contatto"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
@@ -32,76 +32,70 @@
             android:layout_alignParentTop="true"
             android:src="@drawable/rubrica" />
 
-        <TextView
+        <EditText
             android:id="@+id/nomecontatto"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/cognomecontatto"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
-            android:layout_toRightOf="@+id/imageView1"
-            android:gravity="center_horizontal|center"
-            android:text=""
-            android:textColor="#000"
-            android:textSize="22dp" />
+            android:inputType="textPersonName" />
 
-        <TextView
+        <EditText
             android:id="@+id/cognomecontatto"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/nomecontatto"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/nomecontatto"
-            android:gravity="center_horizontal|center"
-            android:textColor="#000"
-            android:textSize="22dp" />
+            android:layout_toRightOf="@+id/imageView1"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
         android:layout_width="230dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_centerHorizontal="true" >
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" >
 
-        <Button
-            android:id="@+id/eliminacontatto"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="Elimina" />
-
-        <Button
-            android:id="@+id/modificacontatto"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:text="Modifica" />
-
-        <TextView
+        <EditText
             android:id="@+id/cittacontatto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="22dp"
-            android:gravity="center_horizontal|center"
-            android:text="citta"
-            android:textColor="#000"
-            android:textSize="17dp" />
+            android:inputType="text"
+            android:text="" />
 
-        <TextView
+        <EditText
             android:id="@+id/emailcontatto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/cittacontatto"
-            android:gravity="center_horizontal|center"
-            android:text="email"
-            android:textColor="#000"
-            android:textSize="17dp" />
+            android:inputType="textEmailAddress"
+            android:text="" />
 
+        <Button
+            android:id="@+id/eliminaContatto"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/emailcontatto"
+            android:text="Elimina" />
+
+        <Button
+            android:id="@+id/salvaContatto"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Salva" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -111,28 +105,26 @@
         android:layout_alignLeft="@+id/relativeLayout4"
         android:layout_centerVertical="true" >
 
-        <TextView
+        <EditText
             android:id="@+id/telefonocellularecontatto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/chiamatacellulare"
-            android:gravity="center_horizontal|center"
+            android:inputType="phone"
             android:text=""
-            android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/telefonocasacontatto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_above="@+id/telefonocellularecontatto"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/telefonocellularecontatto"
-            android:gravity="center_horizontal|center"
+            android:inputType="phone"
             android:text=""
-            android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/TextView01"
@@ -142,8 +134,7 @@
             android:layout_alignParentTop="true"
             android:text="@string/telefono"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textSize="18dp" />
+            android:textColor="#000000" />
 
         <ImageView
             android:id="@+id/chiamatacasa"
@@ -165,5 +156,15 @@
             android:onClick="imageClick"
             android:src="@drawable/whatsapp_messenger_android" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout4"
+        android:layout_alignRight="@+id/relativeLayout4"
+        android:text="Città / email"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
 
 </RelativeLayout>

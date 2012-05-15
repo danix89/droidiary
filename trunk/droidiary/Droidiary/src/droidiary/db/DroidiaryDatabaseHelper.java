@@ -104,7 +104,7 @@ private void copyDataBase() {
 
 public void openDataBase() throws SQLException{
 	String myPath = DB_PATH + DB_NAME;
-	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 
 }
 

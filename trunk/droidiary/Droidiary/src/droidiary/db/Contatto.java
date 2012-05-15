@@ -18,7 +18,7 @@ public class Contatto {
 	 */
 	public static Cursor insertContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
-		Cursor c= db.rawQuery("INSERT INTO contatto (id_account,nome,cognome,citta,cellulare, numeroCasa,mail)VALUES ('"+id_a+"', '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')", null);
+		Cursor c= db.rawQuery("insert into contatto (id_account,nome,cognome,citta,cellulare,numeroCasa,mail)values('"+id_a+"','"+nome+"','"+cognome+"','"+citta+"','"+cell+"','"+ncasa+"','"+mail+"')", null);
 		return c;
 	}
 	
@@ -28,15 +28,14 @@ public class Contatto {
 	 * @param s
 	 * @return
 	 */
-	public static Cursor getContattiById(SQLiteDatabase db, int id){
-		Cursor c= db.rawQuery("select * from contatto where id_account='"+id+"'", null);
+	public static Cursor getContattiById(SQLiteDatabase db, long id){
+		Cursor c= db.rawQuery("select id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where id_account='"+id+"'", null);
 		return c;
     }
 	
 	public static Cursor getDatiFromString(SQLiteDatabase db, String contatto){
 		String dati[]=contatto.split(" ");
-		
-		Cursor c= db.rawQuery("select nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'", null);
+		Cursor c= db.rawQuery("select id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'", null);
 		return c;
     }
 	

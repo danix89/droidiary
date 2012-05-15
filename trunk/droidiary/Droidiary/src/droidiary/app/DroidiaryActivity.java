@@ -31,13 +31,9 @@ public class DroidiaryActivity extends Activity{
 		//codice per il font
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-		final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
-		final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
-		DroidiaryActivity.setAppFont(mContainer, mFont);
-		//fine codice per il font
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db=dbd.getWritableDatabase();
+		db=dbd.getReadableDatabase();
 		try {
 			dbd.createDataBase();
 		} catch (IOException ioe) {
@@ -82,13 +78,12 @@ public class DroidiaryActivity extends Activity{
 					System.out.println(codUtente);
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
-					dbd.close();
 					startActivity(intent);
 				}else{
 					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 				}
 			}else if(online.isChecked()){
-				Toast.makeText(getApplicationContext(), "Funzionalit� online non implementata", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Funzionalità online non implementata", Toast.LENGTH_LONG).show();
 				
 			}
 			}
@@ -113,29 +108,13 @@ public class DroidiaryActivity extends Activity{
 		    	startActivity(intent);
 		    }
 		});
-	}
-
-
-	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
-	{
-		if (mContainer == null || mFont == null) return;
-
-		final int mCount = mContainer.getChildCount();
 		
-		for (int i = 0; i < mCount; ++i)
-		{
-			final View mChild = mContainer.getChildAt(i);
-			if (mChild instanceof TextView)
-			{
-
-				((TextView) mChild).setTypeface(mFont);
-			}
-			else if (mChild instanceof ViewGroup)
-			{
-
-				setAppFont((ViewGroup) mChild, mFont);
-			}
-		}
+		
+	}
+	
+	public void onBackPressed() {
+	    // do something on back.
+	    return;
 	}
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;

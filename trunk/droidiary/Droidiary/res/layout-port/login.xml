@@ -88,7 +88,7 @@
         android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/relativeLayout1"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:onClick="imageClick"

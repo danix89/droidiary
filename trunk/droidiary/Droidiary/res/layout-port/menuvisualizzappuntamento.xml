@@ -34,62 +34,44 @@
 
         <TextView
             android:id="@+id/nomecontatto"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/imageView1"
-            android:gravity="center_horizontal|center"
             android:text=""
             android:textColor="#000"
-            android:textSize="22dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/cognomecontatto"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/nomecontatto"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/nomecontatto"
-            android:gravity="center_horizontal|center"
+            android:layout_centerVertical="true"
+            android:text=""
             android:textColor="#000"
-            android:textSize="22dp" />
+            android:textSize="18dp" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
         android:layout_width="230dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_centerHorizontal="true" >
-
-        <Button
-            android:id="@+id/eliminacontatto"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="Elimina" />
-
-        <Button
-            android:id="@+id/modificacontatto"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:text="Modifica" />
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" >
 
         <TextView
             android:id="@+id/cittacontatto"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="22dp"
-            android:gravity="center_horizontal|center"
-            android:text="citta"
+            android:text=""
             android:textColor="#000"
-            android:textSize="17dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/emailcontatto"
@@ -97,11 +79,25 @@
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/cittacontatto"
-            android:gravity="center_horizontal|center"
-            android:text="email"
+            android:text=""
             android:textColor="#000"
-            android:textSize="17dp" />
+            android:textSize="18dp" />
 
+        <Button
+            android:id="@+id/elimina"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/emailcontatto"
+            android:text="Elimina" />
+
+        <Button
+            android:id="@+id/cancella"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Modifica" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -117,10 +113,9 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/chiamatacellulare"
-            android:gravity="center_horizontal|center"
-            android:text=""
+           	android:text=""
             android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/telefonocasacontatto"
@@ -129,10 +124,9 @@
             android:layout_above="@+id/telefonocellularecontatto"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/telefonocellularecontatto"
-            android:gravity="center_horizontal|center"
             android:text=""
             android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/TextView01"
@@ -144,7 +138,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000"
             android:textSize="18dp" />
-
+        
         <ImageView
             android:id="@+id/chiamatacasa"
             android:layout_width="40dp"
@@ -165,5 +159,16 @@
             android:onClick="imageClick"
             android:src="@drawable/whatsapp_messenger_android" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeLayout4"
+        android:layout_alignRight="@+id/relativeLayout4"
+        android:text="Città / email"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        android:textSize="18dp" />
 
 </RelativeLayout>
