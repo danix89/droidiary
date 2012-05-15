@@ -1,41 +1,28 @@
 package droidiary.app;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
 import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MenuRubricaActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -145,23 +132,15 @@ public class MenuRubricaActivity extends Activity {
 						Object o = lv.getItemAtPosition(position);
 						String contatto = o.toString();
 						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
+						intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
+						dbd.close();
 						startActivity(intent);
-						Toast.makeText(getApplicationContext(), "Caricamento in Corso...", Toast.LENGTH_LONG).show();
 					}   
 				});
 
-		//pressione lunga
-		lv.setOnLongClickListener(new OnLongClickListener() {
-			
-			public boolean onLongClick(View v) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		});
 		//implementazione click premuto
 
-		
 
 		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
 		nuovoContatto.setOnClickListener(new OnClickListener() 
@@ -174,36 +153,7 @@ public class MenuRubricaActivity extends Activity {
 		}
 				);
 
-		final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
-		final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
-		MenuRubricaActivity.setAppFont(mContainer, mFont);
-
-
 	}
-
-	public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
-	{
-		if (mContainer == null || mFont == null) return;
-
-		final int mCount = mContainer.getChildCount();
-
-		// Loop through all of the children.
-		for (int i = 0; i < mCount; ++i)
-		{
-			final View mChild = mContainer.getChildAt(i);
-			if (mChild instanceof TextView)
-			{
-				// Set the font if it is a TextView.
-				((TextView) mChild).setTypeface(mFont);
-			}
-			else if (mChild instanceof ViewGroup)
-			{
-				// Recursively attempt another ViewGroup.
-				setAppFont((ViewGroup) mChild, mFont);
-			}
-		}
-	}
-
 
 	//tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
