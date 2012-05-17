@@ -6,115 +6,73 @@
     android:background="@drawable/agendaportrait2" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/Utente"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="26dp"
-        android:layout_marginTop="36dp"
-        android:text="@string/titoloAppuntamenti"
+        android:gravity="center_horizontal|center"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000"
-        android:textSize="18dp" />
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout6"
+    <ListView
+        android:id="@+id/listaappuntamenti"
         android:layout_width="250dp"
-        android:layout_height="270dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonaggiungiappuntamento"
+        android:layout_below="@+id/EditText01"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:divider="#000" 
+        android:textColor="#000000"
+        android:background="@color/transparent">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" >
+    </ListView>
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/apply" />
-
-            <Button
-                android:id="@+id/menunuovoappuntamento"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:text="@string/menunuovoappuntamento" />
+    <Button
+        android:id="@+id/buttonuovoappuntamento"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/transparent" />
 
-        </RelativeLayout>
+    <Button
+        android:id="@+id/buttoncercaappuntamento"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/transparent" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout3"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/relativeLayout2"
-            android:layout_marginTop="18dp" >
+    <EditText
+        android:id="@+id/EditText01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/listaappuntamenti"
+        android:layout_alignRight="@+id/listaappuntamenti"
+        android:layout_below="@+id/Utente"
+        android:layout_marginTop="14dp"
+        android:hint="Cerca" >
 
-            <Button
-                android:id="@+id/menumodificaappuntamento"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:text="@string/menumodificaappuntamento" />
+        <requestFocus />
+    </EditText>
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/modify" />
-        </RelativeLayout>
+    <Button
+        android:id="@+id/buttonaggiungiappuntamento"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/listaappuntamenti"
+        android:text="Aggiungi Appuntamento" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout4"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/relativeLayout3"
-            android:layout_marginTop="21dp" >
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/cancel" />
-
-            <Button
-                android:id="@+id/menueliminaappuntamento"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:text="@string/menueeliminaappuntamento" />
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/menucercaappuntamento"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/menucercaappuntamento" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/cerca" />
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/buttonaggiungiappuntamento"
+        android:src="@drawable/apply" />
 
 </RelativeLayout>
