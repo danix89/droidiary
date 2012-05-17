@@ -35,8 +35,16 @@ public class MenuRubricaActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.menurubrica);
+		populateListView();
+	}
 
+	public void onResume() {
+		super.onResume();
+		populateListView();
+	}
+	
+	private void populateListView()	{
+		setContentView(R.layout.menurubrica);
 		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		if(codUtente==0){
 		codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
@@ -154,8 +162,7 @@ public class MenuRubricaActivity extends Activity {
 				startActivity(intent);
 			}
 		}
-				);
-
+				);		
 	}
 
 	//tutto il risultato del cursore in un array
