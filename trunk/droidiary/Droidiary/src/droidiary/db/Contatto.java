@@ -1,7 +1,9 @@
 package droidiary.db;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class Contatto {
 
@@ -15,16 +17,29 @@ public class Contatto {
 	 * @param cell
 	 * @param ncasa
 	 * @param mail
+	 * @return 
 	 */
-	public static Cursor insertContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static long insertContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
-		Cursor c= db.rawQuery("insert into contatto (id_account,nome,cognome,citta,cellulare,numeroCasa,mail)values('"+id_a+"','"+nome+"','"+cognome+"','"+citta+"','"+cell+"','"+ncasa+"','"+mail+"')", null);
-		return c;
+		ContentValues cv = new ContentValues();
+		cv.put(ID_ACCOUNT, id_a);
+		cv.put(NOME, nome);
+		cv.put(COGNOME, cognome);
+		cv.put(CITTA, citta);
+		cv.put(CELLULARE, cell);
+		cv.put(NUMEROCASA, ncasa);
+		cv.put(MAIL, mail);
+		long q = db.insert(TABELLA, null, cv);
+//		Cursor c= db.rawQuery("insert into contatto (id_account,nome,cognome,citta,cellulare,numeroCasa,mail)values('"+id_a+"','"+nome+"','"+cognome+"','"+citta+"','"+cell+"','"+ncasa+"','"+mail+"')", null);
+//		c.moveToLast();
+//		return c;
+		return q;
 	}
 	
 	public static Cursor modificaContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		Cursor c= db.rawQuery("update contatto set nome="+nome+", cognome="+cognome+", citta="+citta+", cellulare="+cell+", numeroCasa="+ncasa+", mail='"+mail+"' where id_account='"+id_a+"' and nome='"+nome+"'", null);
+		c.moveToNext();
 		return c;
 	}
 	/**
