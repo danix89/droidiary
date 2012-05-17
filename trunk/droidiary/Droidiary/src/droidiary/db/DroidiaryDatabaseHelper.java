@@ -23,7 +23,11 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 		this.myDataBase=db;
 	}
 
-
+	public void onUpgrade() {
+		int vers = this.myDataBase.getVersion() + 1;
+		this.myDataBase.setVersion(vers);
+	}
+	
 	public void createDataBase() throws IOException{
 
 		boolean dbExist = checkDataBase();
