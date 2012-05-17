@@ -1,11 +1,7 @@
 package droidiary.app;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import droidiary.db.Account;
-import droidiary.db.Appuntamento;
-import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,21 +15,33 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import droidiary.db.Account;
+import droidiary.db.Appuntamento;
+import droidiary.db.DroidiaryDatabaseHelper;
 
 public class MenuAppuntamentiActivity extends Activity {
 //	private DroidiaryDatabaseHelper dbd;
 //	private SQLiteDatabase db;
-	
+	    
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		populateListView();
+	}
+
+	public void onResume() {
+		super.onResume();
+		populateListView();
+	}
+    
+    private void populateListView()	{
         setContentView(R.layout.menuappuntamenti);
         codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		System.out.println("Parametro Menu Rubrica:"+codUtente);
@@ -159,7 +167,7 @@ public class MenuAppuntamentiActivity extends Activity {
                 setAppFont((ViewGroup) mChild, mFont);
             }
         }
-    }
+	}
     
 	//tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
