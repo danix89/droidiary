@@ -48,6 +48,7 @@ public class MenuRubricaActivity extends Activity {
 		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		if(codUtente==0){
 		codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
+		codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
 		}
 		System.out.println("Parametro Menu Rubrica:"+codUtente);
 
