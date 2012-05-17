@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="10" />
-
+	<uses-permission android:name="android.permission.INTERNET" />
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
@@ -29,6 +29,8 @@
         <activity android:screenOrientation="fullSensor" android:name="NuovoAppuntamentoActivity" android:label="@string/nuovoappuntamento"></activity>
         <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
         <activity android:name="ModificaContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
+        
+        <uses-library android:name="com.google.android.maps" /> 
         </application>
         
         </manifest>    
