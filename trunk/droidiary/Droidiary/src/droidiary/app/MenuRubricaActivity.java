@@ -38,6 +38,9 @@ public class MenuRubricaActivity extends Activity {
 		setContentView(R.layout.menurubrica);
 
 		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
+		if(codUtente==0){
+		codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
+		}
 		System.out.println("Parametro Menu Rubrica:"+codUtente);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
@@ -134,7 +137,7 @@ public class MenuRubricaActivity extends Activity {
 						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
-						dbd.close();
+						db.close();
 						startActivity(intent);
 					}   
 				});

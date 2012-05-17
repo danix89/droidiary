@@ -22,6 +22,11 @@ public class Contatto {
 		return c;
 	}
 	
+	public static Cursor modificaContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	{
+		Cursor c= db.rawQuery("update contatto set nome="+nome+", cognome="+cognome+", citta="+citta+", cellulare="+cell+", numeroCasa="+ncasa+", mail='"+mail+"' where id_account='"+id_a+"' and nome='"+nome+"'", null);
+		return c;
+	}
 	/**
 	 * ritorna tutti i contatti dell' account
 	 * @param db
