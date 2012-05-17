@@ -1,6 +1,17 @@
 package droidiary.app;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import org.apache.http.*;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import droidiary.db.Account;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -9,18 +20,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class DroidiaryActivity extends Activity{
@@ -40,14 +48,6 @@ public class DroidiaryActivity extends Activity{
 			throw new Error("Unable to create database");
 		}
 
-		try {
-			dbd.openDataBase();
-		}catch(SQLException sqle){
-
-			throw sqle;
-
-		}
-		
 		final RadioButton online= (RadioButton) findViewById(R.id.online);
 		final RadioButton offline=(RadioButton) findViewById(R.id.offline);
 		
@@ -70,6 +70,18 @@ public class DroidiaryActivity extends Activity{
 
 
 				String[] arg={txtnome.getText().toString(), txtpsw.getText().toString()};
+				
+				username=txtnome.getText().toString();
+				password=txtpsw.getText().toString();
+
+				try {
+					dbd.openDataBase();
+				}catch(SQLException sqle){
+
+					throw sqle;
+
+				}
+				
 								
 				Cursor c= Account.getAccountByUserPsw(db, arg);
 				if(c.moveToFirst()){
@@ -78,13 +90,24 @@ public class DroidiaryActivity extends Activity{
 					System.out.println(codUtente);
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
+					dbd.close();
+					db.close();
 					startActivity(intent);
 				}else{
 					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 				}
 			}else if(online.isChecked()){
-				Toast.makeText(getApplicationContext(), "Funzionalità online non implementata", Toast.LENGTH_LONG).show();
-				
+				try {
+					dbd.openDataBase();
+				}catch(SQLException sqle){
+
+					throw sqle;
+
+				}
+				System.out.println("Username: "+username);
+				System.out.println("Password: "+password);
+				send(Account.getStringAccountByUserPsw(username, password));
+				dbd.close();
 			}
 			}
 		});
@@ -111,11 +134,49 @@ public class DroidiaryActivity extends Activity{
 		
 		
 	}
+
+	public static String send(String query) {
+		String result = "0";
+		InputStream is = null;
+
+		  //the query to send
+		  ArrayList<NameValuePair> querySend = new ArrayList<NameValuePair>();
+
+		  querySend.add(new BasicNameValuePair("querySend",query));
+
+		  //http post
+		  try{
+		    HttpClient httpclient = new DefaultHttpClient();
+		    HttpPost httppost = new HttpPost("http://www.droidiary.altervista.org/query.php");
+		    httppost.setEntity(new UrlEncodedFormEntity(querySend));
+		    HttpResponse response = httpclient.execute(httppost);
+		    HttpEntity entity = response.getEntity();
+		    is = entity.getContent();
+		  }catch(Exception e){
+		    Log.e("log_tag", "Error in http connection "+e.toString());
+		  }
+
+		  //convert response to string
+		  try{
+		    BufferedReader reader = new BufferedReader(
+		               new InputStreamReader(is,"iso-8859-1"),8);
+		    StringBuilder sb = new StringBuilder();
+		    String line = null;
+		      while ((line = reader.readLine()) != null) {
+		        sb.append(line + "\n");
+		      }
+		    is.close();
+		    result=sb.toString();
+
+		  }catch(Exception e){
+		    Log.e("log_tag", "Error converting result: "+e.toString());
+		  }
+
+		  Log.i("SendQUERY", result);
+		  return result;
+		  }
 	
-	public void onBackPressed() {
-	    // do something on back.
-	    return;
-	}
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
+	private String username, password;
 }

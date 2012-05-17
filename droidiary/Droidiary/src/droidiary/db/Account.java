@@ -47,6 +47,7 @@ public class Account extends DroidiaryDatabaseHelper{
         return c;
     }
 	
+
 	/**
 	 * ritorna l'intera riga tramite ricerca di user e psw
 	 * @param db
@@ -56,6 +57,11 @@ public class Account extends DroidiaryDatabaseHelper{
 	 */
 	public static Cursor getAccountByUserPsw(SQLiteDatabase db, String[] s) throws SQLException {
 		Cursor c= db.rawQuery("select * from account where username='"+s[0]+"' and password='"+s[1]+"'", null);
+		return c;
+	}
+	
+	public static String getStringAccountByUserPsw(String user, String pass) throws SQLException {
+		String c="select * from account where username='"+user+"' and password='"+pass+"'";
 		return c;
 	}
 	

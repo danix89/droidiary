@@ -35,7 +35,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 			//..altrimenti lo creiamo
 			this.getReadableDatabase();
 
-		}
+		
 
 		try {
 
@@ -45,6 +45,8 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 
 			throw new Error("Errore nella creazione della copia del database");
 
+		}
+		
 		}
 	}
 
@@ -129,13 +131,10 @@ private boolean checkDataBase(){
 	}catch(SQLiteException e){}
 
 	if(checkDB != null){
-
-		checkDB.close();
-
+		return true;
+	}else{
+		return false;
 	}
-
-	// se non esiste ritorna true
-	return checkDB != null ? true : false;
 }
 
 

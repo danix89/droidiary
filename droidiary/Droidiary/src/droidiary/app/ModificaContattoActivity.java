@@ -1,7 +1,5 @@
 package droidiary.app;
 
-import java.io.IOException;
-
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
@@ -62,6 +60,7 @@ public class ModificaContattoActivity extends Activity {
 			citta.setText(result.getString(3));
 			EditText email= (EditText)findViewById(R.id.emailcontatto);
 			email.setText(result.getString(6));
+			db.close();
 		}
 		
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
@@ -84,7 +83,7 @@ public class ModificaContattoActivity extends Activity {
 		eliminaContatto.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+			
 				
 			}
 		});
@@ -106,7 +105,7 @@ public class ModificaContattoActivity extends Activity {
 			     citta=txtcitta.getText().toString();
 			     if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || telefonocellulare.equals("Cellulare:")|| email.equals("Email:") || citta.equals("Citt�:")){
 			    	Toast.makeText(getApplicationContext(),  "Controlla tutti i campi", Toast.LENGTH_LONG).show();
-			     }else{ 
+			     }else{
 			    	 onClickAggiorna();
 			    
 			     }
@@ -139,27 +138,23 @@ public class ModificaContattoActivity extends Activity {
     
     
     public void aggiornaContatto(){
-    	dbd = new DroidiaryDatabaseHelper(this);
-		db=dbd.getWritableDatabase();
-		try {
-			dbd.createDataBase();
-		} catch (IOException ioe) {
-			throw new Error("Unable to create database");
+    	tmp = new DroidiaryDatabaseHelper(this);
+		db=tmp.getWritableDatabase();
+		tmp.openDataBase();
+		System.out.println("Id_Account: "+codUtente+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
+		Cursor res= Contatto.modificaContatto(db, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
+		
+		if(res!=null){
+			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
+			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
+			db.close();
+			startActivity(intent);
 		}
-
-		try {
-			dbd.openDataBase();
-		}catch(SQLException sqle){
-
-			throw sqle;
-
-		}
-    	
-		//query modifica contatto
-    	
+		
     }
 
-	private DroidiaryDatabaseHelper dbd;
+	private DroidiaryDatabaseHelper dbd, tmp;
 	private SQLiteDatabase db;
 	private int codUtente;
 	private String contatto;
