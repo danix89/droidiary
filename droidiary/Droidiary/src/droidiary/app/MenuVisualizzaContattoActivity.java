@@ -1,7 +1,5 @@
 package droidiary.app;
 
-import droidiary.db.Contatto;
-import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,6 +14,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import droidiary.db.Contatto;
+import droidiary.db.DroidiaryDatabaseHelper;
 
 public class MenuVisualizzaContattoActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -43,13 +43,15 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		Cursor result=Contatto.getDatiFromString(db, contatto);
 
 		if(result.moveToFirst()){
-			codUtente=result.getString(0);
+			id=result.getInt(0);
+			System.out.println("Codice id: " + id);
+			codUtente=result.getString(1);
 			System.out.println("Codice Account: " + codUtente);
 			TextView utente=(TextView) findViewById(R.id.Utente);
-			utente.setText("Contatto: "+result.getString(1) + " " + result.getString(2));
+			utente.setText("Contatto: "+result.getString(2) + " " + result.getString(3));
 			
 			TextView nome= (TextView)findViewById(R.id.nomecontatto);
-			nome.setText(result.getString(1));
+			nome.setText(result.getString(2));
 			nome.setKeyListener(new NumberKeyListener() {
 			    public int getInputType() {
 			        return InputType.TYPE_NULL;
@@ -60,15 +62,15 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			    }
 			});
 			TextView cognome= (TextView)findViewById(R.id.cognomecontatto);
-			cognome.setText(result.getString(2));
+			cognome.setText(result.getString(3));
 			cellulare= (TextView)findViewById(R.id.telefonocellularecontatto);
-			cellulare.setText(result.getString(4));
+			cellulare.setText(result.getString(5));
 			casa= (TextView)findViewById(R.id.telefonocasacontatto);
-			casa.setText(result.getString(5));
+			casa.setText(result.getString(6));
 			TextView citta= (TextView)findViewById(R.id.cittacontatto);
-			citta.setText(result.getString(3));
+			citta.setText(result.getString(4));
 			TextView email= (TextView)findViewById(R.id.emailcontatto);
-			email.setText(result.getString(6));
+			email.setText(result.getString(7));
 		}
 		
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
@@ -92,7 +94,21 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, ModificaContattoActivity.class);
-				intent.putExtra("droidiary.app.MenuVisualizzaContattoActivity", contatto);
+				intent.putExtra("droidiary.app.contatto", contatto);
+				intent.putExtra("droidiary.app.codUtente", id);
+				dbd.close();
+				startActivity(intent);
+			}
+		});
+		
+		Button eliminaContatto=(Button) findViewById(R.id.eliminacontatto);
+		eliminaContatto.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View arg0) {
+				int result=Contatto.eliminaContatto(db, id, Integer.parseInt(codUtente));
+				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
+				intent.putExtra("droidiary.app.contatto", contatto);
+				intent.putExtra("droidiary.app.codUtente", id);
 				dbd.close();
 				startActivity(intent);
 			}
@@ -102,6 +118,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private String codUtente;
+	private int id;
 	private String contatto;
 	private TextView casa, cellulare;
 }

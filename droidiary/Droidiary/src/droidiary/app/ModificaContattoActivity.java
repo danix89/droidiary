@@ -1,7 +1,5 @@
 package droidiary.app;
 
-import droidiary.db.Contatto;
-import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import droidiary.db.Contatto;
+import droidiary.db.DroidiaryDatabaseHelper;
 
 public class ModificaContattoActivity extends Activity {
 
@@ -25,10 +25,11 @@ public class ModificaContattoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menumodificacontatto);
 
-		contatto=getIntent().getExtras().getString("droidiary.app.MenuVisualizzaContattoActivity");
+		contatto=getIntent().getExtras().getString("droidiary.app.contatto");
+		id=getIntent().getExtras().getInt("droidiary.app.codUtente");
 		
 		System.out.println("Parametro contatto Modifica Contatto:"+contatto);
-
+		
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
 		try {
@@ -43,23 +44,23 @@ public class ModificaContattoActivity extends Activity {
 		Cursor result=Contatto.getDatiFromString(db, contatto);
 
 		if(result.moveToFirst()){
-			codUtente=result.getInt(0);
+			codUtente=result.getInt(1);
 			System.out.println("Parametro id_account Modifica Contatto:"+codUtente);
 			TextView utente=(TextView) findViewById(R.id.Contatto);
-			utente.setText("Modifica Contatto: "+result.getString(1) + " " + result.getString(2));
+			utente.setText("Modifica Contatto: "+result.getString(2) + " " + result.getString(3));
 			
 			EditText nome= (EditText)findViewById(R.id.nomecontatto);
-			nome.setText(result.getString(1));
+			nome.setText(result.getString(4));
 			EditText cognome= (EditText)findViewById(R.id.cognomecontatto);
-			cognome.setText(result.getString(2));
+			cognome.setText(result.getString(3));
 			cellulare= (EditText)findViewById(R.id.telefonocellularecontatto);
-			cellulare.setText(result.getString(4));
+			cellulare.setText(result.getString(5));
 			casa= (EditText)findViewById(R.id.telefonocasacontatto);
-			casa.setText(result.getString(5));
+			casa.setText(result.getString(6));
 			EditText citta= (EditText)findViewById(R.id.cittacontatto);
-			citta.setText(result.getString(3));
+			citta.setText(result.getString(4));
 			EditText email= (EditText)findViewById(R.id.emailcontatto);
-			email.setText(result.getString(6));
+			email.setText(result.getString(7));
 			db.close();
 		}
 		
@@ -103,7 +104,7 @@ public class ModificaContattoActivity extends Activity {
 			     email=txtmail.getText().toString();
 			     EditText txtcitta= (EditText) findViewById(R.id.cittacontatto);
 			     citta=txtcitta.getText().toString();
-			     if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || telefonocellulare.equals("Cellulare:")|| email.equals("Email:") || citta.equals("Citt�:")){
+			     if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || telefonocellulare.equals("Cellulare:")|| email.equals("Email:") || citta.equals("Citta:")){
 			    	Toast.makeText(getApplicationContext(),  "Controlla tutti i campi", Toast.LENGTH_LONG).show();
 			     }else{
 			    	 onClickAggiorna();
@@ -142,9 +143,9 @@ public class ModificaContattoActivity extends Activity {
 		db=tmp.getWritableDatabase();
 		tmp.openDataBase();
 		System.out.println("Id_Account: "+codUtente+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
-		Cursor res= Contatto.modificaContatto(db, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
+		int res= Contatto.modificaContatto(db, id, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
 		
-		if(res!=null){
+		if(res>0){
 			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
@@ -156,6 +157,7 @@ public class ModificaContattoActivity extends Activity {
 
 	private DroidiaryDatabaseHelper dbd, tmp;
 	private SQLiteDatabase db;
+	private int id;
 	private int codUtente;
 	private String contatto;
 	private EditText casa;
