@@ -42,14 +42,26 @@ public class MenuRubricaActivity extends Activity {
 		super.onResume();
 		populateListView();
 	}
-	
+
 	private void populateListView()	{
 		setContentView(R.layout.menurubrica);
-		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		if(codUtente==0){
-			codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
-			codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
+		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		}
+		if(codUtente==0){
+		codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
+		}
+		if(codUtente==0){
+		codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
+		}
+		if(codUtente==0){
+		codUtente = getIntent().getExtras().getInt("droidiary.app.EliminaContattoActivity");
+		}
+		if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaContatto");
+		}
+		
+		
 		System.out.println("Parametro Menu Rubrica:"+codUtente);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database

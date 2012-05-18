@@ -1,6 +1,8 @@
 package droidiary.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -24,9 +26,13 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menuvisualizzacontatto);
-
+		if(contatto==null){
 		contatto = getIntent().getExtras().getString("droidiary.app.MenuRubricaActivity");
-
+		}
+		if(contatto==null){
+		contatto = getIntent().getExtras().getString("droidiary.app.ModificaContattoActivity");
+		}
+		
 		System.out.println("Parametro Contatto: "+contatto);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
@@ -44,25 +50,16 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		Cursor result=Contatto.getDatiFromString(db, contatto);
 
 		if(result.moveToFirst()){
-			codUtente=result.getString(1);
+			codUtente=result.getInt(1);
 			id=result.getInt(0);
 			System.out.println("Codice id: " + id);
-			codUtente=result.getString(1);
+			codUtente=result.getInt(1);
 			System.out.println("Codice Account: " + codUtente);
 			TextView utente=(TextView) findViewById(R.id.Utente);
 			utente.setText("Contatto: "+result.getString(2) + " " + result.getString(3));
 			
 			TextView nome= (TextView)findViewById(R.id.nomecontatto);
 			nome.setText(result.getString(2));
-			nome.setKeyListener(new NumberKeyListener() {
-			    public int getInputType() {
-			        return InputType.TYPE_NULL;
-			    }
-
-			    protected char[] getAcceptedChars() {
-			        return new char[] {};
-			    }
-			});
 			TextView cognome= (TextView)findViewById(R.id.cognomecontatto);
 			cognome.setText(result.getString(3));
 			cellulare= (TextView)findViewById(R.id.telefonocellularecontatto);
@@ -73,6 +70,11 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			citta.setText(result.getString(4));
 			TextView email= (TextView)findViewById(R.id.emailcontatto);
 			email.setText(result.getString(7));
+		}
+		
+		if(codUtente==id){
+			Button eliminaContatto=(Button) findViewById(R.id.eliminacontatto);
+			eliminaContatto.setVisibility(View.INVISIBLE);
 		}
 		
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
@@ -103,29 +105,61 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			}
 		});
 		
-		Button eliminaContatto=(Button) findViewById(R.id.eliminacontatto);
+		
+		
+		Button eliminaContatto=(Button)findViewById(R.id.eliminacontatto);
 		eliminaContatto.setOnClickListener(new OnClickListener() {
 			
-			public void onClick(View arg0) {
-				int result=Contatto.eliminaContatto(db, id, Integer.parseInt(codUtente));
-				if(result == 0)
-					Toast.makeText(getApplicationContext(),  "Problema nell'eliminazione del contatto", Toast.LENGTH_LONG).show();
-				else
-				{
-					Toast.makeText(getApplicationContext(),  "Contatto eliminato con successo", Toast.LENGTH_LONG).show();
-					Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
-					intent.putExtra("droidiary.app.contatto", contatto);
-					intent.putExtra("droidiary.app.codUtente", id);
-					dbd.close();
-					startActivity(intent);
-				}
+			public void onClick(View v) {
+				onClickElimina();
+				
 			}
 		});
+		
+		
 	}
 
-	private DroidiaryDatabaseHelper dbd;
+	public void onClickElimina() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Vuoi Eliminare il Contatto?")
+               .setCancelable(false)
+               .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                        eliminaContatto();
+                   }
+               })
+               .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                   }
+               });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+    
+	public void onBackPressed(){
+		Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
+		intent.putExtra("droidiary.app.MenuVisualizzaContatto", codUtente);
+		startActivity(intent);
+	}
+    public void eliminaContatto(){
+    	tmp2 = new DroidiaryDatabaseHelper(this);
+		db=tmp2.getWritableDatabase();
+		tmp2.openDataBase();
+		int res=Contatto.eliminaContatto(db, id, codUtente);
+		if(res>0){
+			Toast.makeText(getApplicationContext(),  "Contatto Elminato con Successo!", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
+			System.out.println(codUtente);
+			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
+			startActivity(intent);
+			tmp2.close();
+		}
+    }
+	private DroidiaryDatabaseHelper dbd, tmp2;
 	private SQLiteDatabase db;
-	private String codUtente;
+	private int codUtente;
 	private int id;
 	private String contatto;
 	private TextView casa, cellulare;

@@ -47,9 +47,9 @@ public class Contatto {
 		return u;
 	}
 	
-	public static int eliminaContatto(SQLiteDatabase db, int id_a, int codUtente)
+	public static int eliminaContatto(SQLiteDatabase db, int id_c, int codUtente)
 	{
-		int u = db.delete(TABELLA, "_id='"+id_a+"' and id_account='"+codUtente+"'", null);
+		int u = db.delete(TABELLA, "_id='"+id_c+"' and id_account='"+codUtente+"'", null);
 		return u;
 	}
 	/**
