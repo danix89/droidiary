@@ -91,7 +91,6 @@ public class DroidiaryActivity extends Activity{
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 					dbd.close();
-					db.close();
 					startActivity(intent);
 				}else{
 					Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();

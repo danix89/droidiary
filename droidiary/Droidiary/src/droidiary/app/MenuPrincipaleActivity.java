@@ -40,6 +40,7 @@ public class MenuPrincipaleActivity extends Activity {
         String nome=c.getString(0);
         String cognome=c.getString(1);
         utente.setText("Benvenuto, " + nome + " " + cognome);
+		dbd.close();
         }
         
         
@@ -63,6 +64,7 @@ public class MenuPrincipaleActivity extends Activity {
         								Intent intent = new Intent(MenuPrincipaleActivity.this, MenuAppuntamentiActivity.class);
         								intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
         								dbd.close();
+        								db.close();
         								startActivity(intent);
         							}
         						}

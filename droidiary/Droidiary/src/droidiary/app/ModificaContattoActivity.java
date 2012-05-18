@@ -50,6 +50,7 @@ public class ModificaContattoActivity extends Activity {
 			utente.setText("Modifica Contatto: "+result.getString(2) + " " + result.getString(3));
 			
 			EditText nome= (EditText)findViewById(R.id.nomecontatto);
+			nome.setText(result.getString(2));
 			nome.setText(result.getString(4));
 			EditText cognome= (EditText)findViewById(R.id.cognomecontatto);
 			cognome.setText(result.getString(3));
@@ -143,11 +144,13 @@ public class ModificaContattoActivity extends Activity {
 		db=tmp.getWritableDatabase();
 		tmp.openDataBase();
 		System.out.println("Id_Account: "+codUtente+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
+		//Cursor res= Contatto.modificaContatto(db, contatto, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
 		int res= Contatto.modificaContatto(db, id, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
 		
 		if(res>0){
 			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
+			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
 			db.close();
 			startActivity(intent);

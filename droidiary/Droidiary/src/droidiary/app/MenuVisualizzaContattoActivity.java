@@ -44,6 +44,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		Cursor result=Contatto.getDatiFromString(db, contatto);
 
 		if(result.moveToFirst()){
+			codUtente=result.getString(1);
 			id=result.getInt(0);
 			System.out.println("Codice id: " + id);
 			codUtente=result.getString(1);

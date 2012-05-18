@@ -47,8 +47,8 @@ public class MenuRubricaActivity extends Activity {
 		setContentView(R.layout.menurubrica);
 		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		if(codUtente==0){
-		codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
-		codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
 		}
 		System.out.println("Parametro Menu Rubrica:"+codUtente);
 
@@ -89,7 +89,7 @@ public class MenuRubricaActivity extends Activity {
 				return view;
 			}
 		});
-
+		dbd.close();
 		//implementazione ricerca
 		et = (EditText) findViewById(R.id.EditText01);
 		et.addTextChangedListener(new TextWatcher()
@@ -146,7 +146,7 @@ public class MenuRubricaActivity extends Activity {
 						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
-						db.close();
+						dbd.close();
 						startActivity(intent);
 					}   
 				});
@@ -173,7 +173,7 @@ public class MenuRubricaActivity extends Activity {
 		startManagingCursor(cursor);
 
 		while(cursor.moveToNext()){
-			myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+" "+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
+			myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+"-"+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
 		}   
 		myArray = myTitle.split(";");     
 		return myArray;
