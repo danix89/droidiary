@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.audiofx.Visualizer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -51,7 +52,6 @@ public class ModificaContattoActivity extends Activity {
 			
 			EditText nome= (EditText)findViewById(R.id.nomecontatto);
 			nome.setText(result.getString(2));
-			nome.setText(result.getString(4));
 			EditText cognome= (EditText)findViewById(R.id.cognomecontatto);
 			cognome.setText(result.getString(3));
 			cellulare= (EditText)findViewById(R.id.telefonocellularecontatto);
@@ -62,7 +62,7 @@ public class ModificaContattoActivity extends Activity {
 			citta.setText(result.getString(4));
 			EditText email= (EditText)findViewById(R.id.emailcontatto);
 			email.setText(result.getString(7));
-			db.close();
+			dbd.close();
 		}
 		
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
@@ -81,15 +81,7 @@ public class ModificaContattoActivity extends Activity {
 		    }
 		});
 		
-		Button eliminaContatto=(Button)findViewById(R.id.eliminaContatto);
-		eliminaContatto.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-			
-				
-			}
-		});
-		
+
 		Button salva=(Button)findViewById(R.id.salvaContatto);
         salva.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -139,6 +131,7 @@ public class ModificaContattoActivity extends Activity {
     }
     
     
+    
     public void aggiornaContatto(){
     	tmp = new DroidiaryDatabaseHelper(this);
 		db=tmp.getWritableDatabase();
@@ -149,11 +142,12 @@ public class ModificaContattoActivity extends Activity {
 		
 		if(res>0){
 			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
+			Intent intent = new Intent(ModificaContattoActivity.this, MenuVisualizzaContattoActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
-			db.close();
+			intent.putExtra("droidiary.app.ModificaContattoActivity", nome+"-"+cognome);
 			startActivity(intent);
+			tmp.close();
 		}
 		
     }
