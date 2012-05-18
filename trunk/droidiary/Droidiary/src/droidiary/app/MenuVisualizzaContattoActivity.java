@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 
@@ -106,11 +107,17 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			
 			public void onClick(View arg0) {
 				int result=Contatto.eliminaContatto(db, id, Integer.parseInt(codUtente));
-				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
-				intent.putExtra("droidiary.app.contatto", contatto);
-				intent.putExtra("droidiary.app.codUtente", id);
-				dbd.close();
-				startActivity(intent);
+				if(result == 0)
+					Toast.makeText(getApplicationContext(),  "Problema nell'eliminazione del contatto", Toast.LENGTH_LONG).show();
+				else
+				{
+					Toast.makeText(getApplicationContext(),  "Contatto eliminato con successo", Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
+					intent.putExtra("droidiary.app.contatto", contatto);
+					intent.putExtra("droidiary.app.codUtente", id);
+					dbd.close();
+					startActivity(intent);
+				}
 			}
 		});
 	}
