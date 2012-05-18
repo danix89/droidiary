@@ -3,7 +3,6 @@ package droidiary.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class Contatto {
 
@@ -29,18 +28,29 @@ public class Contatto {
 		cv.put(CELLULARE, cell);
 		cv.put(NUMEROCASA, ncasa);
 		cv.put(MAIL, mail);
-		long q = db.insert(TABELLA, null, cv);
-//		Cursor c= db.rawQuery("insert into contatto (id_account,nome,cognome,citta,cellulare,numeroCasa,mail)values('"+id_a+"','"+nome+"','"+cognome+"','"+citta+"','"+cell+"','"+ncasa+"','"+mail+"')", null);
-//		c.moveToLast();
-//		return c;
-		return q;
+		long i = db.insert(TABELLA, null, cv);
+		return i;
 	}
 	
-	public static Cursor modificaContatto(SQLiteDatabase db, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static int modificaContatto(SQLiteDatabase db, int id_a, int codUtente, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
-		Cursor c= db.rawQuery("update contatto set nome="+nome+", cognome="+cognome+", citta="+citta+", cellulare="+cell+", numeroCasa="+ncasa+", mail='"+mail+"' where id_account='"+id_a+"' and nome='"+nome+"'", null);
-		c.moveToNext();
-		return c;
+		ContentValues cv = new ContentValues();
+		cv.put(ID, id_a);
+		cv.put(ID_ACCOUNT, codUtente);
+		cv.put(NOME, nome);
+		cv.put(COGNOME, cognome);
+		cv.put(CITTA, citta);
+		cv.put(CELLULARE, cell);
+		cv.put(NUMEROCASA, ncasa);
+		cv.put(MAIL, mail);
+		int u = db.update(TABELLA, cv, "_id='"+id_a+"' and id_account='"+codUtente+"'", null);
+		return u;
+	}
+	
+	public static int eliminaContatto(SQLiteDatabase db, int id_a, int codUtente)
+	{
+		int u = db.delete(TABELLA, "_id='"+id_a+"' and id_account='"+codUtente+"'", null);
+		return u;
 	}
 	/**
 	 * ritorna tutti i contatti dell' account
@@ -55,7 +65,7 @@ public class Contatto {
 	
 	public static Cursor getDatiFromString(SQLiteDatabase db, String contatto){
 		String dati[]=contatto.split(" ");
-		Cursor c= db.rawQuery("select id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'", null);
+		Cursor c= db.rawQuery("select _id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'", null);
 		return c;
     }
 	
