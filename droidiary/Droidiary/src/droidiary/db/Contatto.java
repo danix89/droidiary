@@ -64,7 +64,7 @@ public class Contatto {
     }
 	
 	public static Cursor getDatiFromString(SQLiteDatabase db, String contatto){
-		String dati[]=contatto.split(" ");
+		String dati[]=contatto.split("-");
 		Cursor c= db.rawQuery("select _id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'", null);
 		return c;
     }
