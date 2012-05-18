@@ -5,14 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-
 import droidiary.db.Account;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
@@ -44,7 +42,6 @@ public class DroidiaryActivity extends Activity{
 		db=dbd.getReadableDatabase();
 		try {
 			dbd.createDataBase();
-			dbd.close();
 		} catch (IOException ioe) {
 			throw new Error("Unable to create database");
 		}
