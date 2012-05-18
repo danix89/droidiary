@@ -28,7 +28,7 @@
         <activity android:name="MenuVisualizzaContattoActivity" android:label="Contatto"></activity>
         <activity android:screenOrientation="fullSensor" android:name="NuovoAppuntamentoActivity" android:label="@string/nuovoappuntamento"></activity>
         <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
-        <activity android:name="ModificaContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
+        <activity android:name="ModificaContattoActivity" android:label="Contatto" android:screenOrientation="fullSensor"></activity>
         
         <uses-library android:name="com.google.android.maps" /> 
 	</application>    

@@ -1,7 +1,5 @@
 package droidiary.app;
 
-import java.io.IOException;
-
 import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -12,12 +10,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -68,8 +63,10 @@ public class NuovoContattoActivity extends Activity {
 				email=txtmail.getText().toString();
 				EditText txtcitta= (EditText) findViewById(R.id.cittacontatto);
 				citta=txtcitta.getText().toString();
-				if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || cellulare.equals("Cellulare:")|| email.equals("Email:") || citta.equals("Citt�:")){
-					Toast.makeText(getApplicationContext(),  "Controlla tutti i campi", Toast.LENGTH_LONG).show();
+				if(nome.equals("") && cognome.equals("")){
+					Toast.makeText(getApplicationContext(),  "Controlla i campi Nome e Cognome", Toast.LENGTH_LONG).show();
+				}else if(telefonoCasa.equals("") && cellulare.equals("")){
+					Toast.makeText(getApplicationContext(),  "Inserire almeno un Recapito Telefonico", Toast.LENGTH_LONG).show();
 				}else{ 
 					dbd.close();
 					onClickSalva();
@@ -78,6 +75,24 @@ public class NuovoContattoActivity extends Activity {
 			}
 		}); 
 
+		Button cancella=(Button)findViewById(R.id.cancella);
+		cancella.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				EditText txtnome = (EditText)findViewById(R.id.nomecontatto);
+				txtnome.setText("");
+				EditText txtcognome = (EditText)findViewById(R.id.cognomecontatto);
+				txtcognome.setText("");
+				EditText txtcasa = (EditText)findViewById(R.id.telefonocasacontatto);
+				txtcasa.setText("");
+				EditText txtcellulare = (EditText) findViewById(R.id.telefonocellularecontatto);
+				txtcellulare.setText("");
+				EditText txtmail= (EditText) findViewById(R.id.emailcontatto);
+				txtmail.setText("");
+				EditText txtcitta= (EditText) findViewById(R.id.cittacontatto);
+				txtcitta.setText("");
+			}
+		});
 
 
 	}   
@@ -101,9 +116,6 @@ public class NuovoContattoActivity extends Activity {
 
 	}
 
-
-	//problema con la query
-
 	public void inserisciContatto(){
 		
 		db=dbd.getWritableDatabase();
@@ -114,8 +126,6 @@ public class NuovoContattoActivity extends Activity {
 			throw sqle;
 
 		}
-
-		//Cursor res=Contatto.insertContatto(db, codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
 		
 		long res = Contatto.insertContatto(db, codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
 		if(res == -1){

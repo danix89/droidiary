@@ -48,7 +48,7 @@ public class ModificaContattoActivity extends Activity {
 			codUtente=result.getInt(1);
 			System.out.println("Parametro id_account Modifica Contatto:"+codUtente);
 			TextView utente=(TextView) findViewById(R.id.Contatto);
-			utente.setText("Modifica Contatto: "+result.getString(2) + " " + result.getString(3));
+			utente.setText("Modifica Contatto");
 			
 			EditText nome= (EditText)findViewById(R.id.nomecontatto);
 			nome.setText(result.getString(2));
