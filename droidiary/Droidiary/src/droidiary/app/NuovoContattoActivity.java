@@ -105,7 +105,7 @@ public class NuovoContattoActivity extends Activity {
 	//problema con la query
 
 	public void inserisciContatto(){
-		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		
 		db=dbd.getWritableDatabase();
 		try {
 			dbd.openDataBase();
@@ -115,6 +115,8 @@ public class NuovoContattoActivity extends Activity {
 
 		}
 
+		//Cursor res=Contatto.insertContatto(db, codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
+		
 		long res = Contatto.insertContatto(db, codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
 		if(res == -1){
 			Toast.makeText(getApplicationContext(),  "Problema con la query", Toast.LENGTH_LONG).show();
