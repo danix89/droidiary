@@ -19,7 +19,8 @@
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relativeLayout2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp" >
@@ -27,33 +28,32 @@
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="100dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/rubrica" />
-
-        <TextView
-            android:id="@+id/nomecontatto"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="30dp"
-            android:layout_toRightOf="@+id/imageView1"
-            android:gravity="center_horizontal|center"
-            android:text=""
-            android:textColor="#000"
-            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/cognomecontatto"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/nomecontatto"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/imageView1"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/nomecontatto"
-            android:gravity="center_horizontal|center"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="cognome"
             android:textColor="#000"
             android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/nomecontatto"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/imageView1"
+            android:layout_toRightOf="@+id/imageView1"
+            android:text="nome"
+            android:textColor="#000"
+            android:textSize="22dp" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -116,9 +116,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/chiamatacellulare"
             android:gravity="center_horizontal|center"
-            android:text=""
+            android:text="cellulare"
             android:textColor="#000"
             android:textSize="20dp" />
 
@@ -130,7 +129,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/telefonocellularecontatto"
             android:gravity="center_horizontal|center"
-            android:text=""
+            android:text="casa"
             android:textColor="#000"
             android:textSize="20dp" />
 
@@ -138,7 +137,7 @@
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:text="@string/telefono"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -146,24 +145,25 @@
             android:textSize="18dp" />
 
         <ImageView
-            android:id="@+id/chiamatacasa"
+            android:id="@+id/chiamatacellulare"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/TextView01"
-            android:layout_toRightOf="@+id/telefonocasacontatto"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:clickable="true"
             android:onClick="imageClick"
             android:src="@drawable/whatsapp_messenger_android" />
 
         <ImageView
-            android:id="@+id/chiamatacellulare"
+            android:id="@+id/chiamatacasa"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/chiamatacasa"
+            android:layout_alignTop="@+id/telefonocasacontatto"
             android:clickable="true"
             android:onClick="imageClick"
             android:src="@drawable/whatsapp_messenger_android" />
+
     </RelativeLayout>
 
 </RelativeLayout>
