@@ -44,6 +44,7 @@ public class DroidiaryActivity extends Activity{
 		db=dbd.getReadableDatabase();
 		try {
 			dbd.createDataBase();
+			dbd.close();
 		} catch (IOException ioe) {
 			throw new Error("Unable to create database");
 		}
@@ -134,19 +135,6 @@ public class DroidiaryActivity extends Activity{
 		
 	}
 
-	public void onResume()
-	{
-		super.onResume();
-		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db=dbd.getReadableDatabase();
-		try {
-			dbd.createDataBase();
-		} catch (IOException ioe) {
-			throw new Error("Unable to create database");
-		}
-
-	}
-	
 	public static String send(String query) {
 		String result = "0";
 		InputStream is = null;
