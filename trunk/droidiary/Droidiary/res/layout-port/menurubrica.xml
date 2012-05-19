@@ -31,13 +31,7 @@
 
     </ListView>
 
-    <Button
-        android:id="@+id/buttonuovocontatto"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:background="@color/transparent" />
+    
 
     <Button
         android:id="@+id/buttoncercacontatto"
@@ -66,7 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/listacontatti"
-        android:text="Aggiungi Contatto" />
+        android:text="Aggiungi Contatto" 
+        android:textSize="18dp"/>
 
     <ImageView
         android:id="@+id/imageView1"
