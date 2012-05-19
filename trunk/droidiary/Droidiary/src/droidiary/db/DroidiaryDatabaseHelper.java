@@ -1,5 +1,6 @@
 package droidiary.db;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 
 	public DroidiaryDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, 1);
-		this.myContext= context;
+		this.myContext=context;
 	}
 
 	public void onCreate(SQLiteDatabase db) {
@@ -32,7 +33,8 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	public void createDataBase() throws IOException{
 
 		boolean dbExist = checkDataBase();
-
+		System.out.println(dbExist);
+		//se esiste
 		if(dbExist){
 			
 		}else{
@@ -40,7 +42,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 			this.getReadableDatabase();
 		}
 	}
-
+	
 	/*
 		Metodo usato per creare il DB se non esiste
 
@@ -73,11 +75,10 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 			System.out.println("***************************************");
 			System.out.println("####### Data base copied ##############");
 			System.out.println("***************************************");
-
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally{
@@ -87,6 +88,7 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 				myOutput.close();
 				myInput.close();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -108,11 +110,18 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	}
 
 	//controlla se il database esiste
-	@SuppressWarnings("null")
 	private boolean checkDataBase(){
 		Boolean res=false;
 		SQLiteDatabase checkDB = null;
-
+		String myPath = DB_PATH + DB_NAME;
+		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+	
+		if(checkDB!=null){
+			this.close();
+            return true;
+		}else{
+			return false;
+		}
 		try{
 			String myPath = DB_PATH + DB_NAME;
 			checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
