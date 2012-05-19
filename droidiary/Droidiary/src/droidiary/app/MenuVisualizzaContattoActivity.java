@@ -143,6 +143,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		intent.putExtra("droidiary.app.MenuVisualizzaContatto", codUtente);
 		startActivity(intent);
 	}
+	
     public void eliminaContatto(){
     	tmp2 = new DroidiaryDatabaseHelper(this);
 		db=tmp2.getWritableDatabase();
