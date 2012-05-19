@@ -145,7 +145,6 @@ public class ModificaContattoActivity extends Activity {
 			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
-			intent.putExtra("droidiary.app.ModificaContattoActivity", nome+"-"+cognome);
 			startActivity(intent);
 			tmp.close();
 		}
