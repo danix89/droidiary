@@ -142,7 +142,7 @@ public class ModificaContattoActivity extends Activity {
 		
 		if(res>0){
 			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(ModificaContattoActivity.this, MenuVisualizzaContattoActivity.class);
+			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", nome+"-"+cognome);
