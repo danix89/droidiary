@@ -173,6 +173,11 @@ public class DroidiaryActivity extends Activity{
 		  return result;
 		  }
 	
+	   
+	//chiusura dell'app
+	public void onBackPressed(){
+		   this.finish();
+	    }
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private String username, password;
