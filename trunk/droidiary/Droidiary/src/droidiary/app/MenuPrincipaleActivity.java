@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuPrincipaleActivity extends Activity {
     /** Called when the activity is first created. */
@@ -29,8 +30,16 @@ public class MenuPrincipaleActivity extends Activity {
 			throw sqle;
 
 		}
-		
+		if(codUtente==0){
         codUtente = getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
+		}
+		if(codUtente==0){
+        codUtente = getIntent().getExtras().getInt("droidiary.app.MenuRubricaActivity");
+		}
+		if(codUtente==0){
+	        codUtente = getIntent().getExtras().getInt("droidiary.app.MenuAppuntamentiActivity");
+		}
+		
         System.out.println("Parametro Passato Login:" + codUtente);
         
         Cursor c= Account.getAccountById(db, codUtente);
@@ -72,7 +81,14 @@ public class MenuPrincipaleActivity extends Activity {
         
     }
 
+    public void onBackPressed(){
+    	Intent intent = new Intent(MenuPrincipaleActivity.this, DroidiaryActivity.class);
+		Toast.makeText(getApplicationContext(),  "Non sei più loggato!", Toast.LENGTH_LONG).show();
+    	startActivity(intent);
+    }
+    
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private int codUtente;
 }
+

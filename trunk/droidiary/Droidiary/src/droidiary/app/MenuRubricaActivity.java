@@ -177,7 +177,12 @@ public class MenuRubricaActivity extends Activity {
 		}
 				);		
 	}
-
+	public void onBackPressed(){
+		Intent intent = new Intent(MenuRubricaActivity.this, MenuPrincipaleActivity.class);
+		intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
+		startActivity(intent);
+	}
+	
 	//tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
 		String myTitle = "";
