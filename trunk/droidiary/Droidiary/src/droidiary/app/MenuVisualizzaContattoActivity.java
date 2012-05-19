@@ -137,13 +137,13 @@ public class MenuVisualizzaContattoActivity extends Activity {
         alert.show();
 
     }
-    
+   /* 
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
 		intent.putExtra("droidiary.app.MenuVisualizzaContatto", codUtente);
 		startActivity(intent);
 	}
-	
+	*/
     public void eliminaContatto(){
     	tmp2 = new DroidiaryDatabaseHelper(this);
 		db=tmp2.getWritableDatabase();
