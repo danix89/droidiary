@@ -113,15 +113,6 @@ public class DroidiaryDatabaseHelper extends SQLiteOpenHelper{
 	private boolean checkDataBase(){
 		Boolean res=false;
 		SQLiteDatabase checkDB = null;
-		String myPath = DB_PATH + DB_NAME;
-		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-	
-		if(checkDB!=null){
-			this.close();
-            return true;
-		}else{
-			return false;
-		}
 		try{
 			String myPath = DB_PATH + DB_NAME;
 			checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
