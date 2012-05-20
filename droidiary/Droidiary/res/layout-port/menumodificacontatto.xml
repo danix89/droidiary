@@ -89,7 +89,9 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:text="Salva" />
+
     </RelativeLayout>
 
     <RelativeLayout
