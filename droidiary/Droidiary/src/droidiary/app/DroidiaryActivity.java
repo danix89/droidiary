@@ -11,6 +11,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.*;
 import droidiary.db.Account;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
@@ -25,7 +26,6 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -87,6 +87,8 @@ public class DroidiaryActivity extends Activity{
 					int codUtente= c.getInt(0);
 					System.out.println(codUtente);
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
+					boolean status=false;
+					intent.putExtra("droidiary.app.DroidiaryActivity", true);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 					dbd.close();
 					startActivity(intent);
@@ -103,6 +105,35 @@ public class DroidiaryActivity extends Activity{
 				}
 				System.out.println("Username: "+username);
 				System.out.println("Password: "+password);
+				String query = Account.getStringAccountByUserPsw(username, password);
+				String res=send(query);
+				int codUtente =0;
+				try {
+					JSONArray jArray = new JSONArray(res);
+					for(int i=0;i<jArray.length();i++){
+                        JSONObject json_data = jArray.getJSONObject(i);
+                        Log.d("Username", json_data.getString("username"));
+                        Log.d("Password ", json_data.getString("password"));
+                        username = json_data.getString("username");
+                        password = json_data.getString("password");
+                        codUtente = json_data.getInt("_id");
+					}
+				} catch (JSONException e) {
+					
+					e.printStackTrace();
+				}
+				System.out.println(codUtente);
+				if(username!=null && password!=null && codUtente!=0){
+					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
+					boolean status=true;
+					intent.putExtra("droidiary.app.DroidiaryActivity", status);
+					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
+					
+					startActivity(intent);
+				}else{
+					Toast.makeText(getApplicationContext(), "Dati non presenti", Toast.LENGTH_LONG).show();
+				}
 				send(Account.getStringAccountByUserPsw(username, password));
 				dbd.close();
 			}
@@ -120,16 +151,6 @@ public class DroidiaryActivity extends Activity{
 			}
 		});
 		
-		
-		ImageView img= (ImageView)findViewById(R.id.about);
-		img.setOnClickListener(new OnClickListener() {
-		    public void onClick(View v) {
-		    	Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
-		    	startActivity(intent);
-		    }
-		});
-		
-		
 	}
 
 	public static String send(String query) {
@@ -144,7 +165,7 @@ public class DroidiaryActivity extends Activity{
 		  //http post
 		  try{
 		    HttpClient httpclient = new DefaultHttpClient();
-		    HttpPost httppost = new HttpPost("http://www.droidiary.altervista.org/query.php");
+		    HttpPost httppost = new HttpPost("http://droidiary.altervista.org/query.php");
 		    httppost.setEntity(new UrlEncodedFormEntity(querySend));
 		    HttpResponse response = httpclient.execute(httppost);
 		    HttpEntity entity = response.getEntity();

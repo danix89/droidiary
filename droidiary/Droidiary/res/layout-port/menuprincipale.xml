@@ -16,7 +16,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="18dp" />
-
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="250dp"
@@ -61,5 +61,24 @@
             android:layout_marginBottom="20dp"
             android:text="@string/menurubrica" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="40px"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_below="@+id/Utente"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#000"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:src="@drawable/offline" />
 
 </RelativeLayout>
