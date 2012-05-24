@@ -32,7 +32,7 @@ public class MenuPrincipaleActivity extends Activity {
 
 		}
 		if(codUtente==0){
-			codUtente = getIntent().getExtras().getInt("codiceUtente");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
 		}
 		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuRubricaActivity");
@@ -61,6 +61,7 @@ public class MenuPrincipaleActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuPrincipaleActivity.this, MenuRubricaActivity.class);
 				intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
+				intent.putExtra("Status", status);
 				dbd.close();
 				startActivity(intent);
 			}
@@ -85,15 +86,16 @@ public class MenuPrincipaleActivity extends Activity {
 		ImageView stat = (ImageView) findViewById(R.id.status);
 		int online = R.drawable.online;
 		int offline = R.drawable.offline;
-		String status = getIntent().getStringExtra("Status");
+		status = getIntent().getStringExtra("Status");
 		System.out.println("Status: "+status);
-		if(status.equals("true")){
-			stat.setImageResource(online);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
 		}
-		if(status.equals("false")){
-			stat.setImageResource(offline);
-		}
-
 
 	}
 
@@ -108,5 +110,6 @@ public class MenuPrincipaleActivity extends Activity {
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private int codUtente;
+	String status;
 }
 
