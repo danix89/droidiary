@@ -21,6 +21,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,26 +44,26 @@ public class MenuRubricaActivity extends Activity {
 		populateListView();
 	}
 
-	
+
 	private void populateListView()	{
 		setContentView(R.layout.menurubrica);
 		if(codUtente==0){
-		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		}
 		if(codUtente==0){
-		codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoContattoActivity");
 		}
 		if(codUtente==0){
-		codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaContattoActivity");
 		}
 		if(codUtente==0){
-		codUtente = getIntent().getExtras().getInt("droidiary.app.EliminaContattoActivity");
+			codUtente = getIntent().getExtras().getInt("droidiary.app.EliminaContattoActivity");
 		}
 		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaContatto");
 		}
-		
-		
+
+
 		System.out.println("Parametro Menu Rubrica:"+codUtente);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
@@ -159,6 +160,7 @@ public class MenuRubricaActivity extends Activity {
 						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
+						intent.putExtra("Status", status);
 						dbd.close();
 						startActivity(intent);
 					}   
@@ -168,17 +170,32 @@ public class MenuRubricaActivity extends Activity {
 
 
 		status = getIntent().getStringExtra("Status");
-		
+
 		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
 		nuovoContatto.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
 				intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
+				intent.putExtra("Status", status);
 				startActivity(intent);
 			}
 		}
-				);		
+				);
+
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
 	}
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuRubricaActivity.this, MenuPrincipaleActivity.class);
@@ -186,7 +203,7 @@ public class MenuRubricaActivity extends Activity {
 		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
-	
+
 	//tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
 		String myTitle = "";
