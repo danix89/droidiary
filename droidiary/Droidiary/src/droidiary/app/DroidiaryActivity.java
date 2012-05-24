@@ -109,7 +109,8 @@ public class DroidiaryActivity extends Activity{
 				password=txtpsw.getText().toString();
 				System.out.println("Username: "+username);
 				System.out.println("Password: "+password);
-				String res=send(Account.getStringAccountByUserPsw(username, password));
+				System.out.println(Account.getStringAccountByUserPsw(username, password));
+				//String res=send();
 				/*try {
 					JSONObject root = new JSONObject(res);
 					JSONArray jArray = root.getJSONArray("array");
@@ -122,7 +123,7 @@ public class DroidiaryActivity extends Activity{
 					
 					e.printStackTrace();
 				}*/
-				System.out.println(res);
+				//System.out.println(res);
 				dbd.close();
 			}
 			}
@@ -138,17 +139,7 @@ public class DroidiaryActivity extends Activity{
 				txtpsw.setText("");
 			}
 		});
-		
-		
-		ImageView img= (ImageView)findViewById(R.id.about);
-		img.setOnClickListener(new OnClickListener() {
-		    public void onClick(View v) {
-		    	Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
-		    	startActivity(intent);
-		    }
-		});
-		
-		
+				
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu)
