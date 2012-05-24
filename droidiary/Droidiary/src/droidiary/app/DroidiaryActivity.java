@@ -20,8 +20,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -103,27 +101,9 @@ public class DroidiaryActivity extends Activity{
 					throw sqle;
 
 				}
-				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
-				EditText txtpsw = (EditText)findViewById(R.id.password);
-				username=txtnome.getText().toString();
-				password=txtpsw.getText().toString();
 				System.out.println("Username: "+username);
 				System.out.println("Password: "+password);
-				System.out.println(Account.getStringAccountByUserPsw(username, password));
-				//String res=send();
-				/*try {
-					JSONObject root = new JSONObject(res);
-					JSONArray jArray = root.getJSONArray("array");
-					for(int i=0;i<jArray.length();i++){
-                        JSONObject json_data = jArray.getJSONObject(i);
-                        Log.d("ID", json_data.getString("username"));
-                        Log.d("Value ", json_data.getString("password"));
-					}
-				} catch (JSONException e) {
-					
-					e.printStackTrace();
-				}*/
-				//System.out.println(res);
+				send(Account.getStringAccountByUserPsw(username, password));
 				dbd.close();
 			}
 			}
@@ -139,25 +119,18 @@ public class DroidiaryActivity extends Activity{
 				txtpsw.setText("");
 			}
 		});
-
-	}
-	
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
-	}
-	
-	public boolean onOptionsItemSelected(MenuItem item) {
-	       switch (item.getItemId()) {
-	           case R.id.menu_about:Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
+		
+		
+		ImageView img= (ImageView)findViewById(R.id.about);
+		img.setOnClickListener(new OnClickListener() {
+		    public void onClick(View v) {
+		    	Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
 		    	startActivity(intent);
-	           case R.id.menu_setup:Log.v("ttt", "Registrazione!");
-	                 break;
-	       }
-	       return true;
-	   }
-	
+		    }
+		});
+		
+		
+	}
 
 	public static String send(String query) {
 		String result = "0";
@@ -196,6 +169,7 @@ public class DroidiaryActivity extends Activity{
 		    Log.e("log_tag", "Error converting result: "+e.toString());
 		  }
 
+		  Log.i("SendQUERY", result);
 		  return result;
 		  }
 	
@@ -207,7 +181,6 @@ public class DroidiaryActivity extends Activity{
 		   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		   startActivity(intent);
 	}
-	
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private String username, password;
