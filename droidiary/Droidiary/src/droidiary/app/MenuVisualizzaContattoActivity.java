@@ -33,6 +33,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		contatto = getIntent().getExtras().getString("droidiary.app.ModificaContattoActivity");
 		}
 		
+		
 		System.out.println("Parametro Contatto: "+contatto);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
@@ -137,13 +138,12 @@ public class MenuVisualizzaContattoActivity extends Activity {
         alert.show();
 
     }
-   /* 
+	
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
 		intent.putExtra("droidiary.app.MenuVisualizzaContatto", codUtente);
 		startActivity(intent);
 	}
-	*/
     public void eliminaContatto(){
     	tmp2 = new DroidiaryDatabaseHelper(this);
 		db=tmp2.getWritableDatabase();
