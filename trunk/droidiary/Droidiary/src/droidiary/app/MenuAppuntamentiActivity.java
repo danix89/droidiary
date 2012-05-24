@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +20,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -143,7 +146,6 @@ public class MenuAppuntamentiActivity extends Activity {
 		final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
 		final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
 		MenuAppuntamentiActivity.setAppFont(mContainer, mFont);
-
     }
     
     public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
