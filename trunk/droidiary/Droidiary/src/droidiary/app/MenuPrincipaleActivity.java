@@ -32,7 +32,7 @@ public class MenuPrincipaleActivity extends Activity {
 
 		}
 		if(codUtente==0){
-			codUtente = getIntent().getExtras().getInt("droidiary.app.DroidiaryActivity");
+			codUtente = getIntent().getExtras().getInt("codiceUtente");
 		}
 		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuRubricaActivity");
@@ -85,13 +85,15 @@ public class MenuPrincipaleActivity extends Activity {
 		ImageView stat = (ImageView) findViewById(R.id.status);
 		int online = R.drawable.online;
 		int offline = R.drawable.offline;
-		boolean status = getIntent().getExtras().getBoolean("droidiary.app.DroidiaryActivity");
-		if(status==true){
+		String status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status.equals("true")){
 			stat.setImageResource(online);
 		}
-		if(status==false){
+		if(status.equals("false")){
 			stat.setImageResource(offline);
 		}
+
 
 	}
 

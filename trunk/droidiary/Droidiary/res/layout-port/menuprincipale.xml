@@ -65,7 +65,7 @@
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
-        android:layout_height="40px"
+        android:layout_height="50px"
         android:layout_alignLeft="@+id/relativeLayout2"
         android:layout_below="@+id/Utente"
         android:gravity="center_horizontal|center"
@@ -77,7 +77,7 @@
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
         android:layout_toRightOf="@+id/textView1"
         android:src="@drawable/offline" />
 
