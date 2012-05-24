@@ -139,7 +139,7 @@ public class DroidiaryActivity extends Activity{
 				txtpsw.setText("");
 			}
 		});
-				
+
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu)
