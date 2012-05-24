@@ -21,6 +21,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -87,8 +89,7 @@ public class DroidiaryActivity extends Activity{
 					int codUtente= c.getInt(0);
 					System.out.println(codUtente);
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-					boolean status=false;
-					intent.putExtra("droidiary.app.DroidiaryActivity", true);
+					intent.putExtra("droidiary.app.DroidiaryActivity", false);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 					dbd.close();
 					startActivity(intent);
@@ -103,6 +104,10 @@ public class DroidiaryActivity extends Activity{
 					throw sqle;
 
 				}
+				EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
+				EditText txtpsw = (EditText)findViewById(R.id.password);
+				username=txtnome.getText().toString();
+				password=txtpsw.getText().toString();
 				System.out.println("Username: "+username);
 				System.out.println("Password: "+password);
 				String query = Account.getStringAccountByUserPsw(username, password);
@@ -126,15 +131,13 @@ public class DroidiaryActivity extends Activity{
 				if(username!=null && password!=null && codUtente!=0){
 					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-					boolean status=true;
-					intent.putExtra("droidiary.app.DroidiaryActivity", status);
+					intent.putExtra("droidiary.app.DroidiaryActivity", true);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 					
 					startActivity(intent);
 				}else{
 					Toast.makeText(getApplicationContext(), "Dati non presenti", Toast.LENGTH_LONG).show();
 				}
-				send(Account.getStringAccountByUserPsw(username, password));
 				dbd.close();
 			}
 			}
@@ -150,8 +153,25 @@ public class DroidiaryActivity extends Activity{
 				txtpsw.setText("");
 			}
 		});
-		
+
 	}
+	
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	       switch (item.getItemId()) {
+	           case R.id.menu_about:Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
+		    	startActivity(intent);
+	           case R.id.menu_setup:Log.v("ttt", "Registrazione!");
+	                 break;
+	       }
+	       return true;
+	   }
+	
 
 	public static String send(String query) {
 		String result = "0";
@@ -202,6 +222,7 @@ public class DroidiaryActivity extends Activity{
 		   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		   startActivity(intent);
 	}
+	
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private String username, password;
