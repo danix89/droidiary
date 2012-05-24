@@ -89,8 +89,9 @@ public class DroidiaryActivity extends Activity{
 					int codUtente= c.getInt(0);
 					System.out.println(codUtente);
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-					intent.putExtra("droidiary.app.DroidiaryActivity", false);
+					String status="false";
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
+                    intent.putExtra("Status", status);
 					dbd.close();
 					startActivity(intent);
 				}else{
@@ -131,7 +132,8 @@ public class DroidiaryActivity extends Activity{
 				if(username!=null && password!=null && codUtente!=0){
 					Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 					Intent intent = new Intent(DroidiaryActivity.this, MenuPrincipaleActivity.class);
-					intent.putExtra("droidiary.app.DroidiaryActivity", true);
+					String status="true";
+					intent.putExtra("Status", status);
 					intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 					
 					startActivity(intent);
