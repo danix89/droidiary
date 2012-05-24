@@ -65,9 +65,10 @@
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
-        android:layout_height="50px"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/relativeLayout2"
         android:layout_below="@+id/Utente"
+        android:layout_marginTop="14dp"
         android:gravity="center_horizontal|center"
         android:text="Status: "
         android:textColor="#000"

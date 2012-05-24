@@ -31,7 +31,7 @@ public class MenuRubricaActivity extends Activity {
 	private String listview_array[];
 	private ArrayList<String> array_sort= new ArrayList<String>();
 	int textlength=0;
-
+	String status;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,6 +43,7 @@ public class MenuRubricaActivity extends Activity {
 		populateListView();
 	}
 
+	
 	private void populateListView()	{
 		setContentView(R.layout.menurubrica);
 		if(codUtente==0){
@@ -166,6 +167,8 @@ public class MenuRubricaActivity extends Activity {
 		//implementazione click premuto
 
 
+		status = getIntent().getStringExtra("Status");
+		
 		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
 		nuovoContatto.setOnClickListener(new OnClickListener() 
 		{
@@ -180,6 +183,7 @@ public class MenuRubricaActivity extends Activity {
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuRubricaActivity.this, MenuPrincipaleActivity.class);
 		intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
+		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
 	
