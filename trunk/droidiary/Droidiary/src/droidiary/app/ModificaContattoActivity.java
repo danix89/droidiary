@@ -28,7 +28,7 @@ public class ModificaContattoActivity extends Activity {
 
 		contatto=getIntent().getExtras().getString("droidiary.app.contatto");
 		id=getIntent().getExtras().getInt("droidiary.app.codUtente");
-		
+		status = getIntent().getStringExtra("Status");
 		System.out.println("Parametro contatto Modifica Contatto:"+contatto);
 		
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
@@ -145,6 +145,7 @@ public class ModificaContattoActivity extends Activity {
 			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
+			intent.putExtra("Status", status);
 			startActivity(intent);
 			tmp.close();
 		}
@@ -159,4 +160,5 @@ public class ModificaContattoActivity extends Activity {
 	private EditText casa;
 	private String nome, cognome, telefonoCasa, citta, email, telefonocellulare;
 	private EditText cellulare;
+	String status;
 }

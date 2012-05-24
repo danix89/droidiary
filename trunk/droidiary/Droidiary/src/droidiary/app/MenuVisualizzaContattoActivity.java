@@ -101,6 +101,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, ModificaContattoActivity.class);
 				intent.putExtra("droidiary.app.contatto", contatto);
 				intent.putExtra("droidiary.app.codUtente", id);
+				intent.putExtra("Status", status);
 				dbd.close();
 				startActivity(intent);
 			}
@@ -117,6 +118,19 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			}
 		});
 		
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
 		
 	}
 
@@ -164,4 +178,5 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	private int id;
 	private String contatto;
 	private TextView casa, cellulare;
+	String status;
 }
