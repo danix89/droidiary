@@ -48,6 +48,9 @@
         <item>Completato</item>
     </string-array>
     <string name="infoappuntamento">Info</string>
+    <string name="modificabutton">Modifica</string>
+    <string name="eliminabutton">Elimina</string>
+    <string name="coordinate">Coordinate</string>
     
     
 
