@@ -7,8 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,11 +19,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -35,7 +32,7 @@ public class MenuAppuntamentiActivity extends Activity {
 	    
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	super.onCreate(savedInstanceState);
 		populateListView();
 	}
 
@@ -46,8 +43,21 @@ public class MenuAppuntamentiActivity extends Activity {
     
     private void populateListView()	{
         setContentView(R.layout.menuappuntamenti);
-        codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
-		System.out.println("Parametro Menu Rubrica:"+codUtente);
+      
+        if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
+		}
+		if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoAppuntamentoActivity.codUtente");
+		}
+		if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("droidiary.app.ModificaAppuntamentoActivity.codUtente");
+		}
+		if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente");
+		}
+		
+		System.out.println("Parametro Menu Appuntamenti:"+codUtente);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
@@ -74,10 +84,19 @@ public class MenuAppuntamentiActivity extends Activity {
 		lv=(ListView) findViewById(R.id.listaappuntamenti);
 		Cursor appuntamenti= Appuntamento.getAppuntamentiFromId(db, codUtente);
 		listview_array=getOneColumn(appuntamenti);
-		
+	
 		lv.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, listview_array));
-		
+				android.R.layout.simple_list_item_1, listview_array){
+			public View getView(int position, View convertView,
+					ViewGroup parent) {
+				View view =super.getView(position, convertView, parent);
+				TextView textView=(TextView) view.findViewById(android.R.id.text1);
+				//colore degli item
+				textView.setTextColor(Color.BLACK);
+				return view;
+			}
+		});
+		dbd.close();
 		//implementazione ricerca
 		et = (EditText) findViewById(R.id.EditText01);
 		et.addTextChangedListener(new TextWatcher()
@@ -111,72 +130,76 @@ public class MenuAppuntamentiActivity extends Activity {
 				}
 				lv.setAdapter(new ArrayAdapter<String>
 				(MenuAppuntamentiActivity.this,
-						android.R.layout.simple_list_item_1, array_sort));
+						android.R.layout.simple_list_item_1, array_sort){
+					public View getView(int position, View convertView,
+							ViewGroup parent) {
+						View view =super.getView(position, convertView, parent);
+						TextView textView=(TextView) view.findViewById(android.R.id.text1);
+						//colore degli item
+						textView.setTextColor(Color.BLACK);
+						return view;
+					}
+				});
 			}
 		});
 		
 		lv.setOnItemClickListener(
 				new OnItemClickListener()
 				{
-					public void onItemClick(AdapterView<?> arg0, View view,
-							int position, long id) {
+					public void onItemClick(AdapterView<?> arg0, View view,int position, long id) {
 						Object o = lv.getItemAtPosition(position);
 						String appuntamento = o.toString();
 						Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuVisualizzaAppuntamentoActivity.class);
-						intent.putExtra("droidiary.app.MenuAppuntamentiActivity", appuntamento);
+						intent.putExtra("droidiary.app.MenuAppuntamentiActivity.codUtente", codUtente);
+						intent.putExtra("droidiary.app.MenuAppuntamentiActivity.appuntamento", appuntamento);
+						intent.putExtra("Status", status);
+						dbd.close();
 						startActivity(intent);
-						Toast.makeText(getApplicationContext(), "Caricamento in Corso...", Toast.LENGTH_LONG).show();
 					}   
 				});
 
 
-
+		status = getIntent().getStringExtra("Status");
 		
 		Button nuovoAppuntamento = (Button) findViewById(R.id.buttonaggiungiappuntamento);
 		nuovoAppuntamento.setOnClickListener(new OnClickListener() 
 		{
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuAppuntamentiActivity.this, NuovoAppuntamentoActivity.class);
-				intent.putExtra("droidiary.app.MenuAppuntamentiActivity", codUtente);
+				intent.putExtra("droidiary.app.MenuAppuntamentiActivity.codUtente", codUtente);
+				intent.putExtra("Status", status);
 				startActivity(intent);
 			}
 		}
 				);
-
-		final Typeface mFont = Typeface.createFromAsset(getAssets(),"fonts/AidaSerifObliqueMedium.ttf"); 
-		final ViewGroup mContainer = (ViewGroup) findViewById(android.R.id.content).getRootView();
-		MenuAppuntamentiActivity.setAppFont(mContainer, mFont);
-    }
-    
-    public static final void setAppFont(ViewGroup mContainer, Typeface mFont)
-    {
-        if (mContainer == null || mFont == null) return;
-
-        final int mCount = mContainer.getChildCount();
-
-        // Loop through all of the children.
-        for (int i = 0; i < mCount; ++i)
-        {
-            final View mChild = mContainer.getChildAt(i);
-            if (mChild instanceof TextView)
-            {
-                // Set the font if it is a TextView.
-                ((TextView) mChild).setTypeface(mFont);
-            }
-            else if (mChild instanceof ViewGroup)
-            {
-                // Recursively attempt another ViewGroup.
-                setAppFont((ViewGroup) mChild, mFont);
-            }
-        }
+		
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
+	}
+	
+    public void onBackPressed(){
+		Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuPrincipaleActivity.class);
+		intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
+		intent.putExtra("Status", status);
+		startActivity(intent);
 	}
     
-	//tutto il risultato del cursore in un array
+    //tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
 		String myTitle = "";
 	    String[] myArray = null;            
 	    startManagingCursor(cursor);
-
 	    while(cursor.moveToNext()){
 	        myTitle+=cursor.getString(cursor.getColumnIndex(Appuntamento.DESCRIZIONE))+";";              
 	    }   
@@ -192,4 +215,5 @@ public class MenuAppuntamentiActivity extends Activity {
 	private String listview_array[];
 	private ArrayList<String> array_sort= new ArrayList<String>();
 	int textlength=0;
+	String status;
 }
