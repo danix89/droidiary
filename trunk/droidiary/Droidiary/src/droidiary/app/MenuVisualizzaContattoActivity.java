@@ -9,8 +9,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.method.NumberKeyListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
