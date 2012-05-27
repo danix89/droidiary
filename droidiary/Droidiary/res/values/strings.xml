@@ -37,6 +37,7 @@
         <item>Bassa</item>
     </string-array>
     <string name="coordinateappuntamento">Coordinate</string>
+    <string name="titoloappuntamento">Titolo</string>
     <string name="luogoappuntamento">Luogo</string>
     <string name="indirizzoappuntamento">Indirizzo</string>
     <string name="dataappuntamento">dd/mm/aaaa</string>
@@ -50,8 +51,7 @@
     <string name="infoappuntamento">Info</string>
     <string name="modificabutton">Modifica</string>
     <string name="eliminabutton">Elimina</string>
-    <string name="coordinate">Coordinate</string>
-    
+        
     
 
 </resources>
