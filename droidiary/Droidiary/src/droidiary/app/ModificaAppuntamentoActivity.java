@@ -13,8 +13,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -23,33 +21,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
 
-public class NuovoAppuntamentoActivity extends Activity{
- 	private TextView mDateDisplay;
-    private Button mPickDate;
-    private int mYear;
-    private int mMonth;
-    private int mDay;
-    static final int DATE_DIALOG_ID = 0;
-    private TextView mTimeDisplay;
-    private Button mPickTime;
-    private int mHour;
-    private int mMinute;
-    static final int TIME_DIALOG_ID = 1;
-    
-    private Button salva;
-    private Button cancella;
+public class ModificaAppuntamentoActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.menunuovoappuntamento);
+		setContentView(R.layout.menumodificaappuntamento);
 
-		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuAppuntamentiActivity.codUtente");
-
-		System.out.println("Parametro Menu Appuntamento:"+codUtente);
+		id=getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaAppuntamentoActivity.id");
+		codUtente=getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente");
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Parametro appuntamento Modifica Appuntamento:"+appuntamento);
 		
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
@@ -58,16 +42,6 @@ public class NuovoAppuntamentoActivity extends Activity{
 		}catch(SQLException sqle){
 
 			throw sqle;
-
-		}
-
-		Cursor c= Account.getAccountById(db, codUtente);
-		TextView utente = (TextView) findViewById(R.id.Utente);
-		System.out.println("Codice:" + codUtente);
-		while(c.moveToNext()){
-			String nome=c.getString(0);
-			String cognome=c.getString(1);
-			utente.setText("Utente: " + nome + " " + cognome);
 		}
 		
 		// cattura di tutti i view del layout
@@ -78,7 +52,6 @@ public class NuovoAppuntamentoActivity extends Activity{
         salva = (Button) findViewById(R.id.salvappuntamento);
         cancella = (Button) findViewById(R.id.cancellappuntamento);
         
-
         // add a click listener to the button
         mPickDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -92,20 +65,6 @@ public class NuovoAppuntamentoActivity extends Activity{
             }
         });
         
-    	et = (EditText) findViewById(R.id.descrizioneappuntamento);
-    	et.addTextChangedListener(new TextWatcher()
-    	{
-    		public void afterTextChanged(Editable s)
-    		{
-    			int i = s.length();
-    			if(i == 44)
-    				Toast.makeText(getApplicationContext(),  "Limite di caratteri consentiti per la descrizione dell'appuntamento raggiunto", Toast.LENGTH_LONG).show();
-    		}
-    		public void beforeTextChanged(CharSequence s, int start, int count, int after){ }
-
-    		public void onTextChanged(CharSequence s, int start, int before, int count) { }		
-    	});
-        
         salva.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {
@@ -117,9 +76,8 @@ public class NuovoAppuntamentoActivity extends Activity{
 				luogo = txtluogo.getText().toString();
 				if(descrizione.equals("")){
 					Toast.makeText(getApplicationContext(),  "Inserire almeno una descrizione dell'appuntamento", Toast.LENGTH_LONG).show();
-				} else{ 
+				}else{ 
 					dbd.close();
-					db.close();
 					onClickSalva();
 				}
 			}
@@ -145,9 +103,71 @@ public class NuovoAppuntamentoActivity extends Activity{
         mDay = date.get(Calendar.DAY_OF_MONTH);
         mHour = date.get(Calendar.HOUR_OF_DAY);
         mMinute = date.get(Calendar.MINUTE);
-	}
-	
-	public void onClickSalva() {
+        
+		Cursor result=Appuntamento.getDatiFromId(db, codUtente, id);
+		if(result.moveToFirst()){
+			TextView utente=(TextView) findViewById(R.id.Utente);
+			utente.setText("Modifica Appuntamento");
+			
+			TextView descr = (TextView)findViewById(R.id.descrizioneappuntamento);
+			descr.setText(result.getString(2));
+			TextView indirizzo = (TextView)findViewById(R.id.indirizzoappuntamento);
+			indirizzo.setText(result.getString(3));
+			TextView luogo = (TextView)findViewById(R.id.luogoappuntamento);
+			luogo.setText(result.getString(4));
+
+			if(result.getString(5).isEmpty())
+				mDateDisplay.setText("Data");
+			else
+				mDateDisplay.setText(result.getString(5));
+			
+			if(result.getString(6).isEmpty())
+				mTimeDisplay.setText("Ora");
+			else
+				mTimeDisplay.setText(result.getString(6));
+			
+			db.close();
+		}
+
+		Button salva=(Button)findViewById(R.id.salvappuntamento);
+        salva.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				EditText txtdescrizione = (EditText)findViewById(R.id.descrizioneappuntamento);
+				descrizione = txtdescrizione.getText().toString();
+				EditText txtindirizzo = (EditText)findViewById(R.id.indirizzoappuntamento);
+				indirizzo = txtindirizzo.getText().toString();
+				EditText txtluogo = (EditText)findViewById(R.id.luogoappuntamento);
+				luogo = txtluogo.getText().toString();
+				if(descrizione.equals("")){
+					Toast.makeText(getApplicationContext(),  "Inserire almeno una descrizione dell'appuntamento", Toast.LENGTH_LONG).show();
+				}else{ 
+					dbd.close();
+					onClickAggiorna();
+				}
+			}
+		}); 
+    }   
+    
+    public void onClickAggiorna() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Vuoi Aggionare l'Appuntamento?")
+               .setCancelable(false)
+               .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                        aggiornaAppuntamento();
+                   }
+               })
+               .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                   }
+               });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+    
+    public void onClickSalva() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Vuoi Salvare l'appuntamento?")
 		.setCancelable(false)
@@ -181,7 +201,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 		}
 		else{
 			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(NuovoAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
+			Intent intent = new Intent(ModificaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.NuovoAppuntamentoActivity.codUtente", codUtente);
 			dbd.close();
@@ -189,6 +209,24 @@ public class NuovoAppuntamentoActivity extends Activity{
 		}
 
 	}	
+	    
+    public void aggiornaAppuntamento(){
+    	tmp = new DroidiaryDatabaseHelper(this);
+		db=tmp.getWritableDatabase();
+		tmp.openDataBase();
+		int res= Appuntamento.modificaAppuntamento(db, id, codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString(), mTimeDisplay.getText().toString());
+		
+		if(res>0){
+			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(ModificaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
+			System.out.println(codUtente);
+			intent.putExtra("droidiary.app.ModificaAppuntamentoActivity.codUtente", codUtente);
+			intent.putExtra("Status", status);
+			startActivity(intent);
+			tmp.close();
+		}
+		
+    }
 
 	private void updateDate() {
 	    mDateDisplay.setText(
@@ -254,10 +292,26 @@ public class NuovoAppuntamentoActivity extends Activity{
                 updateDate();
             }
     	};
-    	
-    private DroidiaryDatabaseHelper dbd;
+    
+    private DroidiaryDatabaseHelper dbd, tmp;
 	private SQLiteDatabase db;
-	private EditText et;
 	private int codUtente;
+	private int id;	
 	String descrizione, indirizzo, luogo;
+	private TextView mDateDisplay;
+    private Button mPickDate;    
+    private String appuntamento;
+    private int mYear;
+    private int mMonth;
+    private int mDay;
+    static final int DATE_DIALOG_ID = 0;
+    private TextView mTimeDisplay;
+    private Button mPickTime;
+    private int mHour;
+    private int mMinute;
+    static final int TIME_DIALOG_ID = 1;
+	String status;
+	
+    private Button salva;
+    private Button cancella;
 }
