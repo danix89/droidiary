@@ -86,7 +86,6 @@
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/textView2"
-            android:text="cdscasaionccsasac"
             android:textColor="#000000"
             android:textSize="18dp" />
 
@@ -97,7 +96,6 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/indirizzoappuntamento"
             android:textColor="#000000"
-            android:text="cdscaiocaionccsasac"
             android:textSize="18dp" />
         
         <TextView
