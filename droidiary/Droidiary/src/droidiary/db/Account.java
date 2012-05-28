@@ -24,7 +24,6 @@ public class Account extends DroidiaryDatabaseHelper{
 		ContentValues v= new ContentValues();
 		v.put(USERNAME, user);
 		v.put(PASSWORD, psw);
-		db.insert(TABELLA, null, v);
 		long i = db.insert(TABELLA, null, v);
 		return i;
 	}
