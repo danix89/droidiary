@@ -168,8 +168,8 @@ public class DroidiaryActivity extends Activity{
 	       switch (item.getItemId()) {
 	           case R.id.menu_about:Intent intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
 		    	startActivity(intent);
-	           case R.id.menu_setup:Log.v("ttt", "Registrazione!");
-	                 break;
+	           case R.id.menu_setup:Intent intent2 = new Intent(DroidiaryActivity.this, NuovoAccountActivity.class);
+		    	startActivity(intent2);
 	       }
 	       return true;
 	   }
