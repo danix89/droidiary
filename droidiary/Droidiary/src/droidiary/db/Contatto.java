@@ -32,6 +32,21 @@ public class Contatto {
 		return i;
 	}
 	
+	public static long insertContattoAccount(SQLiteDatabase db, int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	{
+		ContentValues cv = new ContentValues();
+		cv.put(ID, id);
+		cv.put(ID_ACCOUNT, id_a);
+		cv.put(NOME, nome);
+		cv.put(COGNOME, cognome);
+		cv.put(CITTA, citta);
+		cv.put(CELLULARE, cell);
+		cv.put(NUMEROCASA, ncasa);
+		cv.put(MAIL, mail);
+		long i = db.insert(TABELLA, null, cv);
+		return i;
+	}
+	
 	public static int modificaContatto(SQLiteDatabase db, int id_a, int codUtente, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		ContentValues cv = new ContentValues();
