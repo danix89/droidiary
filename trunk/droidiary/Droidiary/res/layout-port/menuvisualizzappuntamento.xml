@@ -149,13 +149,14 @@
 
         <ImageView
             android:id="@+id/chiamatacasa"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/indirizzoappuntamento"
+            android:layout_alignTop="@+id/indirizzoappuntamento"
             android:clickable="true"
             android:onClick="imageClick"
             android:src="@drawable/googlemaps2" />
+
     </RelativeLayout>
 
 </RelativeLayout>
