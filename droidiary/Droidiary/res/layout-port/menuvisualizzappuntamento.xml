@@ -24,23 +24,35 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" >
 
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/appuntamenti" />
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="18dp"
+            android:layout_toRightOf="@+id/imageView1"
             android:text="@string/titoloappuntamento"
-            android:textColor="#000000" 
-            android:textSize="18dp" 
+            android:textColor="#000000"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/descrizioneappuntamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/textView1"
+            android:text="descrizione "
             android:textColor="#000000"
             android:textSize="18dp" />
 
@@ -49,20 +61,9 @@
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="250dp"
-        android:layout_height="280dp"
+        android:layout_height="270dp"
         android:layout_alignLeft="@+id/relativeLayout2"
         android:layout_below="@+id/relativeLayout2" >
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/coordinateappuntamento"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000"
-            android:textStyle="bold" />
 
         <Button
             android:id="@+id/eliminaappuntamento"
@@ -81,30 +82,45 @@
             android:text="@string/modificabutton" />
 
         <TextView
-            android:id="@+id/indirizzoappuntamento"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView2"
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/coordinateappuntamento"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000"
-            android:textSize="18dp" />
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Data/Ora"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/luogoappuntamento"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/indirizzoappuntamento"
+            android:layout_above="@+id/textView2"
+            android:text="luogo"
             android:textColor="#000000"
             android:textSize="18dp" />
-        
+
         <TextView
             android:id="@+id/dataappuntamento"
             android:layout_width="110dp"
             android:layout_height="45dp"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_alignTop="@+id/oraappuntamento"
             android:background="@color/transparent"
+            android:gravity="center_horizontal|center"
+            android:text="data"
             android:textColor="#000000"
             android:textSize="18dp" />
 
@@ -112,9 +128,22 @@
             android:id="@+id/oraappuntamento"
             android:layout_width="110dp"
             android:layout_height="45dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/dataappuntamento"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView2"
             android:background="@color/transparent"
+            android:gravity="center_horizontal|center"
+            android:text="ora"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/indirizzoappuntamento"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/luogoappuntamento"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/luogoappuntamento"
+            android:text="indirizzo"
             android:textColor="#000000"
             android:textSize="18dp" />
 
@@ -123,11 +152,10 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/luogoappuntamento"
+            android:layout_below="@+id/indirizzoappuntamento"
             android:clickable="true"
             android:onClick="imageClick"
-            android:src="@drawable/googlemaps" />
-
+            android:src="@drawable/googlemaps2" />
     </RelativeLayout>
 
 </RelativeLayout>
