@@ -33,7 +33,6 @@ public class VisualizzaMappaActivity extends MapActivity
         GeoPoint point;
         Geocoder geoCoder = new Geocoder(this, Locale.getDefault());    
         try {
-        	Log.w("danix", "cacchio");
             List<Address> addresses = geoCoder.getFromLocationName("via melito", 5);
             String add = "";
             Log.w("danix", "addresses.size = " + addresses.size());
