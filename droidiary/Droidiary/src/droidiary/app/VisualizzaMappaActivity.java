@@ -1,12 +1,18 @@
 package droidiary.app;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
@@ -24,14 +30,28 @@ public class VisualizzaMappaActivity extends MapActivity
         List<Overlay> mapOverlays = mapView.getOverlays();
         Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
         DroidiaryItemizedOverlay itemizedoverlay = new DroidiaryItemizedOverlay(drawable, this);
+        GeoPoint point;
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());    
+        try {
+        	Log.w("danix", "cacchio");
+            List<Address> addresses = geoCoder.getFromLocationName("via melito", 5);
+            String add = "";
+            Log.w("danix", "addresses.size = " + addresses.size());
+            if (addresses.size() > 0) {
+                point = new GeoPoint(
+                        (int) (addresses.get(0).getLatitude() * 1E6), 
+                        (int) (addresses.get(0).getLongitude() * 1E6));
+                OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
+                MapController mc = mapView.getController(); ;
+                itemizedoverlay.addOverlay(overlayitem);
 
-        GeoPoint point = new GeoPoint(19240000,-99120000);
-        OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
-        GeoPoint point2 = new GeoPoint(35410000, 139460000);
-        OverlayItem overlayitem2 = new OverlayItem(point2, "Sekai, konichiwa!", "I'm in Japan!");
+                mc.animateTo(point);    
+                mapView.invalidate();
+            }    
+        } catch (IOException e) {
+        	Log.w("danix", e.getLocalizedMessage());
+        }
         
-        itemizedoverlay.addOverlay(overlayitem);
-        itemizedoverlay.addOverlay(overlayitem2);
         mapOverlays.add(itemizedoverlay);
     }
     
