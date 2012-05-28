@@ -17,13 +17,16 @@ public class Account extends DroidiaryDatabaseHelper{
 	 * @param db
 	 * @param user
 	 * @param psw
+	 * @return 
 	 */
-	public static void insertAccount(SQLiteDatabase db, String user, String psw)
+	public static long insertAccount(SQLiteDatabase db, String user, String psw)
 	{
 		ContentValues v= new ContentValues();
 		v.put(USERNAME, user);
 		v.put(PASSWORD, psw);
 		db.insert(TABELLA, null, v);
+		long i = db.insert(TABELLA, null, v);
+		return i;
 	}
 	
 	/**

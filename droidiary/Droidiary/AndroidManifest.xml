@@ -35,6 +35,7 @@
         <activity android:name="NuovoContattoActivity" android:label="@string/titoloRubrica" android:screenOrientation="fullSensor"></activity>
         <activity android:name="ModificaContattoActivity" android:label="Contatto" android:screenOrientation="fullSensor"></activity>
         
-        <uses-library android:name="com.google.android.maps" /> 
+        <uses-library android:name="com.google.android.maps" />
+        <activity android:name="MenuNuovoAccountActivity"></activity> 
 	</application>    
 </manifest>    
