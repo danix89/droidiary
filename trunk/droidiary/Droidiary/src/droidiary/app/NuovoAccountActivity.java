@@ -115,14 +115,14 @@ public class NuovoAccountActivity extends Activity{
 		}
 		
 		long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
+		dbd.close();
 		if(res2 == -1){
 			Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
 		}else{
 			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
+			Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
 			System.out.println("Codice da Passare"+codUtente);
 			intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
-			dbd.close();
 			startActivity(intent);
 		}
 

@@ -40,6 +40,9 @@ public class MenuPrincipaleActivity extends Activity {
 		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuAppuntamentiActivity");
 		}
+		if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("droidiary.app.NuovoAccountActivity");
+		}
 
 		System.out.println("Parametro Passato Login:" + codUtente);
 
