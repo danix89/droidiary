@@ -1,5 +1,7 @@
 package droidiary.db;
 
+import java.util.Calendar;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,9 +38,18 @@ public class Appuntamento {
 	 * @return
 	 */
 	public static Cursor getAppuntamentiFromId(SQLiteDatabase db, int codice){
-		Cursor c= db.rawQuery("select * from appuntamento where id_account='"+codice+"'", null);
+		Cursor c= db.rawQuery("select descrizione from appuntamento where id_account='"+codice+"'", null);
 		return c;
     }
+	
+	public static Cursor getAppuntamentiToday(SQLiteDatabase db, int codice)
+	{
+		Calendar cal= Calendar.getInstance();
+		String data= "" + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR);
+		System.out.print(data);
+		Cursor c= db.rawQuery("select descrizione from appuntamento where id_account='"+codice+"' and data="+ data, null);
+		return c;
+	}
 	
 	public static Cursor getDatiFromString(SQLiteDatabase db, int codUtente, String appuntamento) {
 		Cursor c= db.rawQuery("select * from " + TABELLA + " where id_account ="+ codUtente +" and descrizione ='"+ appuntamento + "'", null);
