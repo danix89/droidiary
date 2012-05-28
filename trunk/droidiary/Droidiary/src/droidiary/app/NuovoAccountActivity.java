@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import droidiary.db.Account;
 import droidiary.db.Contatto;
@@ -22,17 +21,6 @@ public class NuovoAccountActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menunuovoaccount);
-
-		
-		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db=dbd.getWritableDatabase();
-		try {
-			dbd.openDataBase();
-		}catch(SQLException sqle){
-
-			throw sqle;
-		}
-
 		
 		Button salva=(Button)findViewById(R.id.salva);
 		salva.setOnClickListener(new OnClickListener() {
@@ -54,7 +42,6 @@ public class NuovoAccountActivity extends Activity{
 				}else if(telefonoCasa.equals("") && cellulare.equals("")){
 					Toast.makeText(getApplicationContext(),  "Inserire almeno un Recapito Telefonico", Toast.LENGTH_LONG).show();
 				}else{ 
-					dbd.close();
 					onClickSalva();
 				}
 
@@ -88,8 +75,7 @@ public class NuovoAccountActivity extends Activity{
 		.setCancelable(false)
 		.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				Cursor c= inserisciAccount();
-				inserisciContatto(c);
+				inserisci();
 			}
 		})
 		.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -102,72 +88,49 @@ public class NuovoAccountActivity extends Activity{
 
 	}
 
-	public Cursor inserisciAccount(){
-		temp1 = new DroidiaryDatabaseHelper(this);
-		db=temp1.getWritableDatabase();
+
+
+	public void inserisci(){
+		dbd = new DroidiaryDatabaseHelper(this);
+		db=dbd.getWritableDatabase();
+		db2=dbd.getWritableDatabase();
+		db3=dbd.getWritableDatabase();
 		try {
-			temp1.openDataBase();
+			dbd.openDataBase();
 		}catch(SQLException sqle){
 
 			throw sqle;
 
 		}
-
-		long res = Account.insertAccount(db, user, psw);
-
-
-		if(res == -1){
-			Toast.makeText(getApplicationContext(),  "Problema con la query", Toast.LENGTH_LONG).show();
-		}
-		else{
-			Toast.makeText(getApplicationContext(),  "Account Salvato Correttamente", Toast.LENGTH_LONG).show();
+		long res1 = Account.insertAccount(db, user, psw);
+		if(res1 == -1){
+			Toast.makeText(getApplicationContext(),  "Problema con la query Insert Account", Toast.LENGTH_LONG).show();
+		}else{
 			String[] arg={user, psw};
-			Cursor c= Account.getAccountByUserPsw(db, arg);
-			
-			
+			Cursor c= Account.getAccountByUserPsw(db2, arg);
 			if(c.moveToFirst()){
 				codUtente= c.getInt(0);
 				System.out.print(codUtente);
 			}
-			
-			temp1.close();
-			return c;
 		}
-
-		return null;
-	}
-
-	public void inserisciContatto(Cursor c){
-		temp2 = new DroidiaryDatabaseHelper(this);
-		db=temp2.getWritableDatabase();
-		try {
-			temp2.openDataBase();
-		}catch(SQLException sqle){
-
-			throw sqle;
-
-		}
-
 		
-		
-		long res = Contatto.insertContatto(db, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
-		if(res == -1){
-			Toast.makeText(getApplicationContext(),  "Problema con la query", Toast.LENGTH_LONG).show();
-		}
-		else{
+		long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
+		if(res2 == -1){
+			Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
+		}else{
 			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
 			System.out.println("Codice da Passare"+codUtente);
 			intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
-			temp2.close();
+			dbd.close();
 			startActivity(intent);
 		}
 
 	}
 
 
-	private DroidiaryDatabaseHelper dbd, temp1, temp2;
-	private SQLiteDatabase db;
+	private DroidiaryDatabaseHelper dbd;
+	private SQLiteDatabase db, db2, db3;
     int codUtente;
 	String nome, cognome, telefonoCasa, user, cellulare, psw;
 }
