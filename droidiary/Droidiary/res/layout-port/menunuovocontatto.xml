@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
-    
+
     <TextView
         android:id="@+id/Utente"
         android:layout_width="wrap_content"
@@ -15,7 +15,28 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="15dp" />
-    
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Utente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#fff"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView1"
+        android:src="@drawable/offline" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="250dp"
@@ -62,7 +83,6 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="18dp" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -78,8 +98,8 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:inputType="phone"
             android:hint="@string/cellulare"
+            android:inputType="phone"
             android:textSize="18dp" />
 
         <EditText
@@ -88,8 +108,8 @@
             android:layout_height="40dp"
             android:layout_above="@+id/telefonocellularecontatto"
             android:layout_alignParentLeft="true"
-            android:inputType="phone"
             android:hint="@string/casa"
+            android:inputType="phone"
             android:textSize="18dp" />
 
         <TextView
@@ -144,7 +164,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:text="@string/cancella" />
-
     </RelativeLayout>
 
 </RelativeLayout>

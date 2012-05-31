@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
-    
-        <TextView
+
+    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,11 +45,10 @@
         android:layout_above="@+id/buttonaggiungicontatto"
         android:layout_below="@+id/EditText01"
         android:layout_centerHorizontal="true"
-        android:divider="#000" 
-        android:textColor="#000000"
         android:background="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent">
-
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#000"
+        android:textColor="#000000" >
     </ListView>
 
     <EditText
@@ -71,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/listacontatti"
-        android:text="Aggiungi Contatto" 
-        android:textSize="15dp"/>
+        android:text="Aggiungi Contatto"
+        android:textSize="15dp" />
 
     <ImageView
         android:id="@+id/imageView1"

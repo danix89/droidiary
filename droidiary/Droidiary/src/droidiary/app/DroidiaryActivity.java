@@ -127,12 +127,12 @@ public class DroidiaryActivity extends Activity{
 						String status="true";
 						intent.putExtra("Status", status);
 						intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
-
+						dbd.close();
 						startActivity(intent);
 					}else{
 						Toast.makeText(getApplicationContext(), "Dati non presenti", Toast.LENGTH_LONG).show();
 					}
-					dbd.close();
+					
 				}
 			}
 		});

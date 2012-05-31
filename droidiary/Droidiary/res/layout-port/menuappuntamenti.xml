@@ -15,7 +15,28 @@
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:textSize="16dp" />
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Utente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#fff"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView1"
+        android:src="@drawable/offline" />
 
     <ListView
         android:id="@+id/listaappuntamenti"

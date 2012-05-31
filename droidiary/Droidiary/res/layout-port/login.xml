@@ -31,7 +31,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:hint="Username"
-            android:inputType="textPersonName" >
+            android:inputType="textPersonName"
+            android:lines="1" >
 
             <requestFocus />
         </EditText>
@@ -43,7 +44,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/username"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:lines="1" />
 
         <Button
             android:id="@+id/entra"

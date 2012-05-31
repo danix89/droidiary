@@ -29,12 +29,12 @@ import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
 
 public class MenuAppuntamentiActivity extends Activity {
-//	private DroidiaryDatabaseHelper dbd;
-//	private SQLiteDatabase db;
-	    
-    /** Called when the activity is first created. */
-    public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
+	//	private DroidiaryDatabaseHelper dbd;
+	//	private SQLiteDatabase db;
+
+	/** Called when the activity is first created. */
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		populateListView();
 	}
 
@@ -42,11 +42,11 @@ public class MenuAppuntamentiActivity extends Activity {
 		super.onResume();
 		populateListView();
 	}
-    
-    private void populateListView()	{
-        setContentView(R.layout.menuappuntamenti);
-      
-        if(codUtente==0){
+
+	private void populateListView()	{
+		setContentView(R.layout.menuappuntamenti);
+
+		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuPrincipaleActivity");
 		}
 		if(codUtente==0){
@@ -58,7 +58,7 @@ public class MenuAppuntamentiActivity extends Activity {
 		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente");
 		}
-		
+
 		System.out.println("Parametro Menu Appuntamenti:"+codUtente);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
@@ -71,15 +71,15 @@ public class MenuAppuntamentiActivity extends Activity {
 
 		}
 
-		
-		
-		
+
+
+
 		//passaggio codice utente
-		
+
 		Cursor c= Account.getAccountById(db, codUtente);
 		TextView utente = (TextView) findViewById(R.id.Utente);
 		System.out.println("Codice:" + codUtente);
-		
+
 		while(c.moveToNext()){
 			String nome=c.getString(0);
 			String cognome=c.getString(1);
@@ -89,7 +89,7 @@ public class MenuAppuntamentiActivity extends Activity {
 		lv=(ListView) findViewById(R.id.listaappuntamenti);
 		Cursor appuntamenti= Appuntamento.getAppuntamentiFromId(db, codUtente);
 		listview_array=getOneColumn(appuntamenti);
-	
+
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listview_array){
 			public View getView(int position, View convertView,
@@ -147,10 +147,10 @@ public class MenuAppuntamentiActivity extends Activity {
 				});
 			}
 		});
-		
+
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
-		
+
 		lv.setOnItemClickListener(
 				new OnItemClickListener()
 				{
@@ -168,7 +168,7 @@ public class MenuAppuntamentiActivity extends Activity {
 
 
 		status = getIntent().getStringExtra("Status");
-		
+
 		Button nuovoAppuntamento = (Button) findViewById(R.id.buttonaggiungiappuntamento);
 		nuovoAppuntamento.setOnClickListener(new OnClickListener() 
 		{
@@ -180,7 +180,7 @@ public class MenuAppuntamentiActivity extends Activity {
 			}
 		}
 				);
-		
+
 		ImageView stat = (ImageView) findViewById(R.id.status);
 		int online = R.drawable.online;
 		int offline = R.drawable.offline;
@@ -195,27 +195,27 @@ public class MenuAppuntamentiActivity extends Activity {
 			}
 		}
 	}
-	
-    public void onBackPressed(){
+
+	public void onBackPressed(){
 		Intent intent = new Intent(MenuAppuntamentiActivity.this, MenuPrincipaleActivity.class);
 		intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
 		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
-    
-    //tutto il risultato del cursore in un array
+
+	//tutto il risultato del cursore in un array
 	private String[] getOneColumn(Cursor cursor){ 
 		String myTitle = "";
-	    String[] myArray = null;            
-	    startManagingCursor(cursor);
-	    while(cursor.moveToNext()){
-	        myTitle+=cursor.getString(cursor.getColumnIndex(Appuntamento.DESCRIZIONE))+";";              
-	    }   
-	    myArray = myTitle.split(";");     
-	    return myArray;
+		String[] myArray = null;            
+		startManagingCursor(cursor);
+		while(cursor.moveToNext()){
+			myTitle+=cursor.getString(cursor.getColumnIndex(Appuntamento.DESCRIZIONE))+";";              
+		}   
+		myArray = myTitle.split(";");     
+		return myArray;
 	}
-    
-    private DroidiaryDatabaseHelper dbd;
+
+	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private int codUtente;
 	private ListView lv;
