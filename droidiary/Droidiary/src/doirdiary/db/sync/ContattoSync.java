@@ -69,9 +69,30 @@ public class ContattoSync {
 		System.out.println("Query da Inviare: " + c);
 		send(c);
 	}
+	
+	public static void eliminaTuttiContatto(int id_c)
+	{
+		String c="delete from contatto where id_account='"+id_c+"'";
+		System.out.println("Query da Inviare: " + c);
+		send(c);
+	}
 
 	public static String getContattiById(int id_account, int id_contatto){
 		String query="select * from contatto where id_account='"+id_account+"' and _id='"+id_contatto+"'";
+		System.out.println("Query da Inviare: " + query);
+		String res=send(query);
+		return res;
+    }
+	
+	public static String getContattiById(int id_account){
+		String query="select * from contatto where id_account='"+id_account+"'";
+		System.out.println("Query da Inviare: " + query);
+		String res=send(query);
+		return res;
+    }
+
+	public static String getAllContatti(int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail){
+		String query="select * from contatto where id_account='"+id_a+"' and nome='"+nome+"' and cognome='"+cognome+"' and citta='"+citta+"' and cellulare='"+cell+"' and numeroCasa='"+ncasa+"' and mail='"+mail+"'";
 		System.out.println("Query da Inviare: " + query);
 		String res=send(query);
 		return res;

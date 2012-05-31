@@ -2,6 +2,9 @@ package droidiary.db;
 
 import java.util.Calendar;
 
+import doirdiary.db.sync.AppuntamentoSync;
+import doirdiary.db.sync.ContattoSync;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -61,6 +64,11 @@ public class Appuntamento {
 		return c;
 	}
 	
+	private static Cursor getDatiById(SQLiteDatabase db, int codUtente) {
+		Cursor c= db.rawQuery("select * from " + TABELLA + " where id_account ="+ codUtente, null);
+		return c;
+	}
+	
 	public static int modificaAppuntamento(SQLiteDatabase db, int id, int id_a, String des, String ind, String luogo, String data, String ora)
 	{
 		ContentValues cv = new ContentValues();
@@ -79,6 +87,32 @@ public class Appuntamento {
 		return u;
 	}
 	
+	public static int SincronizzaAppuntamenti(SQLiteDatabase db, int codUtente){ //da offline a online
+		Cursor appuntamenti=getDatiById(db, codUtente);
+		AppuntamentoSync.eliminaTuttiAppuntamenti(codUtente);
+		while(appuntamenti.moveToNext()){
+			int id=appuntamenti.getInt(0);
+			System.out.println("ID: " +id);
+			int id_account=appuntamenti.getInt(1);
+			System.out.println("id_account: " +id_account);
+			String descrizione=appuntamenti.getString(2);
+			System.out.println("descrizione: " +descrizione);
+			String indirizzo=appuntamenti.getString(3);
+			System.out.println("indirizzo: " +indirizzo);
+			String luogo=appuntamenti.getString(4);
+			System.out.println("luogo: " +luogo);
+			String data=appuntamenti.getString(5);
+			System.out.println("data: " +data);
+			String ora=appuntamenti.getString(6);
+			System.out.println("ora: " +ora);
+			AppuntamentoSync.modificaAppuntamento(id, id_account, descrizione, indirizzo, luogo, data, ora);
+		}
+		return 1;
+
+	}
+	
+	
+
 	public static final String ID= "_id";
 	public static final String ID_ACCOUNT= "id_account";
 	public static final String DESCRIZIONE= "descrizione";

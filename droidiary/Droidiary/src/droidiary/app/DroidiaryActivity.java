@@ -168,6 +168,8 @@ public class DroidiaryActivity extends Activity{
 		}
 		 return true;
 	}
+	
+	
 
 	//chiusura dell'app
 	public void onBackPressed(){

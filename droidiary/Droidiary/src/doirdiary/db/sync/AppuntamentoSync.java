@@ -63,6 +63,13 @@ public class AppuntamentoSync {
 		send(c);
 	}
 
+	public static void eliminaTuttiAppuntamenti(int id_c)
+	{
+		String c="delete from appuntamento where id_account='"+id_c+"'";
+		System.out.println("Query da Inviare: " + c);
+		send(c);
+	}
+	
 	public static String send(String query) {
 		String result = "0";
 		InputStream is = null;

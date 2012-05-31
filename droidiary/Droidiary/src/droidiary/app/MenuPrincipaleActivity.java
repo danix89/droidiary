@@ -2,14 +2,18 @@ package droidiary.app;
 
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
+import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MenuPrincipaleActivity extends Activity {
+	
 	/** Called when the activity is first created. */
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -130,14 +135,57 @@ public class MenuPrincipaleActivity extends Activity {
 		if(status!=null){
 			if(status.equals("true")){
 				stat.setImageResource(online);
+				Toast.makeText(getApplicationContext(),  "Sei Online! Sincronizza i tuoi contatti e appuntamenti!!", Toast.LENGTH_LONG).show();
+				
 			}
 			if(status.equals("false")){
 				stat.setImageResource(offline);
 			}
 		}
-
+		
+	}
+	
+	//implementazione menu
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		getMenuInflater().inflate(R.menu.menusync, menu);
+		return true;
 	}
 
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_sync:runDialog(5); 
+		return true;
+		}
+		 return true;
+	}
+	
+	private void runDialog(final int seconds)
+	{
+	    	progressDialog = ProgressDialog.show(this, "Attendere Prego....", "Sincronizzazione in corso");
+
+	    	new Thread(new Runnable(){
+	    		public void run(){
+	    			int flag=sincronizza();
+					if(flag==1){
+					progressDialog.dismiss();
+					}
+	    		}
+	    	}).start();
+	}
+
+	
+	//metodo sincronizzazione
+	
+	public int sincronizza(){
+		int flag=0;
+		flag=Contatto.SincronizzaContatto(db, codUtente);
+		flag=Appuntamento.SincronizzaAppuntamenti(db, codUtente);
+		return flag;
+	}
+	
+	
+	
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuPrincipaleActivity.this, DroidiaryActivity.class);
 		Toast.makeText(getApplicationContext(),  "Non sei più loggato!", Toast.LENGTH_LONG).show();
@@ -162,5 +210,7 @@ public class MenuPrincipaleActivity extends Activity {
 	private String listview_array[];
 	private int codUtente;
 	String status;
+	private ProgressDialog progressDialog;
+
 }
 
