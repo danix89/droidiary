@@ -137,25 +137,25 @@ public class ModificaContattoActivity extends Activity {
 
 		if(status.equals("true")){
 			ContattoSync.modificaContatto(id_contatto, id_account, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
+		}else{
+
+			tmp = new DroidiaryDatabaseHelper(this);
+			db=tmp.getWritableDatabase();
+			tmp.openDataBase();
+			System.out.println("Id_Contatto: "+id_contatto+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
+			//Cursor res= Contatto.modificaContatto(db, contatto, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
+			int res= Contatto.modificaContatto(db, id_contatto, id_account, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
+
+			if(res>0){
+				Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
+				System.out.println(id_account);
+				intent.putExtra("droidiary.app.ModificaContattoActivity", id_account);
+				intent.putExtra("Status", status);
+				startActivity(intent);
+				tmp.close();
+			}
 		}
-
-		tmp = new DroidiaryDatabaseHelper(this);
-		db=tmp.getWritableDatabase();
-		tmp.openDataBase();
-		System.out.println("Id_Contatto: "+id_contatto+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
-		//Cursor res= Contatto.modificaContatto(db, contatto, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
-		int res= Contatto.modificaContatto(db, id_contatto, id_account, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
-
-		if(res>0){
-			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
-			System.out.println(id_account);
-			intent.putExtra("droidiary.app.ModificaContattoActivity", id_account);
-			intent.putExtra("Status", status);
-			startActivity(intent);
-			tmp.close();
-		}
-
 	}
 
 	private DroidiaryDatabaseHelper dbd, tmp;

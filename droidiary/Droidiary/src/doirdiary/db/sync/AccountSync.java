@@ -20,6 +20,14 @@ import android.util.Log;
 public class AccountSync{
 
 
+	public static String insertAccount(int id, String user, String psw)
+	{
+		String c="INSERT INTO  account (_id, username, password) VALUES ('"+id+"','"+user+"',  '"+psw+"')";
+		System.out.println("Query da Inviare: " + c);
+		String res= send(c);
+		return res;
+	}
+	
 	public static String insertAccount(String user, String psw)
 	{
 		String c="INSERT INTO  account (username, password) VALUES ('"+user+"',  '"+psw+"')";

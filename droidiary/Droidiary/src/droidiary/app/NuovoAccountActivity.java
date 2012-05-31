@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import doirdiary.db.sync.AccountSync;
+import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -93,20 +94,8 @@ public class NuovoAccountActivity extends Activity{
 
 	public void inserisci(){
 
-		String res=AccountSync.getStringAccountByUserPsw(user, psw);
-		if(res.contains("null")){
-			AccountSync.insertAccount(user, psw);
-		}else{
-			Toast.makeText(getApplicationContext(),  "Account già esistente", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
-			startActivity(intent);
-		}
-
-
 		dbd = new DroidiaryDatabaseHelper(this);
 		db=dbd.getWritableDatabase();
-		db2=dbd.getWritableDatabase();
-		db3=dbd.getWritableDatabase();
 		try {
 			dbd.openDataBase();
 		}catch(SQLException sqle){
@@ -115,8 +104,14 @@ public class NuovoAccountActivity extends Activity{
 
 		}
 
+
+		String res=AccountSync.getStringAccountByUserPsw(user, psw);
 		Cursor query=Account.getAccountByUserPsw(db, user, psw);
-		if(query.equals(null)){
+		System.out.println(query);
+		if(res.contains("null") || query.equals(null)){
+			db=dbd.getWritableDatabase();
+			db2=dbd.getWritableDatabase();
+			db3=dbd.getWritableDatabase();
 			long res1 = Account.insertAccount(db, user, psw);
 			if(res1 == -1){
 				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Account", Toast.LENGTH_LONG).show();
@@ -128,8 +123,9 @@ public class NuovoAccountActivity extends Activity{
 					System.out.print(codUtente);
 				}
 			}
-
+			AccountSync.insertAccount(codUtente,user, psw);
 			long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
+			ContattoSync.insertContattoAccount(codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
 			dbd.close();
 			if(res2 == -1){
 				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
@@ -145,7 +141,6 @@ public class NuovoAccountActivity extends Activity{
 			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
 			startActivity(intent);
 		}
-
 	}
 
 
