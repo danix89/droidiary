@@ -30,28 +30,25 @@ public class ContattoSync {
 	 * @param mail
 	 * @return 
 	 */
-	public static String insertContatto(int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static void insertContatto(int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		String c="INSERT INTO contatto (id_account, nome, cognome, citta, cellulare, numeroCasa, mail) VALUES ('"+id_a+"',  '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')";
 		System.out.println("Query da Inviare: " + c);
-		String res= send(c);
-		return res;
+		send(c);
 	}
 	
-	public static String insertContattoID(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static void insertContattoID(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		String c="INSERT INTO contatto (_id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail) VALUES ('"+id+"','"+id_a+"',  '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')";
 		System.out.println("Query da Inviare: " + c);
-		String res= send(c);
-		return res;
+		send(c);
 	}
 	
-	public static String insertContattoAccount(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static void insertContattoAccount(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		String c="INSERT INTO contatto (_id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail) VALUES ('"+id+"', '"+id_a+"',  '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')";
 		System.out.println("Query da Inviare: " + c);
-		String res= send(c);
-		return res;
+		send(c);
 	}
 	
 	public static void modificaContatto(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
@@ -60,22 +57,17 @@ public class ContattoSync {
 		if(res1.contains("null")){
 			insertContattoID(id, id_a, nome, cognome, citta, cell, ncasa, mail);
 		}else{
-			String c= "update contatto set nome='"+nome+"', cognome='"+cognome+"', citta='"+citta+"', cellulare='"+cell+"', numeroCasa='"+ncasa+"', mail='"+mail+"' where id_contatto='"+id_a+"' and _id='"+id+"'";
+			String c= "update contatto set nome='"+nome+"', cognome='"+cognome+"', citta='"+citta+"', cellulare='"+cell+"', numeroCasa='"+ncasa+"', mail='"+mail+"' where id_account='"+id_a+"' and _id='"+id+"'";
 			System.out.println("Query da Inviare: " + c);
 			send(c);
 		}
 	}
 	
-	public static int eliminaContatto(int id, int id_c)
+	public static void eliminaContatto(int id, int id_c)
 	{
-		int index=0;
 		String c="delete from contatto where _id='"+id+"' and id_account='"+id_c+"'";
 		System.out.println("Query da Inviare: " + c);
-		String res= send(c);
-		if(res.compareToIgnoreCase("null")==0){
-			index=-1;
-		}
-		return index;
+		send(c);
 	}
 
 	public static String getContattiById(int id_account, int id_contatto){

@@ -134,6 +134,7 @@ public class NuovoAccountActivity extends Activity{
 				Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
 				System.out.println("Codice da Passare"+codUtente);
 				intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
+				intent.putExtra("Status", "true");
 				startActivity(intent);
 			}
 		}else{
