@@ -117,14 +117,14 @@ public class NuovoAppuntamentoActivity extends Activity{
 				indirizzo = txtindirizzo.getText().toString();
 				EditText txtluogo = (EditText)findViewById(R.id.luogoappuntamento);
 				luogo = txtluogo.getText().toString();
+				TextView data= (TextView) findViewById(R.id.dateDisplay);
+				TextView ora= (TextView) findViewById(R.id.timeDisplay);
 				if(descrizione.equals("")){
 					Toast.makeText(getApplicationContext(),  "Inserire almeno una descrizione dell'appuntamento", Toast.LENGTH_LONG).show();
-				}else if((mDateDisplay.getText().toString().equals("")) && (mTimeDisplay.getText().toString().equals(""))){
-					Toast.makeText(getApplicationContext(),  "Inserire la data dell'appuntamento", Toast.LENGTH_LONG).show();
-
+				}else if(data.equals("Data") || ora.equals("Ora")){
+					Toast.makeText(getApplicationContext(),  "Inserire la data e l'ora dell'appuntamento", Toast.LENGTH_LONG).show();
 				}else{ 
 					dbd.close();
-					db.close();
 					onClickSalva();
 				}
 			}
@@ -212,6 +212,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 			Intent intent = new Intent(NuovoAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.NuovoAppuntamentoActivity.codUtente", codUtente);
+			intent.putExtra("Status", status);
 			dbd.close();
 			startActivity(intent);
 		}

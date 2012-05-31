@@ -38,15 +38,6 @@ public class ModificaAppuntamentoActivity extends Activity {
 		System.out.println("id_account modifica Apuntamenti: " + codUtente);
 		status = getIntent().getStringExtra("Status");
 
-		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db=dbd.getWritableDatabase();
-		try {
-			dbd.openDataBase();
-		}catch(SQLException sqle){
-
-			throw sqle;
-		}
-
 		// cattura di tutti i view del layout
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
 		mPickDate = (Button) findViewById(R.id.pickDate);
@@ -136,8 +127,12 @@ public class ModificaAppuntamentoActivity extends Activity {
 				indirizzo = txtindirizzo.getText().toString();
 				EditText txtluogo = (EditText)findViewById(R.id.luogoappuntamento);
 				luogo = txtluogo.getText().toString();
+				TextView data= (TextView) findViewById(R.id.dateDisplay);
+				TextView ora= (TextView) findViewById(R.id.timeDisplay);
 				if(descrizione.equals("")){
 					Toast.makeText(getApplicationContext(),  "Inserire almeno una descrizione dell'appuntamento", Toast.LENGTH_LONG).show();
+				}else if(data.equals("Data") || ora.equals("Ora")){
+					Toast.makeText(getApplicationContext(),  "Inserire la data e l'ora dell'appuntamento", Toast.LENGTH_LONG).show();
 				}else{ 
 					dbd.close();
 					onClickAggiorna();
