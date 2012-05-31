@@ -1,5 +1,6 @@
 package droidiary.app;
 
+import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -95,6 +96,9 @@ public class NuovoContattoActivity extends Activity {
 		});
 
 
+
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status Nuovo Contatto: "+status);
 	}   
 
 	public void onClickSalva() {
@@ -115,6 +119,7 @@ public class NuovoContattoActivity extends Activity {
 		alert.show();
 
 	}
+	
 
 	public void inserisciContatto(){
 		
@@ -127,6 +132,10 @@ public class NuovoContattoActivity extends Activity {
 
 		}
 		
+		if(status.equals("true")){
+			ContattoSync.insertContatto(codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
+		}
+		
 		long res = Contatto.insertContatto(db, codUtente, nome, cognome, citta, cellulare, telefonoCasa, email);
 		if(res == -1){
 			Toast.makeText(getApplicationContext(),  "Problema con la query", Toast.LENGTH_LONG).show();
@@ -136,14 +145,18 @@ public class NuovoContattoActivity extends Activity {
 			Intent intent = new Intent(NuovoContattoActivity.this, MenuRubricaActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.NuovoContattoActivity", codUtente);
+			intent.putExtra("Status", status);
 			dbd.close();
 			startActivity(intent);
 		}
+		
+		
 
 	}
 
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private int codUtente;
+	String status;
 	String nome, cognome, telefonoCasa, email, cellulare, citta;
 }

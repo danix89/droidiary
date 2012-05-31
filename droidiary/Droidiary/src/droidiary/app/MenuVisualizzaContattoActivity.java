@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 
@@ -98,7 +99,8 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, ModificaContattoActivity.class);
 				intent.putExtra("droidiary.app.contatto", contatto);
-				intent.putExtra("droidiary.app.codUtente", id);
+				intent.putExtra("ID", id);
+				intent.putExtra("CodUtente", codUtente);
 				intent.putExtra("Status", status);
 				dbd.close();
 				startActivity(intent);
@@ -130,6 +132,9 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			}
 		}
 		
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status Visualizza Contatto: "+status);
+		
 	}
 
 	public void onClickElimina() {
@@ -154,9 +159,17 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
 		intent.putExtra("droidiary.app.MenuVisualizzaContatto", codUtente);
+		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
     public void eliminaContatto(){
+    	
+    	if(status.equals("true")){
+			int res=ContattoSync.eliminaContatto(id, codUtente);
+			System.out.println("Query online elimina contatto= "+res);
+		}
+    	
+    	
     	tmp2 = new DroidiaryDatabaseHelper(this);
 		db=tmp2.getWritableDatabase();
 		tmp2.openDataBase();
@@ -166,6 +179,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
+			intent.putExtra("Status", status);
 			startActivity(intent);
 			tmp2.close();
 		}

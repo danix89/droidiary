@@ -62,11 +62,11 @@ public class Account extends DroidiaryDatabaseHelper{
 		return c;
 	}
 	
-	public static String getStringAccountByUserPsw(String user, String pass) throws SQLException {
-		String c="select * from account where username='"+user+"' and password='"+pass+"'";
+	public static Cursor getAccountByUserPsw(SQLiteDatabase db, String user, String pass) throws SQLException {
+		Cursor c= db.rawQuery("select * from account where username='"+user+"' and password='"+pass+"'", null);
 		return c;
 	}
-	
+		
 	public static final String ID= "_id";
 	public static final String USERNAME= "username";
 	public static final String PASSWORD= "password";

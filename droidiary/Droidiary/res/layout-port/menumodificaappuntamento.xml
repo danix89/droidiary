@@ -15,7 +15,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="18dp" />
-    
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="250dp"
@@ -40,10 +40,10 @@
             android:layout_height="60dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:inputType="textMultiLine"
-            android:hint="Descrizione" />
-        <requestFocus />
+            android:hint="Descrizione"
+            android:inputType="textMultiLine" />
 
+        <requestFocus />
     </RelativeLayout>
 
     <RelativeLayout
@@ -95,7 +95,7 @@
             android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/pickTime"
-            android:background="@color/transparent"
+            android:background="@android:color/transparent"
             android:gravity="center_vertical|center_horizontal"
             android:text="Ora"
             android:textColor="#000000"
@@ -117,7 +117,7 @@
             android:layout_alignBaseline="@+id/pickDate"
             android:layout_alignBottom="@+id/pickDate"
             android:layout_alignParentRight="true"
-            android:background="@color/transparent"
+            android:background="@android:color/transparent"
             android:gravity="center_vertical|center_horizontal"
             android:text="Data"
             android:textColor="#000000"
@@ -130,8 +130,8 @@
             android:layout_above="@+id/dateDisplay"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="14dp"
-            android:inputType="textMultiLine"
-            android:hint="Luogo" />
+            android:hint="Luogo"
+            android:inputType="textMultiLine" />
 
         <EditText
             android:id="@+id/indirizzoappuntamento"
@@ -139,9 +139,8 @@
             android:layout_height="40dp"
             android:layout_above="@+id/luogoappuntamento"
             android:layout_alignParentLeft="true"
-            android:inputType="textMultiLine"
-            android:hint="Indirizzo" />
-
+            android:hint="Indirizzo"
+            android:inputType="textMultiLine" />
     </RelativeLayout>
 
 </RelativeLayout>

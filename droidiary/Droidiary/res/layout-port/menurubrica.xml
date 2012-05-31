@@ -36,7 +36,7 @@
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <ListView
         android:id="@+id/listacontatti"

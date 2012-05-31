@@ -47,10 +47,9 @@ public class Contatto {
 		return i;
 	}
 	
-	public static int modificaContatto(SQLiteDatabase db, int id_a, int codUtente, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	public static int modificaContatto(SQLiteDatabase db, int id_contatto, int codUtente, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		ContentValues cv = new ContentValues();
-		cv.put(ID, id_a);
 		cv.put(ID_ACCOUNT, codUtente);
 		cv.put(NOME, nome);
 		cv.put(COGNOME, cognome);
@@ -58,7 +57,7 @@ public class Contatto {
 		cv.put(CELLULARE, cell);
 		cv.put(NUMEROCASA, ncasa);
 		cv.put(MAIL, mail);
-		int u = db.update(TABELLA, cv, "_id='"+id_a+"' and id_account='"+codUtente+"'", null);
+		int u = db.update(TABELLA, cv, "_id='"+id_contatto+"' and id_account='"+codUtente+"'", null);
 		return u;
 	}
 	
