@@ -14,61 +14,43 @@
         android:text="Nuovo Account"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:textSize="18dp" />
+        android:textSize="15dp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="250dp"
         android:layout_height="150dp"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/Utente"
-        android:layout_marginRight="19dp" >
-
-        <EditText
-            android:id="@+id/cognomeaccount"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignLeft="@+id/nomeaccount"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:hint="@string/cognome"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/nomeaccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imageView1"
-            android:hint="@string/nome"
-            android:inputType="textPersonName" />
+        android:layout_centerHorizontal="true" >
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:src="@drawable/personal" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="250dp"
-        android:layout_height="110dp"
-        android:layout_alignLeft="@+id/relativeLayout1"
-        android:layout_centerVertical="true" >
 
         <EditText
-            android:id="@+id/telefonocellulareaccount"
+            android:id="@+id/useraccount"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:hint="@string/cellulare"
-            android:inputType="phone"
-            android:textSize="18dp" />
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView1"
+            android:hint="Username:"
+            android:inputType="text"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/passwordaccount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/useraccount"
+            android:layout_toRightOf="@+id/imageView1"
+            android:hint="Password:"
+            android:inputType="textPassword"
+            android:lines="1" />
 
         <TextView
             android:id="@+id/textView1"
@@ -76,22 +58,51 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="dati"
+            android:layout_marginTop="14dp"
+            android:lines="1"
+            android:text="Dati Account"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_below="@+id/relativeLayout1" >
 
         <EditText
-            android:id="@+id/telefonocasaaccount"
+            android:id="@+id/cognomeaccount"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView1"
-            android:hint="@string/casa"
-            android:inputType="phone"
-            android:textSize="18dp" >
+            android:hint="@string/cognome"
+            android:inputType="textPersonName"
+            android:lines="1" />
 
-            <requestFocus />
-        </EditText>
+        <EditText
+            android:id="@+id/nomeaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/cognomeaccount"
+            android:layout_alignParentLeft="true"
+            android:hint="@string/nome"
+            android:inputType="textPersonName"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Dati Contatto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -99,25 +110,7 @@
         android:layout_width="250dp"
         android:layout_height="140dp"
         android:layout_alignLeft="@+id/relativeLayout2"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_marginTop="20dp" >
-
-        <EditText
-            android:id="@+id/useraccount"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:hint="Username:"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/passwordaccount"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/useraccount"
-            android:hint="Password:" />
+        android:layout_below="@+id/relativeLayout2" >
 
         <Button
             android:id="@+id/salva"
@@ -134,7 +127,42 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:text="@string/cancella" />
-    </RelativeLayout>
 
+        <EditText
+            android:id="@+id/telefonocellulareaccount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/salva"
+            android:layout_alignParentLeft="true"
+            android:hint="@string/cellulare"
+            android:inputType="phone"
+            android:lines="1"
+            android:textSize="18dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/telefonocasaaccount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/telefonocellulareaccount"
+            android:layout_alignParentLeft="true"
+            android:hint="@string/casa"
+            android:inputType="phone"
+            android:lines="1"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Telefono"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </RelativeLayout>

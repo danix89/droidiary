@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,6 +100,20 @@ public class NuovoContattoActivity extends Activity {
 
 		status = getIntent().getStringExtra("Status");
 		System.out.println("Status Nuovo Contatto: "+status);
+		
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
 	}   
 
 	public void onClickSalva() {

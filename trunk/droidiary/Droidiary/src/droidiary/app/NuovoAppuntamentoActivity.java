@@ -20,28 +20,30 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import doirdiary.db.sync.AppuntamentoSync;
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
 
 public class NuovoAppuntamentoActivity extends Activity{
- 	private TextView mDateDisplay;
-    private Button mPickDate;
-    private int mYear;
-    private int mMonth;
-    private int mDay;
-    static final int DATE_DIALOG_ID = 0;
-    private TextView mTimeDisplay;
-    private Button mPickTime;
-    private int mHour;
-    private int mMinute;
-    static final int TIME_DIALOG_ID = 1;
-    
-    private Button salva;
-    private Button cancella;
+	private TextView mDateDisplay;
+	private Button mPickDate;
+	private int mYear;
+	private int mMonth;
+	private int mDay;
+	static final int DATE_DIALOG_ID = 0;
+	private TextView mTimeDisplay;
+	private Button mPickTime;
+	private int mHour;
+	private int mMinute;
+	static final int TIME_DIALOG_ID = 1;
+
+	private Button salva;
+	private Button cancella;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuAppuntamentiActivity.codUtente");
 
 		System.out.println("Parametro Menu Appuntamento:"+codUtente);
-		
+
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
 		try {
@@ -69,45 +71,45 @@ public class NuovoAppuntamentoActivity extends Activity{
 			String cognome=c.getString(1);
 			utente.setText("Utente: " + nome + " " + cognome);
 		}
-		
+
 		// cattura di tutti i view del layout
-        mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
-        mPickDate = (Button) findViewById(R.id.pickDate);
-        mTimeDisplay = (TextView) findViewById(R.id.timeDisplay);
-        mPickTime = (Button) findViewById(R.id.pickTime);
-        salva = (Button) findViewById(R.id.salvappuntamento);
-        cancella = (Button) findViewById(R.id.cancellappuntamento);
-        
+		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);
+		mPickDate = (Button) findViewById(R.id.pickDate);
+		mTimeDisplay = (TextView) findViewById(R.id.timeDisplay);
+		mPickTime = (Button) findViewById(R.id.pickTime);
+		salva = (Button) findViewById(R.id.salvappuntamento);
+		cancella = (Button) findViewById(R.id.cancellappuntamento);
 
-        // add a click listener to the button
-        mPickDate.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID);
-            }
-        });
-        
-        mPickTime.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(TIME_DIALOG_ID);
-            }
-        });
-        
-    	et = (EditText) findViewById(R.id.descrizioneappuntamento);
-    	et.addTextChangedListener(new TextWatcher()
-    	{
-    		public void afterTextChanged(Editable s)
-    		{
-    			int i = s.length();
-    			if(i == 44)
-    				Toast.makeText(getApplicationContext(),  "Limite di caratteri consentiti per la descrizione dell'appuntamento raggiunto", Toast.LENGTH_LONG).show();
-    		}
-    		public void beforeTextChanged(CharSequence s, int start, int count, int after){ }
 
-    		public void onTextChanged(CharSequence s, int start, int before, int count) { }		
-    	});
-        
-        salva.setOnClickListener(new OnClickListener() {
-			
+		// add a click listener to the button
+		mPickDate.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showDialog(DATE_DIALOG_ID);
+			}
+		});
+
+		mPickTime.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showDialog(TIME_DIALOG_ID);
+			}
+		});
+
+		et = (EditText) findViewById(R.id.descrizioneappuntamento);
+		et.addTextChangedListener(new TextWatcher()
+		{
+			public void afterTextChanged(Editable s)
+			{
+				int i = s.length();
+				if(i == 44)
+					Toast.makeText(getApplicationContext(),  "Limite di caratteri consentiti per la descrizione dell'appuntamento raggiunto", Toast.LENGTH_LONG).show();
+			}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after){ }
+
+			public void onTextChanged(CharSequence s, int start, int before, int count) { }		
+		});
+
+		salva.setOnClickListener(new OnClickListener() {
+
 			public void onClick(View v) {
 				EditText txtdescrizione = (EditText)findViewById(R.id.descrizioneappuntamento);
 				descrizione = txtdescrizione.getText().toString();
@@ -117,16 +119,19 @@ public class NuovoAppuntamentoActivity extends Activity{
 				luogo = txtluogo.getText().toString();
 				if(descrizione.equals("")){
 					Toast.makeText(getApplicationContext(),  "Inserire almeno una descrizione dell'appuntamento", Toast.LENGTH_LONG).show();
-				} else{ 
+				}else if((mDateDisplay.getText().toString().equals("")) && (mTimeDisplay.getText().toString().equals(""))){
+					Toast.makeText(getApplicationContext(),  "Inserire la data dell'appuntamento", Toast.LENGTH_LONG).show();
+
+				}else{ 
 					dbd.close();
 					db.close();
 					onClickSalva();
 				}
 			}
 		});
-        
-        cancella.setOnClickListener(new OnClickListener() {
-			
+
+		cancella.setOnClickListener(new OnClickListener() {
+
 			public void onClick(View v) {
 				EditText descrizione= (EditText) findViewById(R.id.descrizioneappuntamento);
 				descrizione.setText("");
@@ -134,19 +139,36 @@ public class NuovoAppuntamentoActivity extends Activity{
 				luogo.setText("");
 				EditText indirizzo= (EditText) findViewById(R.id.indirizzoappuntamento);
 				indirizzo.setText("");
-				
+
 			}
 		});
 
-        // get the current date
-        final Calendar date = Calendar.getInstance();
-        mYear = date.get(Calendar.YEAR);
-        mMonth = date.get(Calendar.MONTH);
-        mDay = date.get(Calendar.DAY_OF_MONTH);
-        mHour = date.get(Calendar.HOUR_OF_DAY);
-        mMinute = date.get(Calendar.MINUTE);
+		// get the current date
+		final Calendar date = Calendar.getInstance();
+		mYear = date.get(Calendar.YEAR);
+		mMonth = date.get(Calendar.MONTH);
+		mDay = date.get(Calendar.DAY_OF_MONTH);
+		mHour = date.get(Calendar.HOUR_OF_DAY);
+		mMinute = date.get(Calendar.MINUTE);
+
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status Nuovo Contatto: "+status);
+
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
 	}
-	
+
 	public void onClickSalva() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Vuoi Salvare l'appuntamento?")
@@ -164,8 +186,14 @@ public class NuovoAppuntamentoActivity extends Activity{
 		AlertDialog alert = builder.create();
 		alert.show();
 	}
-	
+
 	public void inserisciAppuntamento(){
+
+		if(status.equals("true")){
+			AppuntamentoSync.insertAppuntamento(codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString(), mTimeDisplay.getText().toString());
+		}
+
+
 		db=dbd.getWritableDatabase();
 		try {
 			dbd.openDataBase();
@@ -174,7 +202,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 			throw sqle;
 
 		}
-		
+
 		long res = Appuntamento.insertAppuntamento(db, codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString(), mTimeDisplay.getText().toString());
 		if(res == -1){
 			Toast.makeText(getApplicationContext(),  "Problema con la query", Toast.LENGTH_LONG).show();
@@ -191,73 +219,73 @@ public class NuovoAppuntamentoActivity extends Activity{
 	}	
 
 	private void updateDate() {
-	    mDateDisplay.setText(
-	        new StringBuilder()
-	                // Month is 0 based so add 1
-	                .append(mDay).append("/")
-	                .append(mMonth + 1).append("/")
-	                .append(mYear).append(" "));
-	    showDialog(TIME_DIALOG_ID);
+		mDateDisplay.setText(
+				new StringBuilder()
+				// Month is 0 based so add 1
+				.append(mDay).append("/")
+				.append(mMonth + 1).append("/")
+				.append(mYear).append(" "));
+		showDialog(TIME_DIALOG_ID);
 	}
-	
+
 	public void updatetime()
 	{
-	    mTimeDisplay.setText(
-	            new StringBuilder()
-	                    .append(pad(mHour)).append(":")
-	                    .append(pad(mMinute))); 
+		mTimeDisplay.setText(
+				new StringBuilder()
+				.append(pad(mHour)).append(":")
+				.append(pad(mMinute))); 
 	}
 
 	private static String pad(int c) {
-	                    if (c >= 10)
-	                            return String.valueOf(c);
-	                        else
-	                                return "0" + String.valueOf(c);
-	                        }
-    
+		if (c >= 10)
+			return String.valueOf(c);
+		else
+			return "0" + String.valueOf(c);
+	}
+
 	// Timepicker dialog generation
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener =
-        new TimePickerDialog.OnTimeSetListener() {
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                mHour = hourOfDay;
-                mMinute = minute;
-                updatetime();
-            }
+	private TimePickerDialog.OnTimeSetListener mTimeSetListener =
+			new TimePickerDialog.OnTimeSetListener() {
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			mHour = hourOfDay;
+			mMinute = minute;
+			updatetime();
+		}
 
 
-        };
+	};
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DATE_DIALOG_ID:
-            return new DatePickerDialog(this,
-                        mDateSetListener,
-                        mYear, mMonth, mDay);
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			return new DatePickerDialog(this,
+					mDateSetListener,
+					mYear, mMonth, mDay);
 
-        case TIME_DIALOG_ID:
-            return new TimePickerDialog(this,
-                    mTimeSetListener, mHour, mMinute, false);
+		case TIME_DIALOG_ID:
+			return new TimePickerDialog(this,
+					mTimeSetListener, mHour, mMinute, false);
 
-        }
-        return null;
-    }
-  
-    // the callback received when the user "sets" the date in the dialog
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
-        new DatePickerDialog.OnDateSetListener() {
-            public void onDateSet(DatePicker view, int year, 
-              int monthOfYear, int dayOfMonth) {
-            	mYear = year;
-                mMonth = monthOfYear;
-                mDay = dayOfMonth;
-                updateDate();
-            }
-    	};
-    	
-    private DroidiaryDatabaseHelper dbd;
+		}
+		return null;
+	}
+
+	// the callback received when the user "sets" the date in the dialog
+	private DatePickerDialog.OnDateSetListener mDateSetListener =
+			new DatePickerDialog.OnDateSetListener() {
+		public void onDateSet(DatePicker view, int year, 
+				int monthOfYear, int dayOfMonth) {
+			mYear = year;
+			mMonth = monthOfYear;
+			mDay = dayOfMonth;
+			updateDate();
+		}
+	};
+
+	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private EditText et;
 	private int codUtente;
-	String descrizione, indirizzo, luogo;
+	String descrizione, indirizzo, luogo, status;
 }

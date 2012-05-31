@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import doirdiary.db.sync.AppuntamentoSync;
+import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
 
@@ -137,9 +139,14 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
 		intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente", codUtente);
+		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
     public void eliminaAppuntamento(){
+    	
+    	if(status.equals("true")){
+			AppuntamentoSync.eliminaAppuntamento(id, codUtente);
+		}
     	tmp2 = new DroidiaryDatabaseHelper(this);
 		db=tmp2.getWritableDatabase();
 		tmp2.openDataBase();
@@ -149,6 +156,7 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
 			System.out.println(codUtente);
 			intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente", codUtente);
+			intent.putExtra("Status", status);
 			startActivity(intent);
 			tmp2.close();
 		}
