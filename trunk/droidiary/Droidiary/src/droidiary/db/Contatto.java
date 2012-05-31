@@ -74,7 +74,7 @@ public class Contatto {
 	 * @return
 	 */
 	public static Cursor getContattiById(SQLiteDatabase db, int id){
-		Cursor c= db.rawQuery("select id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where id_account='"+id+"'", null);
+		Cursor c= db.rawQuery("select id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where id_account='"+id+"' order by nome asc", null);
 		return c;
 	}
 	
