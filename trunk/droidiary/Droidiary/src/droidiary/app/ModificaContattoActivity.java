@@ -43,7 +43,6 @@ public class ModificaContattoActivity extends Activity {
 			throw sqle;
 		}
 
-
 		//id_account, nome, cognome, citta, cellulare, numeroCasa, email
 		Cursor result=Contatto.getDatiFromString(db, contatto);
 
@@ -65,6 +64,7 @@ public class ModificaContattoActivity extends Activity {
 			dbd.close();
 		}
 
+		
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
 		img.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -97,11 +97,12 @@ public class ModificaContattoActivity extends Activity {
 				email=txtmail.getText().toString();
 				EditText txtcitta= (EditText) findViewById(R.id.cittacontatto);
 				citta=txtcitta.getText().toString();
-				if(nome.equals("Nome:") || cognome.equals("Cognome:") || telefonoCasa.equals("Casa:") || telefonocellulare.equals("Cellulare:")|| email.equals("Email:") || citta.equals("Citta:")){
-					Toast.makeText(getApplicationContext(),  "Controlla tutti i campi", Toast.LENGTH_LONG).show();
-				}else{
+				if(nome.equals("") && cognome.equals("")){
+					Toast.makeText(getApplicationContext(),  "Controlla i campi Nome, Cognome", Toast.LENGTH_LONG).show();
+				}else if(telefonoCasa.equals("") && cellulare.equals("")){
+					Toast.makeText(getApplicationContext(),  "Inserire almeno un Recapito Telefonico", Toast.LENGTH_LONG).show();
+				}else{ 
 					onClickAggiorna();
-
 				}
 
 			}
@@ -137,24 +138,21 @@ public class ModificaContattoActivity extends Activity {
 
 		if(status.equals("true")){
 			ContattoSync.modificaContatto(id_contatto, id_account, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
-		}else{
+		}
+		tmp = new DroidiaryDatabaseHelper(this);
+		db=tmp.getWritableDatabase();
+		tmp.openDataBase();
+		System.out.println("Id_Contatto: "+id_contatto+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
+		int res= Contatto.modificaContatto(db, id_contatto, id_account, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
 
-			tmp = new DroidiaryDatabaseHelper(this);
-			db=tmp.getWritableDatabase();
-			tmp.openDataBase();
-			System.out.println("Id_Contatto: "+id_contatto+" Nome: " + nome + " Cognome:" + cognome + "Citta: " + citta+ "Cellulare: " + telefonocellulare + "Casa: " + telefonoCasa + "Email: " + email);
-			//Cursor res= Contatto.modificaContatto(db, contatto, codUtente, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
-			int res= Contatto.modificaContatto(db, id_contatto, id_account, nome, cognome, citta, telefonocellulare, telefonoCasa, email);
-
-			if(res>0){
-				Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
-				System.out.println(id_account);
-				intent.putExtra("droidiary.app.ModificaContattoActivity", id_account);
-				intent.putExtra("Status", status);
-				startActivity(intent);
-				tmp.close();
-			}
+		if(res>0){
+			Toast.makeText(getApplicationContext(),  "Salvataggio Effettuato con Successo!", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(ModificaContattoActivity.this, MenuRubricaActivity.class);
+			System.out.println(id_account);
+			intent.putExtra("droidiary.app.ModificaContattoActivity", id_account);
+			intent.putExtra("Status", status);
+			startActivity(intent);
+			tmp.close();
 		}
 	}
 
