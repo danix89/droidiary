@@ -61,7 +61,7 @@ public class MenuPrincipaleActivity extends Activity {
 			dbd.close();
 		}
 
-		
+
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
 		try {
@@ -71,14 +71,14 @@ public class MenuPrincipaleActivity extends Activity {
 			throw sqle;
 
 		}
-		
-		
+
+
 		// visualizzazione notifiche appuntamenti
 
 		lv=(ListView) findViewById(R.id.listanotifiche);
 		Cursor appuntamenti= Appuntamento.getAppuntamentiToday(db, codUtente);
 		listview_array=getOneColumn(appuntamenti);
-	
+
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listview_array){
 			public View getView(int position, View convertView,
@@ -91,8 +91,8 @@ public class MenuPrincipaleActivity extends Activity {
 			}
 		});
 
-		
-		
+
+
 		Button rubrica = (Button) findViewById(R.id.rubrica);
 		rubrica.setOnClickListener(new OnClickListener() 
 		{
@@ -112,6 +112,7 @@ public class MenuPrincipaleActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuPrincipaleActivity.this, MenuAppuntamentiActivity.class);
 				intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
+				intent.putExtra("Status", status);
 				dbd.close();
 				db.close();
 				startActivity(intent);
@@ -144,17 +145,17 @@ public class MenuPrincipaleActivity extends Activity {
 	}
 
 	//tutto il risultato del cursore in un array
-		private String[] getOneColumn(Cursor cursor){ 
-			String myTitle = "";
-		    String[] myArray = null;            
-		    startManagingCursor(cursor);
-		    while(cursor.moveToNext()){
-		        myTitle+=cursor.getString(cursor.getColumnIndex(Appuntamento.DESCRIZIONE))+";";              
-		    }   
-		    myArray = myTitle.split(";");     
-		    return myArray;
-		}
-	
+	private String[] getOneColumn(Cursor cursor){ 
+		String myTitle = "";
+		String[] myArray = null;            
+		startManagingCursor(cursor);
+		while(cursor.moveToNext()){
+			myTitle+=cursor.getString(cursor.getColumnIndex(Appuntamento.DESCRIZIONE))+";";              
+		}   
+		myArray = myTitle.split(";");     
+		return myArray;
+	}
+
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private ListView lv;

@@ -22,11 +22,11 @@
         </activity>
         <activity android:name="AboutActivity" android:label="About"></activity><activity android:name="CercaAppuntamentoActivity" android:label="Cerca Appuntamento"></activity>
         <activity android:name="EliminaAppuntamentoActivity" android:label="Elimina Appuntamento"></activity>
-        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="fullSensor"></activity>
+        <activity android:label="@string/titoloAppuntamenti" android:name="MenuAppuntamentiActivity" android:screenOrientation="fullSensor" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name="MenuListaAppuntamentiActivity" android:label="Appuntamenti"></activity>
         <activity android:name="MenuListaContattiActivity" android:label="Lista Contatti"></activity>
         <activity android:name="MenuPrincipaleActivity" android:label="@string/titolomenu" android:screenOrientation="fullSensor"></activity>
-        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity" android:screenOrientation="fullSensor"></activity>
+        <activity android:label="@string/titoloRubrica" android:name="MenuRubricaActivity" android:screenOrientation="fullSensor" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name="MenuVisualizzaAppuntamentoActivity" android:label="Appuntamento"></activity>
         <activity android:name="ModificaAppuntamentoActivity" android:label="Appuntamento"></activity>
         <activity android:name="VisualizzaMappaActivity" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar"></activity>

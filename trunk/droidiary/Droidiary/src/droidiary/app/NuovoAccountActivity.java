@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import doirdiary.db.sync.AccountSync;
 import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -21,7 +22,7 @@ public class NuovoAccountActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menunuovoaccount);
-		
+
 		Button salva=(Button)findViewById(R.id.salva);
 		salva.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -91,6 +92,17 @@ public class NuovoAccountActivity extends Activity{
 
 
 	public void inserisci(){
+
+		String res=AccountSync.getStringAccountByUserPsw(user, psw);
+		if(res.contains("null")){
+			AccountSync.insertAccount(user, psw);
+		}else{
+			Toast.makeText(getApplicationContext(),  "Account già esistente", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
+			startActivity(intent);
+		}
+
+
 		dbd = new DroidiaryDatabaseHelper(this);
 		db=dbd.getWritableDatabase();
 		db2=dbd.getWritableDatabase();
@@ -102,27 +114,35 @@ public class NuovoAccountActivity extends Activity{
 			throw sqle;
 
 		}
-		long res1 = Account.insertAccount(db, user, psw);
-		if(res1 == -1){
-			Toast.makeText(getApplicationContext(),  "Problema con la query Insert Account", Toast.LENGTH_LONG).show();
-		}else{
-			String[] arg={user, psw};
-			Cursor c= Account.getAccountByUserPsw(db2, arg);
-			if(c.moveToFirst()){
-				codUtente= c.getInt(0);
-				System.out.print(codUtente);
+
+		Cursor query=Account.getAccountByUserPsw(db, user, psw);
+		if(query.equals(null)){
+			long res1 = Account.insertAccount(db, user, psw);
+			if(res1 == -1){
+				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Account", Toast.LENGTH_LONG).show();
+			}else{
+				String[] arg={user, psw};
+				Cursor c= Account.getAccountByUserPsw(db2, arg);
+				if(c.moveToFirst()){
+					codUtente= c.getInt(0);
+					System.out.print(codUtente);
+				}
 			}
-		}
-		
-		long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
-		dbd.close();
-		if(res2 == -1){
-			Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
+
+			long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
+			dbd.close();
+			if(res2 == -1){
+				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
+			}else{
+				Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
+				System.out.println("Codice da Passare"+codUtente);
+				intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
+				startActivity(intent);
+			}
 		}else{
-			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
-			System.out.println("Codice da Passare"+codUtente);
-			intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
+			Toast.makeText(getApplicationContext(),  "Account già esistente", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
 			startActivity(intent);
 		}
 
@@ -131,6 +151,6 @@ public class NuovoAccountActivity extends Activity{
 
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db, db2, db3;
-    int codUtente;
+	int codUtente;
 	String nome, cognome, telefonoCasa, user, cellulare, psw;
 }
