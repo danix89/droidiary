@@ -204,7 +204,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 
 		}
 
-		long res = Appuntamento.insertAppuntamento(db, codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString(), mTimeDisplay.getText().toString());
+		long res = Appuntamento.insertAppuntamento(db, codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString().trim(), mTimeDisplay.getText().toString().trim());
 		if(res == -1){
 			Toast.makeText(getApplicationContext(),  "Problema con la query", Toast.LENGTH_LONG).show();
 		}
