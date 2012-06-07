@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="16dp" />
-
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="240dp"
@@ -25,60 +25,37 @@
         android:layout_below="@+id/titolo"
         android:layout_centerHorizontal="true" >
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="69dp"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:lines="1" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/username"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:lines="1" >
-
-            <requestFocus />
-        </EditText>
-
         <RadioGroup
             android:id="@+id/radiogroup"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_below="@+id/password"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:gravity="center_vertical" >
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
             <RadioButton
                 android:id="@+id/online"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modalità Online"
+                android:text="Online"
                 android:textColor="#000" />
 
             <RadioButton
                 android:id="@+id/offline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modalità Offline"
+                android:text="Offline"
                 android:textColor="#000" />
-
         </RadioGroup>
-
+
         <CheckBox
             android:id="@+id/access"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radiogroup"
             android:layout_below="@+id/radiogroup"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
             android:gravity="center_horizontal|center"
             android:text="Memorizza Accesso"
             android:textColor="#000" />
@@ -90,6 +67,37 @@
             android:layout_below="@+id/access"
             android:layout_centerHorizontal="true"
             android:text="@string/login" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radiogroup"
+            android:layout_alignParentLeft="true"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/password"
+            android:layout_alignParentLeft="true"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:lines="1" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo principale" />
 
     </RelativeLayout>
 
