@@ -51,11 +51,31 @@ public class AccountSync{
 	}
 	
 	public static String getAccountById(long id){
-		String c= "select nome, cognome from contatto where _id='"+id+"' and id_account='"+id+"'";
+		String c= "select * from account where _id='"+id+"'";
 		System.out.println("Query da Inviare: " + c);
 		String res= send(c);
 		return res;
     }
+	
+	public static String getAccountById(int id_account){
+		String query="select * from account where _id='"+id_account+"'";
+		System.out.println("Query da Inviare: " + query);
+		String res=send(query);
+		return res;
+    }
+	
+	public static void modificaAccount(int id_a, String user, String psw)
+	{
+		String res1=getAccountById(id_a);
+		if(res1.contains("null")){
+			insertAccount(id_a, user, psw);
+		}else{
+			String c= "update account set id_account='"+id_a+"', username='"+user+"', password='"+psw+"' where _id='"+id_a+"'";
+			System.out.println("Query da Inviare: " + c);
+			send(c);
+		}
+	}
+	
 	
 	public static String send(String query) {
 		String result = "0";
