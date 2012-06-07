@@ -72,10 +72,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal|center"
-        android:text="Status: "
+        android:text=""
         android:textColor="#fff"
         android:textSize="16dp" />
-
+
     <ListView
         android:id="@+id/listanotifiche"
         android:layout_width="match_parent"
