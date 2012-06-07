@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agendalandscape2" >
+
+    <TextView
+        android:id="@+id/Utente"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Utente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#fff"
+        android:textSize="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="250dp"
+        android:layout_height="110dp"
+        android:layout_centerVertical="true" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/rubrica" />
+
+            <EditText
+                android:id="@+id/cognomecontatto"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/imageView1"
+                android:hint="@string/cognome"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/nomecontatto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/cognomecontatto"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/imageView1"
+                android:hint="@string/nome"
+                android:inputType="textPersonName" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="250dp"
+        android:layout_height="140dp"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_marginTop="20dp" >
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/cancella"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/cancella" />
+
+    <Button
+        android:id="@+id/salva"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/cancella"
+        android:text="@string/salvacontatto" />
+
+    <EditText
+        android:id="@+id/telefonocellularecontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/salva"
+        android:layout_centerVertical="true"
+        android:hint="@string/cellulare"
+        android:inputType="phone"
+        android:textSize="18dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Utente"
+        android:layout_marginRight="39dp"
+        android:layout_toLeftOf="@+id/Utente"
+        android:text="@string/telefono"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/cittacontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/salva"
+        android:layout_below="@+id/relativeLayout2"
+        android:hint="@string/citta"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/emailcontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/cittacontatto"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/telefonocellularecontatto"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/telefonocasacontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/telefonocellularecontatto"
+        android:layout_alignLeft="@+id/telefonocellularecontatto"
+        android:layout_alignParentRight="true"
+        android:hint="@string/casa"
+        android:inputType="phone"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/titolo"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:text="@string/menunuovocontatto"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/titolo"
+        android:layout_marginRight="17dp"
+        android:src="@drawable/offline" />
+
+</RelativeLayout>
