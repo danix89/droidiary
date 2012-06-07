@@ -1,12 +1,18 @@
 package droidiary.app;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.json.*;
 
 import doirdiary.db.sync.AccountSync;
 import droidiary.db.Account;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,18 +22,23 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DroidiaryActivity extends Activity{
+	private Dialog alertDialog;
 	/** Called when the activity is first created. */
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,9 +56,9 @@ public class DroidiaryActivity extends Activity{
 		final RadioButton online= (RadioButton) findViewById(R.id.online);
 		final RadioButton offline=(RadioButton) findViewById(R.id.offline);
 		access = (CheckBox)findViewById(R.id.access);
-		
+
 		//riempimento txt accesso
-		
+
 		boolean res=checkMemorizzaAccesso();
 		System.out.println("Memorizza Accesso: " + res);
 		if(res==true){
@@ -65,18 +76,8 @@ public class DroidiaryActivity extends Activity{
 				access.setChecked(true);
 			}
 			dbd.close();
-		}else{
-			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-			db=dbd.getReadableDatabase();
-			dbd.openDataBase();
-			int n=Account.getCountAccount(db);
-			if(n==0){
-				//implementazione benvenuto sull'app
-				
-			}
-			dbd.close();
 		}
-		
+
 		Button entra = (Button) findViewById(R.id.entra);
 
 
@@ -85,7 +86,7 @@ public class DroidiaryActivity extends Activity{
 
 			public void onClick(View v) {
 
-				
+
 
 				if(offline.isChecked()){
 
@@ -117,7 +118,7 @@ public class DroidiaryActivity extends Activity{
 						MemorizzaAccessoNO(username, password);
 					}
 
-					
+
 					if(c.moveToFirst()){
 						Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 						int codUtente= c.getInt(0);
@@ -131,9 +132,10 @@ public class DroidiaryActivity extends Activity{
 					}else{
 						Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 					}
+					dbd.close();
 				}else if(online.isChecked()){
-					
-					
+
+
 					ConnectivityManager connec =  (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 					if ( connec.getNetworkInfo(0).getState() == NetworkInfo.State.DISCONNECTED ||  connec.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED   ) {
 						Toast.makeText(getApplicationContext(), "Non sei connesso! Usare Modalità Offline...", Toast.LENGTH_LONG).show();       
@@ -144,7 +146,7 @@ public class DroidiaryActivity extends Activity{
 						password=txtpsw.getText().toString();
 						System.out.println("Username: "+username);
 						System.out.println("Password: "+password);
-						
+
 						if(access.isChecked()){
 							System.out.println("Click Accesso");
 							MemorizzaAccessoSI(username, password);
@@ -184,13 +186,13 @@ public class DroidiaryActivity extends Activity{
 					}
 
 				}
-				dbd.close();
+
 			}
 		});
 
 
+		dbd.close();
 
-		
 	}
 
 	public void MemorizzaAccessoSI(String user, String pass){
@@ -203,7 +205,7 @@ public class DroidiaryActivity extends Activity{
 		}
 		dbd.close();
 	}
-	
+
 	public void MemorizzaAccessoNO(String user, String pass){
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();

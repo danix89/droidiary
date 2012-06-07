@@ -105,6 +105,11 @@ public class Contatto {
 		Cursor c= db.rawQuery("select * from contatto where id_account='"+id+"'", null);
 		return c;
 	}
+	
+	public static Cursor getDatiById(SQLiteDatabase db, int id, int id_account){
+		Cursor c= db.rawQuery("select nome, cognome from contatto where id_account='"+id_account+"' and _id='"+id+"'", null);
+		return c;
+	}
 
 	public static Cursor getDatiFromString(SQLiteDatabase db, String contatto){
 		String dati[]=contatto.split("-");

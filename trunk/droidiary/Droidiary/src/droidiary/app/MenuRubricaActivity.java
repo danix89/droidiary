@@ -80,14 +80,13 @@ public class MenuRubricaActivity extends Activity {
 
 		//passaggio codice utente
 
-		Cursor c= Account.getAccountById(db, codUtente);
+		Cursor c= Contatto.getDatiById(db, codUtente, codUtente);
 		TextView utente = (TextView) findViewById(R.id.Utente);
-		System.out.println("Codice:" + codUtente);
 
 		while(c.moveToNext()){
 			String nome=c.getString(0);
 			String cognome=c.getString(1);
-			utente.setText("Utente: " + nome + " " + cognome);
+			utente.setText("Benvenuto, " + nome + " " + cognome);
 		}
 
 		lv=(ListView) findViewById(R.id.listacontatti);
