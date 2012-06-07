@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="16dp" />
-
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="240dp"
@@ -49,25 +49,6 @@
                 android:textColor="#000" />
         </RadioGroup>
 
-        <CheckBox
-            android:id="@+id/access"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/radiogroup"
-            android:layout_below="@+id/radiogroup"
-            android:layout_marginTop="24dp"
-            android:gravity="center_horizontal|center"
-            android:text="Memorizza Accesso"
-            android:textColor="#000" />
-
-        <Button
-            android:id="@+id/entra"
-            android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/access"
-            android:layout_centerHorizontal="true"
-            android:text="@string/login" />
-
         <EditText
             android:id="@+id/password"
             android:layout_width="240dp"
@@ -97,7 +78,26 @@
             android:layout_height="130dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/logo principale" />
+            android:src="@drawable/logoprincipale" />
+
+        <CheckBox
+            android:id="@+id/access"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/radiogroup"
+            android:layout_below="@+id/radiogroup"
+            android:gravity="center_horizontal|center"
+            android:text="Memorizza Accesso"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/entra"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/access"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="@string/login" />
 
     </RelativeLayout>
 
