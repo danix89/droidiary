@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,16 +29,22 @@ public class NuovoAccountActivity extends Activity{
 		salva.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				EditText txtnome = (EditText)findViewById(R.id.nomeaccount);
+				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				nome = txtnome.getText().toString();
 				EditText txtcognome = (EditText)findViewById(R.id.cognomeaccount);
+				txtcognome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				cognome = txtcognome.getText().toString();
 				EditText txtcasa = (EditText)findViewById(R.id.telefonocasaaccount);
+				txtcasa.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				telefonoCasa = txtcasa.getText().toString();
 				EditText txtcellulare = (EditText) findViewById(R.id.telefonocellulareaccount);
+				txtcellulare.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				cellulare= txtcellulare.getText().toString();
 				EditText txtuser= (EditText) findViewById(R.id.useraccount);
+				txtuser.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				user=txtuser.getText().toString();
 				EditText txtpsw= (EditText) findViewById(R.id.passwordaccount);
+				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
 				psw=txtpsw.getText().toString();
 				if(nome.equals("") && cognome.equals("") && user.equals("") && psw.equals("")){
 					Toast.makeText(getApplicationContext(),  "Controlla i campi Nome, Cognome, User e Password", Toast.LENGTH_LONG).show();
@@ -73,7 +80,7 @@ public class NuovoAccountActivity extends Activity{
 
 	public void onClickSalva() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Vuoi Salvare il Contatto?")
+		builder.setMessage("Vuoi Creare l'Account?")
 		.setCancelable(false)
 		.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
@@ -107,8 +114,8 @@ public class NuovoAccountActivity extends Activity{
 
 		String res=AccountSync.getStringAccountByUserPsw(user, psw);
 		Cursor query=Account.getAccountByUserPsw(db, user, psw);
-		System.out.println(query);
-		if(res.contains("null") || query.equals(null)){
+		query.moveToFirst();
+		if(res.contains("null") & query==null || res.contains("0")){
 			db=dbd.getWritableDatabase();
 			db2=dbd.getWritableDatabase();
 			db3=dbd.getWritableDatabase();
@@ -134,7 +141,11 @@ public class NuovoAccountActivity extends Activity{
 				Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
 				System.out.println("Codice da Passare"+codUtente);
 				intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
-				intent.putExtra("Status", "true");
+				if(res.contains("0")){
+					intent.putExtra("Status", "false");
+				}else{
+					intent.putExtra("Status", "true");
+				}
 				startActivity(intent);
 			}
 		}else{

@@ -4,71 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/agendaportrait2" >
-
+
     <TextView
         android:id="@+id/titolo"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:gravity="center_horizontal|center"
         android:text="Benvenuto su Droidiary"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:textSize="18dp" />
-
+        android:textSize="16dp" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="240dp"
-        android:layout_height="260dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titolo"
+        android:layout_centerHorizontal="true" >
 
         <EditText
             android:id="@+id/username"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="69dp"
             android:hint="Username"
             android:inputType="textPersonName"
-            android:lines="1" >
-
-            <requestFocus />
-        </EditText>
+            android:lines="1" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:layout_below="@+id/username"
             android:hint="Password"
             android:inputType="textPassword"
-            android:lines="1" />
+            android:lines="1" >
 
-        <Button
-            android:id="@+id/entra"
-            android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:text="@string/login" />
-
-        <Button
-            android:id="@+id/cancella"
-            android:layout_width="115dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/reset" />
+            <requestFocus />
+        </EditText>
 
         <RadioGroup
             android:id="@+id/radiogroup"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_below="@+id/password"
-            android:layout_centerHorizontal="true" >
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical" >
 
             <RadioButton
                 android:id="@+id/online"
@@ -83,7 +70,27 @@
                 android:layout_height="wrap_content"
                 android:text="Modalità Offline"
                 android:textColor="#000" />
+
         </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/access"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radiogroup"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal|center"
+            android:text="Memorizza Accesso"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/entra"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/access"
+            android:layout_centerHorizontal="true"
+            android:text="@string/login" />
+
     </RelativeLayout>
 
 </RelativeLayout>

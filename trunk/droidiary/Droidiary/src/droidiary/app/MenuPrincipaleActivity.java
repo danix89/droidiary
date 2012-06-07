@@ -143,6 +143,8 @@ public class MenuPrincipaleActivity extends Activity {
 			}
 		}
 		
+		dbd.close();
+		
 	}
 	
 	//implementazione menu
