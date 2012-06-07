@@ -49,8 +49,9 @@ public class Appuntamento {
 	{
 		Calendar cal= Calendar.getInstance();
 		String data= "" + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR);
-		System.out.print(data);
-		Cursor c= db.rawQuery("select descrizione from appuntamento where id_account='"+codice+"' and data="+ data, null);
+		System.out.println(data);
+		Cursor c= db.rawQuery("select descrizione from appuntamento where id_account='"+codice+"' and data='"+ data + "'", null);
+		System.out.println("select descrizione from appuntamento where id_account='"+codice+"' and data='"+ data + "'");
 		return c;
 	}
 	
