@@ -167,6 +167,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 				stat.setImageResource(offline);
 			}
 		}
+		dbd.close();
 	}
 
 	public void onClickSalva() {

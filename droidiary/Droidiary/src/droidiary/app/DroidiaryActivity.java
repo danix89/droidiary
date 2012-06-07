@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -31,22 +32,51 @@ public class DroidiaryActivity extends Activity{
 
 	public void onCreate(Bundle savedInstanceState) {
 
-		//codice per il font
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login);
-
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-		db=dbd.getReadableDatabase();
+		dbd.getReadableDatabase();
 		try {
 			dbd.createDataBase();
 		} catch (IOException ioe) {
 			throw new Error("Unable to create database");
 		}
-
+		//codice per il font
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login);
 		final RadioButton online= (RadioButton) findViewById(R.id.online);
 		final RadioButton offline=(RadioButton) findViewById(R.id.offline);
-
-
+		access = (CheckBox)findViewById(R.id.access);
+		
+		//riempimento txt accesso
+		
+		boolean res=checkMemorizzaAccesso();
+		System.out.println("Memorizza Accesso: " + res);
+		if(res==true){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getReadableDatabase();
+			dbd.openDataBase();
+			Cursor c= Account.getMemorizzaAccesso(db);
+			EditText txtnome = (EditText)findViewById(R.id.username);
+			EditText txtpass = (EditText)findViewById(R.id.password);
+			if(c.moveToNext()){
+				String username=c.getString(1);
+				String password=c.getString(2);
+				txtnome.setText(username);
+				txtpass.setText(password);
+				access.setChecked(true);
+			}
+			dbd.close();
+		}else{
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getReadableDatabase();
+			dbd.openDataBase();
+			int n=Account.getCountAccount(db);
+			if(n==0){
+				//implementazione benvenuto sull'app
+				
+			}
+			dbd.close();
+		}
+		
 		Button entra = (Button) findViewById(R.id.entra);
 
 
@@ -54,6 +84,8 @@ public class DroidiaryActivity extends Activity{
 
 
 			public void onClick(View v) {
+
+				
 
 				if(offline.isChecked()){
 
@@ -69,6 +101,7 @@ public class DroidiaryActivity extends Activity{
 					username=txtnome.getText().toString();
 					password=txtpsw.getText().toString();
 
+					db=dbd.getReadableDatabase();
 					try {
 						dbd.openDataBase();
 					}catch(SQLException sqle){
@@ -76,9 +109,15 @@ public class DroidiaryActivity extends Activity{
 						throw sqle;
 
 					}
-
-
 					Cursor c= Account.getAccountByUserPsw(db, arg);
+					if(access.isChecked()){
+						System.out.println("Click Accesso");
+						MemorizzaAccessoSI(username, password);
+					}else{
+						MemorizzaAccessoNO(username, password);
+					}
+
+					
 					if(c.moveToFirst()){
 						Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
 						int codUtente= c.getInt(0);
@@ -93,6 +132,8 @@ public class DroidiaryActivity extends Activity{
 						Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 					}
 				}else if(online.isChecked()){
+					
+					
 					ConnectivityManager connec =  (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 					if ( connec.getNetworkInfo(0).getState() == NetworkInfo.State.DISCONNECTED ||  connec.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED   ) {
 						Toast.makeText(getApplicationContext(), "Non sei connesso! Usare Modalità Offline...", Toast.LENGTH_LONG).show();       
@@ -103,6 +144,13 @@ public class DroidiaryActivity extends Activity{
 						password=txtpsw.getText().toString();
 						System.out.println("Username: "+username);
 						System.out.println("Password: "+password);
+						
+						if(access.isChecked()){
+							System.out.println("Click Accesso");
+							MemorizzaAccessoSI(username, password);
+						}else{
+							MemorizzaAccessoNO(username, password);
+						}
 						String res = AccountSync.getStringAccountByUserPsw(username, password);
 						System.out.println(res);
 						int codUtente=0;
@@ -127,6 +175,7 @@ public class DroidiaryActivity extends Activity{
 							String status="true";
 							intent.putExtra("Status", status);
 							intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
+							dbd.close();
 							startActivity(intent);
 						}else{
 							Toast.makeText(getApplicationContext(), "Dati non presenti", Toast.LENGTH_LONG).show();
@@ -135,21 +184,54 @@ public class DroidiaryActivity extends Activity{
 					}
 
 				}
+				dbd.close();
 			}
 		});
 
-		Button cancella = (Button) findViewById(R.id.cancella);
-		cancella.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				EditText txtnome = (EditText)findViewById(R.id.username);
-				EditText txtpsw = (EditText)findViewById(R.id.password);
-				txtnome.setText("");
-				txtpsw.setText("");
-			}
-		});
 
+		
 	}
+
+	public void MemorizzaAccessoSI(String user, String pass){
+		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		db=dbd.getWritableDatabase();
+		dbd.openDataBase();
+		int i=Account.MemorizzaAccessoSI(db, user, pass);
+		if(i==-1){
+			System.out.println("Problema con la query");
+		}
+		dbd.close();
+	}
+	
+	public void MemorizzaAccessoNO(String user, String pass){
+		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		db=dbd.getWritableDatabase();
+		dbd.openDataBase();
+		int i=Account.MemorizzaAccessoNO(db, user, pass);
+		if(i==-1){
+			System.out.println("Problema con la query");
+		}
+		dbd.close();
+	}
+
+	public boolean checkMemorizzaAccesso(){
+		boolean ris=false;
+		String index=null;
+		db=dbd.getReadableDatabase();
+		dbd.openDataBase();
+		Cursor res=Account.getMemorizzaAccesso(db);
+		if(res.moveToFirst()){
+			ris=true;
+		}else{
+			ris=false;
+		}
+		res.close();
+		dbd.close();
+		return ris;
+	}
+
+
 
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -161,9 +243,11 @@ public class DroidiaryActivity extends Activity{
 		Intent intent;
 		switch (item.getItemId()) {
 		case R.id.menu_about:intent = new Intent(DroidiaryActivity.this, AboutActivity.class);
+		dbd.close();
 		startActivity(intent);
 		return true;
 		case R.id.menu_setup:intent= new Intent(DroidiaryActivity.this, NuovoAccountActivity.class);
+		dbd.close();
 		startActivity(intent);
 		return true;
 		}
@@ -183,4 +267,5 @@ public class DroidiaryActivity extends Activity{
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private String username, password;
+	CheckBox access;
 }

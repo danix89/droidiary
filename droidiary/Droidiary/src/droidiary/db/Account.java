@@ -66,6 +66,35 @@ public class Account extends DroidiaryDatabaseHelper{
 		Cursor c= db.rawQuery("select * from account where username='"+user+"' and password='"+pass+"'", null);
 		return c;
 	}
+	
+	public static Cursor getMemorizzaAccesso(SQLiteDatabase db) throws SQLException {
+		Cursor c= db.rawQuery("select accesso, username, password from account where accesso='si'", null);
+		System.out.println("select accesso, username, password from account where accesso='si'");
+		return c;
+	}
+	
+	public static int MemorizzaAccessoSI(SQLiteDatabase db, String user, String pass) throws SQLException {
+		ContentValues cv = new ContentValues();
+		cv.put("accesso", "si");
+		int u = db.update(TABELLA, cv, "username='"+user+"' and password='"+pass+"'", null);
+		return u;
+	}
+	
+	public static int MemorizzaAccessoNO(SQLiteDatabase db, String user, String pass) throws SQLException {
+		ContentValues cv = new ContentValues();
+		cv.put("accesso", "no");
+		int u = db.update(TABELLA, cv, "username='"+user+"' and password='"+pass+"'", null);
+		return u;
+	}
+	
+	public static int getCountAccount(SQLiteDatabase db) throws SQLException {
+		int res=0;
+		Cursor c= db.rawQuery("SELECT  count(accesso) from account", null);
+		if(c.moveToFirst()){
+		res=c.getInt(0);
+		}
+		return res;
+	}
 		
 	public static final String ID= "_id";
 	public static final String USERNAME= "username";
