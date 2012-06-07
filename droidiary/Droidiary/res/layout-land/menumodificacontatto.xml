@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agendalandscape2" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Contatto"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#fff"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/Contatto"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="230dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="230dp"
+        android:layout_height="110dp"
+        android:layout_alignLeft="@+id/relativeLayout4"
+        android:layout_centerVertical="true" >
+
+        <ImageView
+            android:id="@+id/chiamatacasa"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:onClick="imageClick"
+            android:src="@drawable/whatsapp_messenger_android" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView1"
+        android:src="@drawable/offline" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/status"
+        android:src="@drawable/rubrica" />
+
+    <EditText
+        android:id="@+id/nomecontatto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/cognomecontatto"
+        android:layout_alignTop="@+id/relativeLayout4"
+        android:layout_toRightOf="@+id/textView1"
+        android:hint="@string/nome"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/relativeLayout1"
+        android:layout_toRightOf="@+id/relativeLayout1"
+        android:text="@string/telefono"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/telefonocasacontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/relativeLayout2"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/relativeLayout2"
+        android:hint="@string/casa"
+        android:inputType="phone"
+        android:textSize="18dp" />
+
+    <ImageView
+        android:id="@+id/chiamatacellulare"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/relativeLayout2"
+        android:layout_alignTop="@+id/telefonocasacontatto"
+        android:clickable="true"
+        android:onClick="imageClick"
+        android:src="@drawable/whatsapp_messenger_android" />
+
+    <EditText
+        android:id="@+id/telefonocellularecontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/telefonocasacontatto"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/relativeLayout2"
+        android:hint="@string/cellulare"
+        android:inputType="phone"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/altridati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/TextView01"
+        android:layout_centerVertical="true"
+        android:text="Città / email"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/cittacontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/relativeLayout2"
+        android:layout_alignLeft="@+id/altridati"
+        android:layout_alignParentRight="true"
+        android:hint="@string/citta"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/salvaContatto"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Salva" />
+
+    <EditText
+        android:id="@+id/emailcontatto"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/salvaContatto"
+        android:layout_alignLeft="@+id/cittacontatto"
+        android:layout_alignParentRight="true"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/cognomecontatto"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/cittacontatto"
+        android:layout_alignBottom="@+id/cittacontatto"
+        android:layout_alignLeft="@+id/status"
+        android:layout_alignRight="@+id/imageView1"
+        android:hint="@string/cognome"
+        android:inputType="textPersonName" />
+
+</RelativeLayout>
