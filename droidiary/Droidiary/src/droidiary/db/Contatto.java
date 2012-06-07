@@ -64,6 +64,20 @@ public class Contatto {
 		int u = db.update(TABELLA, cv, "_id='"+id_contatto+"' and id_account='"+codUtente+"'", null);
 		return u;
 	}
+	
+	public static int modificaContatto(SQLiteDatabase db, int id, int id_contatto, int codUtente, String nome, String cognome, String citta, String cell, String ncasa, String mail)
+	{
+		ContentValues cv = new ContentValues();
+		cv.put(ID_ACCOUNT, codUtente);
+		cv.put(NOME, nome);
+		cv.put(COGNOME, cognome);
+		cv.put(CITTA, citta);
+		cv.put(CELLULARE, cell);
+		cv.put(NUMEROCASA, ncasa);
+		cv.put(MAIL, mail);
+		int u = db.update(TABELLA, cv, "_id='"+id_contatto+"' and id_account='"+codUtente+"'", null);
+		return u;
+	}
 
 	public static int eliminaContatto(SQLiteDatabase db, int id_c, int codUtente)
 	{
@@ -109,8 +123,6 @@ public class Contatto {
 		System.out.println("Grandezza offline: " + contatti.getCount());
 		System.out.println("Grandezza online: " + jArray.length());
 		if(contatti.getCount()>jArray.length()){
-			eliminaContatto(db, codUtente);
-			ContattoSync.eliminaTuttiContatto(codUtente);
 			while(contatti.moveToNext()){
 				int id=contatti.getInt(0);
 				System.out.println("ID: " +id);
@@ -131,7 +143,6 @@ public class Contatto {
 				ContattoSync.modificaContatto(id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
 			}
 		}else if(contatti.getCount()<=jArray.length()){
-			eliminaContatto(db, codUtente);
 			try{
 				for(int i=0;i<jArray.length();i++){
 					JSONObject json_data = jArray.getJSONObject(i);

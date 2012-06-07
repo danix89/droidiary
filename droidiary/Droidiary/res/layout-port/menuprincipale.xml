@@ -16,22 +16,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
         android:textSize="16dp" />
-
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="250dp"
-        android:layout_height="200sp"
-        android:layout_below="@+id/Utente"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp" >
-
+        android:layout_height="260dp"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true" >
+
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_above="@+id/imageView2"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/appuntamenti"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="24dp"
             android:scaleType="fitXY"
             android:src="@drawable/appuntamenti" />
 
@@ -39,17 +38,17 @@
             android:id="@+id/appuntamenti"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/imageView1"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="26dp"
+            android:layout_toRightOf="@+id/imageView1"
             android:text="@string/menuappuntamenti" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageView1"
             android:scaleType="center"
             android:src="@drawable/rubrica" />
 
@@ -58,7 +57,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/imageView2"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="22dp"
             android:layout_toLeftOf="@+id/imageView2"
             android:text="@string/menurubrica" />
 
@@ -75,7 +74,7 @@
         android:text=""
         android:textColor="#fff"
         android:textSize="16dp" />
-
+
     <ListView
         android:id="@+id/listanotifiche"
         android:layout_width="match_parent"
@@ -84,15 +83,38 @@
         android:layout_alignRight="@+id/relativeLayout2"
         android:layout_below="@+id/relativeLayout2"
         android:layout_marginTop="24dp" >
-
     </ListView>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal|center"
+        android:text="Prossimi Appuntamenti "
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/status"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#fff"
+        android:textSize="16dp" />
 
     <ImageView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/relativeLayout2"
-        android:layout_toRightOf="@+id/textnotifica"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView1"
         android:src="@drawable/offline" />
 
 </RelativeLayout>
