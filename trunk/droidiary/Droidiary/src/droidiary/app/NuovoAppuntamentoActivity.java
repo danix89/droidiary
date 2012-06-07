@@ -193,8 +193,7 @@ public class NuovoAppuntamentoActivity extends Activity{
 		if(status.equals("true")){
 			AppuntamentoSync.insertAppuntamento(codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString(), mTimeDisplay.getText().toString());
 		}
-
-
+		
 		db=dbd.getWritableDatabase();
 		try {
 			dbd.openDataBase();
@@ -217,7 +216,6 @@ public class NuovoAppuntamentoActivity extends Activity{
 			dbd.close();
 			startActivity(intent);
 		}
-
 	}	
 
 	private void updateDate() {

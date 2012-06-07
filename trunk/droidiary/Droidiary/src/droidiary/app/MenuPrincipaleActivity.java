@@ -130,6 +130,7 @@ public class MenuPrincipaleActivity extends Activity {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuPrincipaleActivity.this, MenuAppuntamentiActivity.class);
 				intent.putExtra("droidiary.app.MenuPrincipaleActivity", codUtente);
+				intent.putExtra("Status", status);
 				dbd.close();
 				db.close();
 				startActivity(intent);
