@@ -12,7 +12,8 @@
         android:layout_alignParentTop="true"
         android:text="Sviluppatori"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:textSize="18dp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
