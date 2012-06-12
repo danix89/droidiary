@@ -15,48 +15,103 @@
         android:text="Nuovo Account"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#ffffff"
-        android:textSize="16dp" />
-
+        android:textSize="15dp" />
+
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/Utente"
-        android:layout_centerHorizontal="true" >
+        android:id="@+id/relativeLayout4"
+        android:layout_width="230dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/Utente" >
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:src="@drawable/personal" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout4"
-        android:layout_width="250dp"
-        android:layout_height="140dp" >
 
         <TextView
-            android:id="@+id/TextView01"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Telefono"
+            android:layout_alignParentRight="true"
+            android:lines="1"
+            android:text="Dati Account"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#000000"
             android:textStyle="bold" />
 
-    </RelativeLayout>
+        <EditText
+            android:id="@+id/useraccount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView1"
+            android:ems="10"
+            android:hint="Username:"
+            android:inputType="textPersonName"
+            android:lines="1" />
 
+        <EditText
+            android:id="@+id/passwordaccount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/useraccount"
+            android:layout_toRightOf="@+id/imageView1"
+            android:ems="10"
+            android:hint="Password:"
+            android:inputType="textPassword"
+            android:lines="1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/relativeLayout4" >
+
+        <TextView
+            android:id="@+id/TextView02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Dati Contatto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nomeaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/TextView02"
+            android:ems="10"
+            android:hint="@string/nome"
+            android:inputType="textPersonName"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/cognomeaccount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/nomeaccount"
+            android:ems="10"
+            android:hint="@string/cognome"
+            android:inputType="textPersonName"
+            android:lines="1" />
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="250dp"
-        android:layout_height="120dp"
+        android:layout_width="230dp"
+        android:layout_height="150dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" >
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="42dp" >
 
         <Button
             android:id="@+id/salva"
@@ -73,99 +128,42 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/salva"
             android:text="Cancella" />
-
-        <EditText
-            android:id="@+id/telefonocasaaccount"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignLeft="@+id/cancella"
-            android:layout_centerVertical="true"
-            android:hint="@string/casa"
-            android:inputType="phone"
-            android:lines="1"
-            android:textSize="18dp" />
-
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Telefono"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/telefonocellulareaccount"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_above="@+id/telefonocasaaccount"
-            android:layout_alignLeft="@+id/cancella"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/TextView01"
+            android:ems="10"
             android:hint="@string/cellulare"
             android:inputType="phone"
             android:lines="1"
             android:textSize="18dp" />
 
+        <EditText
+            android:id="@+id/telefonocasaaccount"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/telefonocellulareaccount"
+            android:ems="10"
+            android:hint="@string/casa"
+            android:inputType="phone"
+            android:lines="1"
+            android:textSize="18dp" />
+
     </RelativeLayout>
-
-    <EditText
-        android:id="@+id/cognomeaccount"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_above="@+id/relativeLayout2"
-        android:layout_alignLeft="@+id/nomeaccount"
-        android:layout_alignParentRight="true"
-        android:hint="@string/cognome"
-        android:inputType="textPersonName"
-        android:lines="1" />
-
-    <EditText
-        android:id="@+id/passwordaccount"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/relativeLayout1"
-        android:hint="Password:"
-        android:inputType="textPassword"
-        android:lines="1" />
-
-    <EditText
-        android:id="@+id/useraccount"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/passwordaccount"
-        android:layout_below="@+id/relativeLayout1"
-        android:hint="Username:"
-        android:inputType="textPersonName"
-        android:lines="1" />
-
-    <EditText
-        android:id="@+id/nomeaccount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/cognomeaccount"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/relativeLayout1"
-        android:hint="@string/nome"
-        android:inputType="textPersonName"
-        android:lines="1" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/TextView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Utente"
-        android:text="Dati Contatto"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/useraccount"
-        android:layout_below="@+id/relativeLayout4"
-        android:lines="1"
-        android:text="Dati Account"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000"
-        android:textStyle="bold" />
 
 </RelativeLayout>
