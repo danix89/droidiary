@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agendalandscape2" >
+
+    <TextView
+        android:id="@+id/Utente"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/status"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="utente"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Status: "
+        android:textColor="#fff"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView1"
+        android:src="@drawable/offline" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="230dp"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="14dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/appuntamenti" />
+
+        <EditText
+            android:id="@+id/descrizioneappuntamento"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView1"
+            android:hint="Descrizione"
+            android:inputType="textMultiLine"
+            android:maxLength="44" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="230dp"
+        android:layout_height="280dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/relativeLayout2" >
+
+        <Button
+            android:id="@+id/cancellappuntamento"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/cancella" />
+
+        <Button
+            android:id="@+id/salvappuntamento"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="@string/salvacontatto" />
+
+        <Button
+            android:id="@+id/pickTime"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/salvappuntamento"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="28dp"
+            android:text="Inserisci Ora"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/timeDisplay"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/pickTime"
+             android:background="@android:color/transparent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Ora"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/pickDate"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/pickTime"
+            android:layout_alignParentLeft="true"
+            android:text="Inserisci Data"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/dateDisplay"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignBaseline="@+id/pickDate"
+            android:layout_alignBottom="@+id/pickDate"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Data"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout2" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Coordinate"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/indirizzoappuntamento"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView2"
+            android:ems="10"
+            android:hint="Indirizzo"
+            android:inputType="textMultiLine"
+            android:lines="1" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/luogoappuntamento"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/indirizzoappuntamento"
+            android:ems="10"
+            android:hint="Luogo"
+            android:inputType="textMultiLine"
+            android:lines="1" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
