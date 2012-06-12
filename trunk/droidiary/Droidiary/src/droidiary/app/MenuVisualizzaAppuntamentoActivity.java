@@ -76,8 +76,8 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 		    }
 		});
 		
-		Button modificaAppuntamento=(Button) findViewById(R.id.modificaappuntamento);
-		modificaAppuntamento.setOnClickListener(new OnClickListener() {
+		Button modifica=(Button) findViewById(R.id.modificaappuntamento);
+		modifica.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View arg0) {
 				Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, ModificaAppuntamentoActivity.class);
