@@ -54,7 +54,7 @@
             android:src="@drawable/appuntamenti" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/descrizione"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -69,13 +69,13 @@
             android:id="@+id/descrizioneappuntamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView1"
+            android:layout_alignLeft="@+id/descrizione"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/textView1"
+            android:layout_below="@+id/descrizione"
             android:text="descrizione "
             android:textColor="#000000"
             android:textSize="18dp" />
+
     </RelativeLayout>
 
     <RelativeLayout
