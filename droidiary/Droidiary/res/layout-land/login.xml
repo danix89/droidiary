@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/agendalandscape2" >
+
+    <TextView
+        android:id="@+id/titolo"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center"
+        android:text="Benvenuto su Droidiary"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/titolo"
+        android:layout_marginLeft="14dp" >
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="44dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:lines="1" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/password"
+            android:layout_alignParentLeft="true"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:lines="1" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_alignBottom="@+id/username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/logoprincipale" />
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/titolo"
+        android:layout_marginRight="38dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/online"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Online"
+            android:textColor="#000" />
+
+        <RadioButton
+            android:id="@+id/offline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offline"
+            android:textColor="#000" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/access"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/radiogroup"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal|center"
+        android:text="Memorizza Accesso"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/entra"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/radiogroup"
+        android:layout_below="@+id/access"
+        android:layout_marginRight="22dp"
+        android:text="@string/login" />
+
+</RelativeLayout>
