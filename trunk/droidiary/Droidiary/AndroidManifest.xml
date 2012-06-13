@@ -5,7 +5,9 @@
     android:versionName="3.0" >
 
     <uses-sdk android:minSdkVersion="10" />
-	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -30,29 +32,14 @@
         </activity>
         <activity
             android:name="AboutActivity"
-            android:label="About" >
-        </activity>
-        <activity
-            android:name="CercaAppuntamentoActivity"
-            android:label="Cerca Appuntamento" >
-        </activity>
-        <activity
-            android:name="EliminaAppuntamentoActivity"
-            android:label="Elimina Appuntamento" >
+            android:label="About"
+            android:screenOrientation="fullSensor" >
         </activity>
         <activity
             android:name="MenuAppuntamentiActivity"
             android:label="@string/titoloAppuntamenti"
             android:screenOrientation="fullSensor"
             android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name="MenuListaAppuntamentiActivity"
-            android:label="Appuntamenti" >
-        </activity>
-        <activity
-            android:name="MenuListaContattiActivity"
-            android:label="Lista Contatti" >
         </activity>
         <activity
             android:name="MenuPrincipaleActivity"
@@ -67,20 +54,23 @@
         </activity>
         <activity
             android:name="MenuVisualizzaAppuntamentoActivity"
-            android:label="Appuntamento" >
+            android:screenOrientation="fullSensor" android:label="Dettagli Appuntamento">
         </activity>
         <activity
             android:name="ModificaAppuntamentoActivity"
-            android:label="Appuntamento" >
+            android:label="Modifica Appuntamento"
+            android:screenOrientation="fullSensor" >
         </activity>
         <activity
             android:name="VisualizzaMappaActivity"
             android:label="@string/app_name"
+            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
         <activity
             android:name="MenuVisualizzaContattoActivity"
-            android:label="Contatto" >
+            android:label="Dettagli Contatto"
+            android:screenOrientation="fullSensor" >
         </activity>
         <activity
             android:name="NuovoAppuntamentoActivity"
@@ -94,13 +84,15 @@
         </activity>
         <activity
             android:name="ModificaContattoActivity"
-            android:label="Contatto"
+            android:label="Modifica Contatto"
             android:screenOrientation="fullSensor" >
         </activity>
 
         <uses-library android:name="com.google.android.maps" />
 
-        <activity android:name="NuovoAccountActivity" >
+        <activity
+            android:name="NuovoAccountActivity"
+            android:screenOrientation="fullSensor" >
         </activity>
     </application>
 

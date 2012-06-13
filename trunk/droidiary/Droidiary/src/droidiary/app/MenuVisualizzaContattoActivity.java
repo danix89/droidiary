@@ -55,9 +55,6 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			System.out.println("Codice id: " + id);
 			codUtente=result.getInt(1);
 			System.out.println("Codice Account: " + codUtente);
-			TextView utente=(TextView) findViewById(R.id.Utente);
-			utente.setText("Dettagli Contatto");
-
 			TextView nome= (TextView)findViewById(R.id.nomecontatto);
 			nome.setText(result.getString(2));
 			TextView cognome= (TextView)findViewById(R.id.cognomecontatto);

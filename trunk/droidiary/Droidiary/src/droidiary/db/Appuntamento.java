@@ -64,12 +64,13 @@ public class Appuntamento {
 	}
 
 	public static Cursor getDatiFromId(SQLiteDatabase db, int codUtente, int id) {
-		Cursor c= db.rawQuery("select * from " + TABELLA + " where _id='"+id+"' and id_account ="+ codUtente, null);
+		Cursor c= db.rawQuery("select * from appuntamento where id_account='"+codUtente+"' and _id='"+id+"'", null);
+		System.out.println("select * from appuntamento where id_account='"+codUtente+"' and _id='"+id+"'");
 		return c;
 	}
 
 	private static Cursor getDatiById(SQLiteDatabase db, int codUtente) {
-		Cursor c= db.rawQuery("select * from " + TABELLA + " where id_account ="+ codUtente, null);
+		Cursor c= db.rawQuery("select * from " + TABELLA + " where id_account ='"+ codUtente+"'", null);
 		return c;
 	}
 

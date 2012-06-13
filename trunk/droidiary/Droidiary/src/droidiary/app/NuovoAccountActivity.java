@@ -2,12 +2,14 @@ package droidiary.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -37,9 +39,14 @@ public class NuovoAccountActivity extends Activity{
 				EditText txtcasa = (EditText)findViewById(R.id.telefonocasaaccount);
 				txtcasa.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				telefonoCasa = txtcasa.getText().toString();
+				TelephonyManager mTelephonyMgr;
+				mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+				String id_sim = mTelephonyMgr.getLine1Number();
 				EditText txtcellulare = (EditText) findViewById(R.id.telefonocellulareaccount);
 				txtcellulare.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-				cellulare= txtcellulare.getText().toString();
+				txtcellulare.setText(id_sim);
+				cellulare=txtcellulare.getText().toString();
+				
 				EditText txtuser= (EditText) findViewById(R.id.useraccount);
 				txtuser.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				user=txtuser.getText().toString();
