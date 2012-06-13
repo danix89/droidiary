@@ -107,8 +107,6 @@ public class DroidiaryActivity extends Activity{
 					}else{
 						MemorizzaAccessoNO(username, password);
 					}
-					db.close();
-					dbd.close();
 					
 					if(c.moveToFirst()){
 						Toast.makeText(getApplicationContext(), "Login effettuato con successo!", Toast.LENGTH_LONG).show();
@@ -118,6 +116,8 @@ public class DroidiaryActivity extends Activity{
 						String status="false";
 						intent.putExtra("droidiary.app.DroidiaryActivity", codUtente);
 						intent.putExtra("Status", status);
+						db.close();
+						dbd.close();
 						startActivity(intent);
 					}else{
 						Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
@@ -174,14 +174,8 @@ public class DroidiaryActivity extends Activity{
 					}
 
 				}
-				db.close();
-				dbd.close();
 			}
 		});
-
-		db.close();
-		dbd.close();
-
 	}
 
 	public void MemorizzaAccessoSI(String user, String pass){

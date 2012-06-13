@@ -65,34 +65,70 @@
             android:hint="@string/cognome"
             android:inputType="textPersonName" >
         </EditText>
+
+        <TextView
+            android:id="@+id/datiContatto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Dati Contatto"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout4"
         android:layout_width="230dp"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
+        android:layout_below="@+id/relativeLayout2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" >
-
-        <EditText
-            android:id="@+id/emailcontatto"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="15dp"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
 
         <Button
             android:id="@+id/salvaContatto"
             android:layout_width="100dp"
             android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/emailcontatto"
             android:text="Salva" />
+
+        <EditText
+            android:id="@+id/emailcontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/salvaContatto"
+            android:layout_alignParentLeft="true"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/cittacontatto"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@+id/emailcontatto"
+            android:layout_alignParentLeft="true"
+            android:ems="10"
+            android:hint="@string/citta"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/altridati"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_above="@+id/cittacontatto"
+            android:layout_alignParentLeft="true"
+            android:text="Città / email"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -147,14 +183,17 @@
             android:src="@drawable/whatsapp_messenger_android" />
 
         <TextView
-            android:id="@+id/TextView01"
+            android:id="@+id/telefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:text="@string/telefono"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 
     <ImageView
@@ -165,28 +204,5 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView1"
         android:src="@drawable/offline" />
-
-    <TextView
-        android:id="@+id/altridati"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout2"
-        android:layout_centerHorizontal="true"
-        android:text="Città / email"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000" />
-
-    <EditText
-        android:id="@+id/cittacontatto"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignLeft="@+id/relativeLayout4"
-        android:layout_alignRight="@+id/relativeLayout4"
-        android:layout_below="@+id/altridati"
-        android:hint="@string/citta"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
 
 </RelativeLayout>

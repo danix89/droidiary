@@ -51,9 +51,6 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			id=result.getInt(0);
 			System.out.println("Codice id: " + id);
 			System.out.println("Codice Account: " + codUtente);
-			TextView utente=(TextView) findViewById(R.id.Utente);
-			utente.setText("Dettagli Appuntamento");
-			
 			TextView descr = (TextView)findViewById(R.id.descrizioneappuntamento);
 			descr.setText(appuntamento);
 			TextView indirizzo  = (TextView)findViewById(R.id.indirizzoappuntamento);

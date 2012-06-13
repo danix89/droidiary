@@ -10,6 +10,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -32,9 +33,9 @@ public class ModificaAppuntamentoActivity extends Activity {
 		setContentView(R.layout.menumodificaappuntamento);
 
 		id=getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaAppuntamentoActivity.id");
-		System.out.println("ID modifica Appuntamenti: " + id);
+		System.out.println("ID modifica Appuntamenti: +" + id+"+");
 		codUtente=getIntent().getExtras().getInt("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente");
-		System.out.println("id_account modifica Apuntamenti: " + codUtente);
+		System.out.println("id_account modifica Appuntamenti: +" + codUtente+"+");
 		status = getIntent().getStringExtra("Status");
 
 		// cattura di tutti i view del layout
@@ -92,11 +93,18 @@ public class ModificaAppuntamentoActivity extends Activity {
 		mHour = date.get(Calendar.HOUR_OF_DAY);
 		mMinute = date.get(Calendar.MINUTE);
 
+		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		db=dbd.getWritableDatabase();
+		try {
+			dbd.openDataBase();
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
+		
 		Cursor result=Appuntamento.getDatiFromId(db, codUtente, id);
 		if(result.moveToFirst()){
-			TextView utente=(TextView) findViewById(R.id.Utente);
-			utente.setText("Modifica Appuntamento");
-
 			TextView descr = (TextView)findViewById(R.id.descrizioneappuntamento);
 			descr.setText(result.getString(2));
 			TextView indirizzo = (TextView)findViewById(R.id.indirizzoappuntamento);
@@ -115,6 +123,7 @@ public class ModificaAppuntamentoActivity extends Activity {
 				mTimeDisplay.setText(result.getString(6));
 
 			db.close();
+			dbd.close();
 		}
 
 		Button salva=(Button)findViewById(R.id.salvappuntamento);
@@ -249,8 +258,8 @@ public class ModificaAppuntamentoActivity extends Activity {
 
 	private DroidiaryDatabaseHelper dbd, tmp;
 	private SQLiteDatabase db;
-	private int codUtente;
-	private int id;	
+	int codUtente;
+	int id;	
 	String descrizione, indirizzo, luogo;
 	private TextView mDateDisplay;
 	private Button mPickDate;    
