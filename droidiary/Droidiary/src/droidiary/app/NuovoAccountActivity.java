@@ -106,16 +106,15 @@ public class NuovoAccountActivity extends Activity{
 		try {
 			dbd.openDataBase();
 		}catch(SQLException sqle){
-
 			throw sqle;
-
 		}
 
 
 		String res=AccountSync.getStringAccountByUserPsw(user, psw);
 		Cursor query=Account.getAccountByUserPsw(db, user, psw);
 		query.moveToFirst();
-		if(res.contains("null") & query==null || res.contains("0")){
+		
+		if(!query.moveToFirst()){
 			db=dbd.getWritableDatabase();
 			db2=dbd.getWritableDatabase();
 			db3=dbd.getWritableDatabase();
@@ -130,27 +129,32 @@ public class NuovoAccountActivity extends Activity{
 					System.out.print(codUtente);
 				}
 			}
-			AccountSync.insertAccount(codUtente,user, psw);
 			long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
-			ContattoSync.insertContattoAccount(codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
 			dbd.close();
 			if(res2 == -1){
 				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
-			}else{
-				Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
-				System.out.println("Codice da Passare"+codUtente);
-				intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
-				if(res.contains("0")){
-					intent.putExtra("Status", "false");
-				}else{
-					intent.putExtra("Status", "true");
-				}
-				startActivity(intent);
 			}
-		}else{
-			Toast.makeText(getApplicationContext(),  "Account già esistente", Toast.LENGTH_LONG).show();
+		}
+		
+		if(res==null){
+			AccountSync.insertAccount(codUtente,user, psw);
+			ContattoSync.insertContattoAccount(codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
+		}
+		
+		if(query.moveToFirst() && res!=null){
+			Toast.makeText(getApplicationContext(),  "Account gia' esistente", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
+			startActivity(intent);
+		}else{
+			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
+			System.out.println("Codice da Passare"+codUtente);
+			intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
+			if(res.contains("0")){
+				intent.putExtra("Status", "false");
+			}else{
+				intent.putExtra("Status", "true");
+			}
 			startActivity(intent);
 		}
 	}

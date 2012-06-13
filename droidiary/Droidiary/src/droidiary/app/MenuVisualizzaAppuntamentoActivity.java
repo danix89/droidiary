@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import doirdiary.db.sync.AppuntamentoSync;
-import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Appuntamento;
 import droidiary.db.DroidiaryDatabaseHelper;
 

@@ -24,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -83,7 +82,7 @@ public class MenuAppuntamentiActivity extends Activity {
 		while(c.moveToNext()){
 			String nome=c.getString(0);
 			String cognome=c.getString(1);
-			utente.setText("Benvenuto, " + nome + " " + cognome);
+			utente.setText("Utente: " + nome + " " + cognome);
 			
 		}
 

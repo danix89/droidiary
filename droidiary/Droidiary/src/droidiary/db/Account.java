@@ -118,27 +118,37 @@ public class Account extends DroidiaryDatabaseHelper{
 	public static int SincronizzaAccount(SQLiteDatabase db, int codUtente){ //da offline a online
 		Cursor account=getAccountByID(db, codUtente);
 		String accountSync=AccountSync.getAccountById(codUtente);
+		int sizeOnline=0;
+		int sizeOffline=account.getCount();
 		JSONArray jArray = null;
 		try{
 			jArray = new JSONArray(accountSync);
 		}catch (Exception e) {
 		}
-		int sizeOnline=jArray.length();
-		int sizeOffline=account.getCount();
-		System.out.println("Grandezza offline: " + sizeOffline);
-		System.out.println("Grandezza online: " + sizeOnline);
-		
-		if(sizeOffline>sizeOnline){
-			while(account.moveToNext()){
-				int id_account=account.getInt(0);
-				System.out.println("id_account: " +id_account);
-				String user=account.getString(1);
-				System.out.println("username: " +user);
-				String psw=account.getString(2);
-				System.out.println("password: " +psw);
-				AccountSync.insertAccount(id_account, user, psw);
-			}
+		System.out.println("Grandezza offline: " + account.getCount());
+		if(jArray==null){
+		System.out.println("Grandezza online: 0");
 		}else{
+			sizeOnline=jArray.length();
+			System.out.println("Grandezza online: " + sizeOnline);
+		}
+
+		
+		if(sizeOffline==0 && sizeOnline==0){
+			//do nothing
+		}else if(sizeOnline==0){
+			System.out.println("FASE 1");
+			while(account.moveToNext()){
+				int id=account.getInt(0);
+				System.out.println("ID: " +id);
+				String username= account.getString(1);
+				System.out.println("username: " +username);
+				String password= account.getString(2);
+				System.out.println("password: " +password);
+				AccountSync.insertAccount(id, username, password);
+			}
+		}else if(sizeOffline==0){
+			System.out.println("FASE 2");
 			try{
 				for(int i=0;i<jArray.length();i++){
 					JSONObject json_data = jArray.getJSONObject(i);
@@ -153,7 +163,22 @@ public class Account extends DroidiaryDatabaseHelper{
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-
+		}if(sizeOffline!=0 && sizeOnline!=0 && sizeOffline==sizeOnline){
+			System.out.println("FASE 3");
+			while(account.moveToNext()){
+				int id_account=account.getInt(0);
+				System.out.println("id_account: " +id_account);
+				String user=account.getString(1);
+				System.out.println("username: " +user);
+				String psw=account.getString(2);
+				System.out.println("password: " +psw);
+				String res=AccountSync.getAccountById(id_account);
+				if(res.contains("null")){
+				AccountSync.insertAccount(id_account, user, psw);
+				}else{
+				AccountSync.modificaAccount(id_account, user, psw);
+				}
+			}
 		}
 		return 1;
 
