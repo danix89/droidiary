@@ -66,7 +66,7 @@ public class MenuPrincipaleActivity extends Activity {
 			utente.setText("Benvenuto, " + nome + " " + cognome);
 			dbd.close();
 		}
-
+		dbd.close();
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db2=dbd.getWritableDatabase();
@@ -160,12 +160,19 @@ public class MenuPrincipaleActivity extends Activity {
 			}
 		}
 
+		dbd.close();
+
 	}
 	//implementazione menu
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
+		if(status.equals("true")){
 			getMenuInflater().inflate(R.menu.menusync, menu);
 			return true;
+		}else{
+			System.out.println("ModalitÃ  offline non si sincronizza");
+			return true;
+		}
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -209,14 +216,14 @@ public class MenuPrincipaleActivity extends Activity {
 		flag=Account.SincronizzaAccount(db, codUtente);
 		dbd.close();
 		return flag;
-		
+
 	}
 
 
 
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuPrincipaleActivity.this, DroidiaryActivity.class);
-		Toast.makeText(getApplicationContext(),  "Non sei più loggato!", Toast.LENGTH_LONG).show();
+		Toast.makeText(getApplicationContext(),  "Non sei piu' loggato!", Toast.LENGTH_LONG).show();
 		startActivity(intent);
 	}
 

@@ -108,11 +108,12 @@
         android:text="Status: "
         android:textColor="#fff"
         android:textSize="16dp" />
-
+
     <ImageView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textnotifica"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView1"
         android:src="@drawable/offline" />

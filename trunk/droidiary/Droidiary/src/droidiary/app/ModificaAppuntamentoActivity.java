@@ -10,7 +10,6 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -255,7 +254,6 @@ public class ModificaAppuntamentoActivity extends Activity {
 	String descrizione, indirizzo, luogo;
 	private TextView mDateDisplay;
 	private Button mPickDate;    
-	private String appuntamento;
 	private int mYear;
 	private int mMonth;
 	private int mDay;

@@ -64,7 +64,7 @@ public class Contatto {
 		int u = db.update(TABELLA, cv, "_id='"+id_contatto+"' and id_account='"+codUtente+"'", null);
 		return u;
 	}
-	
+
 	public static int modificaContatto(SQLiteDatabase db, int id, int id_contatto, int codUtente, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		ContentValues cv = new ContentValues();
@@ -84,7 +84,7 @@ public class Contatto {
 		int u = db.delete(TABELLA, "_id='"+id_c+"' and id_account='"+codUtente+"'", null);
 		return u;
 	}
-	
+
 	public static int eliminaContatto(SQLiteDatabase db,int codUtente)
 	{
 		int u = db.delete(TABELLA, "id_account='"+codUtente+"'", null);
@@ -105,7 +105,7 @@ public class Contatto {
 		Cursor c= db.rawQuery("select * from contatto where id_account='"+id+"'", null);
 		return c;
 	}
-	
+
 	public static Cursor getDatiById(SQLiteDatabase db, int id, int id_account){
 		Cursor c= db.rawQuery("select nome, cognome from contatto where id_account='"+id_account+"' and _id='"+id+"'", null);
 		return c;
@@ -120,14 +120,26 @@ public class Contatto {
 	public static int SincronizzaContatto(SQLiteDatabase db, int codUtente){ //da offline a online
 		Cursor contatti=getDatiById(db, codUtente);
 		String contattiSync= ContattoSync.getContattiById(codUtente);
+		int sizeOnline=0;
+		int sizeOffline=contatti.getCount();
 		JSONArray jArray = null;
 		try{
 			jArray = new JSONArray(contattiSync);
 		}catch (Exception e) {
 		}
 		System.out.println("Grandezza offline: " + contatti.getCount());
-		System.out.println("Grandezza online: " + jArray.length());
-		if(contatti.getCount()>jArray.length()){
+		if(jArray==null){
+		System.out.println("Grandezza online: 0");
+		}else{
+			sizeOnline=jArray.length();
+			System.out.println("Grandezza online: " + sizeOnline);
+		}
+
+		
+		if(sizeOffline==0 && sizeOnline==0){
+			//do nothing
+		}else if(sizeOffline>sizeOnline){
+			System.out.println("FASE 3");
 			while(contatti.moveToNext()){
 				int id=contatti.getInt(0);
 				System.out.println("ID: " +id);
@@ -145,9 +157,15 @@ public class Contatto {
 				System.out.println("numeroCasa: " +numeroCasa);
 				String mail=contatti.getString(7);
 				System.out.println("mail: " +mail);
-				ContattoSync.modificaContatto(id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+				String res=ContattoSync.getContattiById(id_account, id);
+				if(res.contains("null")){
+					ContattoSync.insertContattoID(id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+				}else{
+					ContattoSync.modificaContatto(id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+				}
 			}
-		}else if(contatti.getCount()<=jArray.length()){
+		}else if(sizeOffline<sizeOnline){
+			System.out.println("FASE 4");
 			try{
 				for(int i=0;i<jArray.length();i++){
 					JSONObject json_data = jArray.getJSONObject(i);
@@ -167,10 +185,42 @@ public class Contatto {
 					System.out.println("numeroCasa: " +numeroCasa);
 					String mail=json_data.getString("mail");
 					System.out.println("mail: " +mail);
-					insertContattoAccount(db, id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+					Cursor res=getDatiById(db, id, id_account);
+					if(!res.moveToFirst()){
+						insertContattoAccount(db, id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+					}else{
+						modificaContatto(db, id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+					}
+					
 				}
 			}catch (Exception e) {
 				// TODO: handle exception
+			}
+		}else if(sizeOffline!=0 && sizeOnline!=0 && sizeOffline==sizeOnline){
+			System.out.println("FASE 5");
+			while(contatti.moveToNext()){
+				int id=contatti.getInt(0);
+				System.out.println("ID: " +id);
+				int id_account=contatti.getInt(1);
+				System.out.println("id_account: " +id_account);
+				String nome=contatti.getString(2);
+				System.out.println("nome: " +nome);
+				String cognome=contatti.getString(3);
+				System.out.println("cognome: " +cognome);
+				String citta=contatti.getString(4);
+				System.out.println("citta: " +citta);
+				String cell=contatti.getString(5);
+				System.out.println("cellulare: " +cell);
+				String numeroCasa=contatti.getString(6);
+				System.out.println("numeroCasa: " +numeroCasa);
+				String mail=contatti.getString(7);
+				System.out.println("mail: " +mail);
+				String res= ContattoSync.getContattiById(id_account, id);
+				if(res.contains("null")){
+					ContattoSync.insertContattoID(id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+				}else{
+					ContattoSync.modificaContatto(id, id_account, nome, cognome, citta, cell, numeroCasa, mail);
+				}
 			}
 
 		}

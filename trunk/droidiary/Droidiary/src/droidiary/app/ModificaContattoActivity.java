@@ -63,6 +63,23 @@ public class ModificaContattoActivity extends Activity {
 			email.setText(result.getString(7));
 			dbd.close();
 		}
+		
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
+
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status Modifica Contatto: "+status);
 
 		
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);

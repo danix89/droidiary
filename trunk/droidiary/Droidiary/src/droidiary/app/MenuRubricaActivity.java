@@ -1,7 +1,6 @@
 package droidiary.app;
 
 import java.util.ArrayList;
-import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
@@ -86,7 +85,7 @@ public class MenuRubricaActivity extends Activity {
 		while(c.moveToNext()){
 			String nome=c.getString(0);
 			String cognome=c.getString(1);
-			utente.setText("Benvenuto, " + nome + " " + cognome);
+			utente.setText("Utente: " + nome + " " + cognome);
 		}
 
 		lv=(ListView) findViewById(R.id.listacontatti);
@@ -213,7 +212,6 @@ public class MenuRubricaActivity extends Activity {
 		String myTitle = "";
 		String[] myArray = null;            
 		startManagingCursor(cursor);
-
 		while(cursor.moveToNext()){
 			myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+"-"+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
 		}   
