@@ -139,9 +139,19 @@ public class MenuAppuntamentiActivity extends Activity {
 		Cursor appuntamenti;
 		String appuntamentiSync;
 		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
 			appuntamenti= Appuntamento.getAppuntamentiFromId(db, codUtente);
 			listview_array=getOneColumn(appuntamenti);
 			System.out.println(listview_array);
+			dbd.close();
 		}
 		
 		if(status.equals("true")){
