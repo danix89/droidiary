@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class ContattoSync {
@@ -36,21 +38,21 @@ public class ContattoSync {
 		System.out.println("Query da Inviare: " + c);
 		send(c);
 	}
-	
+
 	public static void insertContattoID(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		String c="INSERT INTO contatto (_id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail) VALUES ('"+id+"','"+id_a+"',  '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')";
 		System.out.println("Query da Inviare: " + c);
 		send(c);
 	}
-	
+
 	public static void insertContattoAccount(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		String c="INSERT INTO contatto (_id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail) VALUES ('"+id+"', '"+id_a+"',  '"+nome+"', '"+cognome+"', '"+citta+"', '"+cell+"', '"+ncasa+"', '"+mail+"')";
 		System.out.println("Query da Inviare: " + c);
 		send(c);
 	}
-	
+
 	public static void modificaContatto(int id, int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail)
 	{
 		String res1=getContattiById(id_a, id);
@@ -62,14 +64,14 @@ public class ContattoSync {
 			send(c);
 		}
 	}
-	
+
 	public static void eliminaContatto(int id, int id_c)
 	{
 		String c="delete from contatto where _id='"+id+"' and id_account='"+id_c+"'";
 		System.out.println("Query da Inviare: " + c);
 		send(c);
 	}
-	
+
 	public static void eliminaTuttiContatto(int id_c)
 	{
 		String c="delete from contatto where id_account='"+id_c+"'";
@@ -82,60 +84,67 @@ public class ContattoSync {
 		System.out.println("Query da Inviare: " + query);
 		String res=send(query);
 		return res;
-    }
-	
+	}
+
 	public static String getContattiById(int id_account){
 		String query="select * from contatto where id_account='"+id_account+"'";
 		System.out.println("Query da Inviare: " + query);
 		String res=send(query);
 		return res;
-    }
+	}
 
 	public static String getAllContatti(int id_a, String nome, String cognome, String citta, String cell, String ncasa, String mail){
 		String query="select * from contatto where id_account='"+id_a+"' and nome='"+nome+"' and cognome='"+cognome+"' and citta='"+citta+"' and cellulare='"+cell+"' and numeroCasa='"+ncasa+"' and mail='"+mail+"'";
 		System.out.println("Query da Inviare: " + query);
 		String res=send(query);
 		return res;
-    }
-	
+	}
+
+	public static String getDatiFromString(String contatto){
+		String dati[]=contatto.split("-");
+		String c="select _id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'";
+		String res=send(c);
+		return res;
+	}
+
 	public static String send(String query) {
 		String result = "0";
 		InputStream is = null;
 
-		  //the query to send
-		  ArrayList<NameValuePair> querySend = new ArrayList<NameValuePair>();
+		//the query to send
+		ArrayList<NameValuePair> querySend = new ArrayList<NameValuePair>();
 
-		  querySend.add(new BasicNameValuePair("querySend",query));
+		querySend.add(new BasicNameValuePair("querySend",query));
 
-		  //http post
-		  try{
-		    HttpClient httpclient = new DefaultHttpClient();
-		    HttpPost httppost = new HttpPost("http://droidiary.altervista.org/query.php");
-		    httppost.setEntity(new UrlEncodedFormEntity(querySend));
-		    HttpResponse response = httpclient.execute(httppost);
-		    HttpEntity entity = response.getEntity();
-		    is = entity.getContent();
-		  }catch(Exception e){
-		    Log.e("log_tag", "Error in http connection "+e.toString());
-		  }
+		//http post
+		try{
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpPost httppost = new HttpPost("http://droidiary.altervista.org/query.php");
+			httppost.setEntity(new UrlEncodedFormEntity(querySend));
+			HttpResponse response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+			is = entity.getContent();
+		}catch(Exception e){
+			Log.e("log_tag", "Error in http connection "+e.toString());
+		}
 
-		  //convert response to string
-		  try{
-		    BufferedReader reader = new BufferedReader(
-		               new InputStreamReader(is,"iso-8859-1"),8);
-		    StringBuilder sb = new StringBuilder();
-		    String line = null;
-		      while ((line = reader.readLine()) != null) {
-		        sb.append(line + "\n");
-		      }
-		    is.close();
-		    result=sb.toString();
+		//convert response to string
+		try{
+			BufferedReader reader = new BufferedReader(
+					new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb = new StringBuilder();
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+			}
+			is.close();
+			result=sb.toString();
 
-		  }catch(Exception e){
-		    Log.e("log_tag", "Error converting result: "+e.toString());
-		  }
+		}catch(Exception e){
+			Log.e("log_tag", "Error converting result: "+e.toString());
+		}
 
-		  Log.i("SendQUERY", result);
-		  return result;
-		  }
+		Log.i("SendQUERY", result);
+		return result;
+	}
 }

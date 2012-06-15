@@ -159,8 +159,18 @@ public class MenuRubricaActivity extends Activity {
 		Cursor contatti;
 		String contattiSync;
 		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
 			contatti= Contatto.getContattiById(db, codUtente);
 			listview_array=getOneColumn(contatti);
+			dbd.close();
 		}
 		
 		if(status.equals("true")){
