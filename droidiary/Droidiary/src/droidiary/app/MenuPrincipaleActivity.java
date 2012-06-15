@@ -1,5 +1,10 @@
 package droidiary.app;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import doirdiary.db.sync.AccountSync;
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.Contatto;
@@ -12,6 +17,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,17 +63,54 @@ public class MenuPrincipaleActivity extends Activity {
 
 		System.out.println("Parametro Passato Login:" + codUtente);
 
-		Cursor c= Account.getAccountById(db, codUtente);
-		TextView utente = (TextView) findViewById(R.id.Utente);
+		//implementazione status
 
-		while(c.moveToNext()){
-			String nome=c.getString(0);
-			String cognome=c.getString(1);
-			utente.setText("Benvenuto, " + nome + " " + cognome);
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+				Toast.makeText(getApplicationContext(),  "Sei Online! Sincronizza i tuoi contatti e appuntamenti!!", Toast.LENGTH_LONG).show();
+
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
+
+		TextView utente = (TextView) findViewById(R.id.Utente);
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Benvenuto, " + nome + " " + cognome);
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+
+
+		if(status.equals("false")){
+			Cursor c= Account.getAccountById(db, codUtente);
+			while(c.moveToNext()){
+				String nome=c.getString(0);
+				String cognome=c.getString(1);
+				utente.setText("Benvenuto, " + nome + " " + cognome);
+				dbd.close();
+			}
 			dbd.close();
 		}
-		dbd.close();
-
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db2=dbd.getWritableDatabase();
 		try {
@@ -77,6 +120,9 @@ public class MenuPrincipaleActivity extends Activity {
 			throw sqle;
 
 		}
+
+
+
 
 
 		// visualizzazione notifiche appuntamenti
@@ -142,23 +188,6 @@ public class MenuPrincipaleActivity extends Activity {
 		}
 				);
 
-		//implementazione status
-
-		ImageView stat = (ImageView) findViewById(R.id.status);
-		int online = R.drawable.online;
-		int offline = R.drawable.offline;
-		status = getIntent().getStringExtra("Status");
-		System.out.println("Status: "+status);
-		if(status!=null){
-			if(status.equals("true")){
-				stat.setImageResource(online);
-				Toast.makeText(getApplicationContext(),  "Sei Online! Sincronizza i tuoi contatti e appuntamenti!!", Toast.LENGTH_LONG).show();
-
-			}
-			if(status.equals("false")){
-				stat.setImageResource(offline);
-			}
-		}
 
 		dbd.close();
 

@@ -1,6 +1,14 @@
 package droidiary.app;
 
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import doirdiary.db.sync.AccountSync;
+import doirdiary.db.sync.ContattoSync;
+import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 import android.app.Activity;
@@ -77,20 +85,89 @@ public class MenuRubricaActivity extends Activity {
 
 		}
 
-		//passaggio codice utente
+		status = getIntent().getStringExtra("Status");
 
-		Cursor c= Contatto.getDatiById(db, codUtente, codUtente);
-		TextView utente = (TextView) findViewById(R.id.Utente);
+		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
+		nuovoContatto.setOnClickListener(new OnClickListener() 
+		{
+			public void onClick(View arg0) {
+				Intent intent = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
+				intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
+				intent.putExtra("Status", status);
+				startActivity(intent);
+			}
+		}
+				);
 
-		while(c.moveToNext()){
-			String nome=c.getString(0);
-			String cognome=c.getString(1);
-			utente.setText("Utente: " + nome + " " + cognome);
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
 		}
 
+		//passaggio codice utente
+
+		TextView utente = (TextView) findViewById(R.id.Utente);
+
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Benvenuto, " + nome + " " + cognome);
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor res= Account.getAccountById(db, codUtente);
+			while(res.moveToNext()){
+				String nome=res.getString(0);
+				String cognome=res.getString(1);
+				utente.setText("Benvenuto, " + nome + " " + cognome);
+				dbd.close();
+			}
+			dbd.close();
+		}
+		
+		
 		lv=(ListView) findViewById(R.id.listacontatti);
-		Cursor contatti= Contatto.getContattiById(db, codUtente);
-		listview_array=getOneColumn(contatti);
+		Cursor contatti;
+		String contattiSync;
+		if(status.equals("false")){
+			contatti= Contatto.getContattiById(db, codUtente);
+			listview_array=getOneColumn(contatti);
+		}
+		
+		if(status.equals("true")){
+			contattiSync=ContattoSync.getContattiById(codUtente);
+			listview_array=getOneColumn(contattiSync);
+		}
+		
 
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listview_array){
@@ -149,7 +226,7 @@ public class MenuRubricaActivity extends Activity {
 				});
 			}
 		});
-		
+
 		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
 
@@ -169,36 +246,9 @@ public class MenuRubricaActivity extends Activity {
 					}   
 				});
 
-		//implementazione click premuto
 
 
-		status = getIntent().getStringExtra("Status");
 
-		Button nuovoContatto = (Button) findViewById(R.id.buttonaggiungicontatto);
-		nuovoContatto.setOnClickListener(new OnClickListener() 
-		{
-			public void onClick(View arg0) {
-				Intent intent = new Intent(MenuRubricaActivity.this, NuovoContattoActivity.class);
-				intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
-				intent.putExtra("Status", status);
-				startActivity(intent);
-			}
-		}
-				);
-
-		ImageView stat = (ImageView) findViewById(R.id.status);
-		int online = R.drawable.online;
-		int offline = R.drawable.offline;
-		status = getIntent().getStringExtra("Status");
-		System.out.println("Status: "+status);
-		if(status!=null){
-			if(status.equals("true")){
-				stat.setImageResource(online);
-			}
-			if(status.equals("false")){
-				stat.setImageResource(offline);
-			}
-		}
 	}
 	public void onBackPressed(){
 		Intent intent = new Intent(MenuRubricaActivity.this, MenuPrincipaleActivity.class);
@@ -216,6 +266,25 @@ public class MenuRubricaActivity extends Activity {
 			myTitle+=cursor.getString(cursor.getColumnIndex(Contatto.NOME))+"-"+cursor.getString(cursor.getColumnIndex(Contatto.COGNOME))+";";              
 		}   
 		myArray = myTitle.split(";");     
+		return myArray;
+	}
+	
+	private String[] getOneColumn(String res){ 
+		String myTitle = "";
+		String[] myArray = null;
+		try {
+			JSONArray jArray = new JSONArray(res);
+			for(int i=0;i<jArray.length();i++){
+				JSONObject json_data = jArray.getJSONObject(i);
+				String nome = json_data.getString("nome");
+				String cognome = json_data.getString("cognome");
+				myTitle+=nome+"-"+cognome+";"; 
+				myArray = myTitle.split(";");     
+			}
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
 		return myArray;
 	}
 

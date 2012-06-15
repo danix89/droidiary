@@ -123,10 +123,6 @@ public class DroidiaryActivity extends Activity{
 						Toast.makeText(getApplicationContext(), "Dati non esatti", Toast.LENGTH_LONG).show();
 					}
 				}else if(online.isChecked()){
-					ConnectivityManager connec =  (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-					if ( connec.getNetworkInfo(0).getState() == NetworkInfo.State.DISCONNECTED ||  connec.getNetworkInfo(1).getState() == NetworkInfo.State.DISCONNECTED   ) {
-						Toast.makeText(getApplicationContext(), "Non sei connesso! Usare Modalit� Offline...", Toast.LENGTH_LONG).show();       
-					} else {
 						EditText txtnome = (EditText)findViewById(R.id.username); //creazione riferimenti a editText
 						EditText txtpsw = (EditText)findViewById(R.id.password);
 						username=txtnome.getText().toString();
@@ -174,7 +170,6 @@ public class DroidiaryActivity extends Activity{
 					}
 
 				}
-			}
 		});
 	}
 
