@@ -141,24 +141,35 @@ public class MenuAppuntamentiActivity extends Activity {
 		if(status.equals("false")){
 			appuntamenti= Appuntamento.getAppuntamentiFromId(db, codUtente);
 			listview_array=getOneColumn(appuntamenti);
+			System.out.println(listview_array);
 		}
 		
 		if(status.equals("true")){
 			appuntamentiSync=AppuntamentoSync.getAppuntamentiFromId(codUtente);
 			listview_array=getOneColumn(appuntamentiSync);
+			System.out.println(listview_array);
+		}
+		
+		if(listview_array==null){
+			lv.setEmptyView(findViewById(R.id.empty));
+			EditText e = (EditText) findViewById(R.id.EditText01);
+			e.setEnabled(false);
+		}else{
+			TextView a = (TextView)findViewById(R.id.empty);
+			a.setVisibility(View.INVISIBLE);
+			lv.setAdapter(new ArrayAdapter<String>(this,
+					android.R.layout.simple_list_item_1, listview_array){
+				public View getView(int position, View convertView,
+						ViewGroup parent) {
+					View view =super.getView(position, convertView, parent);
+					TextView textView=(TextView) view.findViewById(android.R.id.text1);
+					//colore degli item
+					textView.setTextColor(Color.BLACK);
+					return view;
+				}
+			});
 		}
 
-		lv.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, listview_array){
-			public View getView(int position, View convertView,
-					ViewGroup parent) {
-				View view =super.getView(position, convertView, parent);
-				TextView textView=(TextView) view.findViewById(android.R.id.text1);
-				//colore degli item
-				textView.setTextColor(Color.BLACK);
-				return view;
-			}
-		});
 		dbd.close();
 		//implementazione ricerca
 		et = (EditText) findViewById(R.id.EditText01);
