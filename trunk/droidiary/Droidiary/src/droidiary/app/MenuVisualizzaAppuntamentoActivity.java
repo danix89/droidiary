@@ -218,6 +218,11 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 
 		if(status.equals("true")){
 			AppuntamentoSync.eliminaAppuntamento(id, codUtente);
+			Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
+			intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.id", id);
+			intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente", codUtente);
+			intent.putExtra("Status", status);
+			startActivity(intent);
 		}
 		tmp2 = new DroidiaryDatabaseHelper(this);
 		db=tmp2.getWritableDatabase();
