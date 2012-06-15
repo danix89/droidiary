@@ -174,12 +174,12 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 		img.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				String ind = "";
-		    	ind = luogo.getText().toString();
+				ind = indirizzo.getText().toString();
 		    	ind = ind.replaceAll(" ","+"); //senza gli spazi
 		    	String lg = "";
-		    	ind = luogo.getText().toString();
-		    	ind = ind.replaceAll(" ","+"); //senza gli spazi
-		    	Uri uri = Uri.parse("http://maps.google.it/maps?q=" + ind + ",+" + lg + "&hl=it");
+		    	lg = luogo.getText().toString();
+		    	lg = lg.replaceAll(" ","+"); //senza gli spazi
+		    	Uri uri = Uri.parse("http://maps.google.it/maps?q=" + ind + "+" + lg + "&hl=it");
 		    	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		    	startActivity(intent);
 			}
