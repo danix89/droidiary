@@ -1,18 +1,20 @@
 package droidiary.app;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,27 +33,16 @@ public class NuovoAccountActivity extends Activity{
 		salva.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				EditText txtnome = (EditText)findViewById(R.id.nomeaccount);
-				txtnome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				nome = txtnome.getText().toString();
 				EditText txtcognome = (EditText)findViewById(R.id.cognomeaccount);
-				txtcognome.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				cognome = txtcognome.getText().toString();
 				EditText txtcasa = (EditText)findViewById(R.id.telefonocasaaccount);
-				txtcasa.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				telefonoCasa = txtcasa.getText().toString();
-				TelephonyManager mTelephonyMgr;
-				mTelephonyMgr = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				String id_sim = mTelephonyMgr.getLine1Number();
 				EditText txtcellulare = (EditText) findViewById(R.id.telefonocellulareaccount);
-				txtcellulare.setImeOptions(EditorInfo.IME_ACTION_NEXT);
-				txtcellulare.setText(id_sim);
-				cellulare=txtcellulare.getText().toString();
-				
+				cellulare= txtcellulare.getText().toString();
 				EditText txtuser= (EditText) findViewById(R.id.useraccount);
-				txtuser.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				user=txtuser.getText().toString();
 				EditText txtpsw= (EditText) findViewById(R.id.passwordaccount);
-				txtpsw.setImeOptions(EditorInfo.IME_ACTION_DONE);
 				psw=txtpsw.getText().toString();
 				if(nome.equals("") && cognome.equals("") && user.equals("") && psw.equals("")){
 					Toast.makeText(getApplicationContext(),  "Controlla i campi Nome, Cognome, User e Password", Toast.LENGTH_LONG).show();
@@ -87,7 +78,7 @@ public class NuovoAccountActivity extends Activity{
 
 	public void onClickSalva() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Vuoi Creare l'Account?")
+		builder.setMessage("Vuoi Salvare il Contatto?")
 		.setCancelable(false)
 		.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
@@ -113,55 +104,53 @@ public class NuovoAccountActivity extends Activity{
 		try {
 			dbd.openDataBase();
 		}catch(SQLException sqle){
+
 			throw sqle;
+
 		}
 
 
 		String res=AccountSync.getStringAccountByUserPsw(user, psw);
+		String cnt=AccountSync.countAccount();
+		try {
+			JSONArray jArray = new JSONArray(cnt);
+			for(int i=0;i<jArray.length();i++){
+				JSONObject json_data = jArray.getJSONObject(i);
+				count =(json_data.getInt("COUNT( _id )"))+1;
+				System.out.println("Count: " +count);
+			}
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
+
 		Cursor query=Account.getAccountByUserPsw(db, user, psw);
-		query.moveToFirst();
-		
-		if(!query.moveToFirst()){
+
+		if(res.contains("null") || query.moveToFirst()){
 			db=dbd.getWritableDatabase();
 			db2=dbd.getWritableDatabase();
 			db3=dbd.getWritableDatabase();
-			long res1 = Account.insertAccount(db, user, psw);
+			long res1=Account.insertAccount(db, count, user, psw);
 			if(res1 == -1){
 				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Account", Toast.LENGTH_LONG).show();
 			}else{
-				String[] arg={user, psw};
-				Cursor c= Account.getAccountByUserPsw(db2, arg);
-				if(c.moveToFirst()){
-					codUtente= c.getInt(0);
-					System.out.print(codUtente);
-				}
+				AccountSync.insertAccount(count, user, psw);
 			}
-			long res2 = Contatto.insertContattoAccount(db3, codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
-			dbd.close();
+			long res2=Contatto.insertContattoAccount(db2, count, count, nome, cognome, "", cellulare, telefonoCasa, "");
 			if(res2 == -1){
 				Toast.makeText(getApplicationContext(),  "Problema con la query Insert Contatto", Toast.LENGTH_LONG).show();
+			}else{
+				ContattoSync.insertContattoAccount(count, count, nome, cognome, "", cellulare, telefonoCasa, "");
+				Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
+				System.out.println("Codice da Passare "+count);
+				intent.putExtra("droidiary.app.NuovoAccountActivity", count);
+				intent.putExtra("Status", "true");
+				startActivity(intent);
 			}
-		}
-		
-		if(res==null){
-			AccountSync.insertAccount(codUtente,user, psw);
-			ContattoSync.insertContattoAccount(codUtente, codUtente, nome, cognome, "", cellulare, telefonoCasa, "");
-		}
-		
-		if(query.moveToFirst() && res!=null){
+		}else{
 			Toast.makeText(getApplicationContext(),  "Account gia' esistente", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent(NuovoAccountActivity.this, DroidiaryActivity.class);
-			startActivity(intent);
-		}else{
-			Toast.makeText(getApplicationContext(),  "Contatto Salvato Correttamente", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(NuovoAccountActivity.this, MenuPrincipaleActivity.class);
-			System.out.println("Codice da Passare"+codUtente);
-			intent.putExtra("droidiary.app.NuovoAccountActivity", codUtente);
-			if(res.contains("0")){
-				intent.putExtra("Status", "false");
-			}else{
-				intent.putExtra("Status", "true");
-			}
 			startActivity(intent);
 		}
 	}
@@ -170,5 +159,6 @@ public class NuovoAccountActivity extends Activity{
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db, db2, db3;
 	int codUtente;
+	int count;
 	String nome, cognome, telefonoCasa, user, cellulare, psw;
 }

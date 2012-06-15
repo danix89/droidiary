@@ -14,7 +14,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class AccountSync{
@@ -23,6 +25,16 @@ public class AccountSync{
 	public static String insertAccount(int id, String user, String psw)
 	{
 		String c="INSERT INTO  account (_id, username, password) VALUES ('"+id+"','"+user+"',  '"+psw+"')";
+		System.out.println("Query da Inviare: " + c);
+		String res= send(c);
+		return res;
+	}
+	
+	
+	
+	public static String countAccount()
+	{
+		String c="SELECT COUNT( _id ) FROM account";
 		System.out.println("Query da Inviare: " + c);
 		String res= send(c);
 		return res;
@@ -49,13 +61,13 @@ public class AccountSync{
 		String res= send(c);
 		return res;
 	}
-	
-	public static String getAccountById(long id){
-		String c= "select * from account where _id='"+id+"'";
+		
+	public static String getContattoAccountById(long id){
+		String c="select nome, cognome from contatto where _id='"+id+"' and id_account='"+id+"'";
 		System.out.println("Query da Inviare: " + c);
 		String res= send(c);
 		return res;
-    }
+	}
 	
 	public static String getAccountById(int id_account){
 		String query="select * from account where _id='"+id_account+"'";
