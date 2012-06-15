@@ -2,6 +2,10 @@ package droidiary.app;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +28,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import doirdiary.db.sync.AccountSync;
+import doirdiary.db.sync.AppuntamentoSync;
+import doirdiary.db.sync.ContattoSync;
+import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
@@ -72,23 +80,73 @@ public class MenuAppuntamentiActivity extends Activity {
 		}
 
 
-
-
-		//passaggio codice utente
-
-		Cursor c= Contatto.getDatiById(db, codUtente, codUtente);
-		TextView utente = (TextView) findViewById(R.id.Utente);
-
-		while(c.moveToNext()){
-			String nome=c.getString(0);
-			String cognome=c.getString(1);
-			utente.setText("Utente: " + nome + " " + cognome);
-			
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
 		}
 
+
+		TextView utente = (TextView) findViewById(R.id.Utente);
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Benvenuto, " + nome + " " + cognome);
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor res= Account.getAccountById(db, codUtente);
+			while(res.moveToNext()){
+				String nome=res.getString(0);
+				String cognome=res.getString(1);
+				utente.setText("Benvenuto, " + nome + " " + cognome);
+				dbd.close();
+			}
+			dbd.close();
+		}
+		
+		
+
 		lv=(ListView) findViewById(R.id.listaappuntamenti);
-		Cursor appuntamenti= Appuntamento.getAppuntamentiFromId(db, codUtente);
-		listview_array=getOneColumn(appuntamenti);
+		Cursor appuntamenti;
+		String appuntamentiSync;
+		if(status.equals("false")){
+			appuntamenti= Appuntamento.getAppuntamentiFromId(db, codUtente);
+			listview_array=getOneColumn(appuntamenti);
+		}
+		
+		if(status.equals("true")){
+			appuntamentiSync=AppuntamentoSync.getAppuntamentiFromId(codUtente);
+			listview_array=getOneColumn(appuntamentiSync);
+		}
 
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listview_array){
@@ -181,19 +239,7 @@ public class MenuAppuntamentiActivity extends Activity {
 		}
 				);
 
-		ImageView stat = (ImageView) findViewById(R.id.status);
-		int online = R.drawable.online;
-		int offline = R.drawable.offline;
-		status = getIntent().getStringExtra("Status");
-		System.out.println("Status: "+status);
-		if(status!=null){
-			if(status.equals("true")){
-				stat.setImageResource(online);
-			}
-			if(status.equals("false")){
-				stat.setImageResource(offline);
-			}
-		}
+
 	}
 
 	public void onBackPressed(){
@@ -214,13 +260,31 @@ public class MenuAppuntamentiActivity extends Activity {
 		myArray = myTitle.split(";");     
 		return myArray;
 	}
+	
+	private String[] getOneColumn(String res){ 
+		String myTitle = "";
+		String[] myArray = null;
+		try {
+			JSONArray jArray = new JSONArray(res);
+			for(int i=0;i<jArray.length();i++){
+				JSONObject json_data = jArray.getJSONObject(i);
+				String descrizione = json_data.getString("descrizione");
+				myTitle+=descrizione+";"; 
+				myArray = myTitle.split(";");     
+			}
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
+		return myArray;
+	}
 
 	private DroidiaryDatabaseHelper dbd;
 	private SQLiteDatabase db;
 	private int codUtente;
 	private ListView lv;
 	private EditText et;
-	private String listview_array[];
+	String listview_array[];
 	private ArrayList<String> array_sort= new ArrayList<String>();
 	int textlength=0;
 	String status;

@@ -38,7 +38,7 @@ public class MenuRubricaActivity extends Activity {
 	/** Called when the activity is first created. */
 	private ListView lv;
 	private EditText et;
-	private String listview_array[];
+	String listview_array[];
 	private ArrayList<String> array_sort= new ArrayList<String>();
 	int textlength=0;
 	String status;
