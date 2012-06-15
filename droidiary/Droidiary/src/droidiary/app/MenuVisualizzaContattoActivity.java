@@ -196,6 +196,10 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		modificaContatto.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {
+				if(status.equals("true")){
+					Toast.makeText(getApplicationContext(),  "Per modificare devi sincronizzare i contatti", Toast.LENGTH_LONG).show();
+				}
+				if(status.equals("false")){		
 				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, ModificaContattoActivity.class);
 				intent.putExtra("droidiary.app.contatto", contatto);
 				intent.putExtra("ID", id);
@@ -203,6 +207,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 				intent.putExtra("Status", status);
 				dbd.close();
 				startActivity(intent);
+				}
 			}
 		});
 
@@ -212,8 +217,12 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		eliminaContatto.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				if(status.equals("true")){
+					Toast.makeText(getApplicationContext(),  "Per eliminare devi sincronizzare i contatti", Toast.LENGTH_LONG).show();
+				}
+				if(status.equals("false")){
 				onClickElimina();
-
+				}
 			}
 		});
 
