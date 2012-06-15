@@ -30,6 +30,13 @@ public class AppuntamentoSync {
 		String res= send(c);
 		return res;
 	}
+	
+	public static String getAppuntamentiFromId(int codUtente) {
+		String c="select * from appuntamento where id_account='"+codUtente+"'";
+		System.out.println("Query da Inviare: " + c);
+		String res= send(c);
+		return res;
+	}
 
 	public static String getDatiFromString(int codUtente, String appuntamento) {
 		String c="select * from appuntamento where id_account ="+ codUtente +" and descrizione ='"+ appuntamento + "'";
@@ -125,4 +132,5 @@ public class AppuntamentoSync {
 	static String luogo;
 	static String data;
 	static String ora;
+
 }
