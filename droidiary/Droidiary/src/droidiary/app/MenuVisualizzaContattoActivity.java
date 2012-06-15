@@ -1,5 +1,8 @@
 package droidiary.app;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,7 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import doirdiary.db.sync.AccountSync;
 import doirdiary.db.sync.ContattoSync;
+import droidiary.db.Account;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 
@@ -45,29 +50,126 @@ public class MenuVisualizzaContattoActivity extends Activity {
 
 		}
 
+		TextView utente = (TextView) findViewById(R.id.Utente);
+		ImageView stat = (ImageView) findViewById(R.id.status);
+		int online = R.drawable.online;
+		int offline = R.drawable.offline;
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status: "+status);
+		if(status!=null){
+			if(status.equals("true")){
+				stat.setImageResource(online);
+			}
+			if(status.equals("false")){
+				stat.setImageResource(offline);
+			}
+		}
+		
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Benvenuto, " + nome + " " + cognome);
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor res= Account.getAccountById(db, codUtente);
+			while(res.moveToNext()){
+				String nome=res.getString(0);
+				String cognome=res.getString(1);
+				utente.setText("Benvenuto, " + nome + " " + cognome);
+				dbd.close();
+			}
+			dbd.close();
+		}
+
+		status = getIntent().getStringExtra("Status");
+		System.out.println("Status Visualizza Contatto: "+status);
+
+		nome= (TextView)findViewById(R.id.nomecontatto);
+		cognome= (TextView)findViewById(R.id.cognomecontatto);
+		cellulare= (TextView)findViewById(R.id.telefonocellularecontatto);
+		casa= (TextView)findViewById(R.id.telefonocasacontatto);
+		citta= (TextView)findViewById(R.id.cittacontatto);
+		email= (TextView)findViewById(R.id.emailcontatto);
+
 		//id_account, nome, cognome, citta, cellulare, numeroCasa, email
 
-		Cursor result=Contatto.getDatiFromString(db, contatto);
+		if(status.equals("true")){
+			String res=ContattoSync.getDatiFromString(contatto);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					codUtente = json_data.getInt("id_account");
+					nome.setText(json_data.getString("nome"));
+					cognome.setText(json_data.getString("cognome"));
+					casa.setText(json_data.getString("numeroCasa"));
+					citta.setText(json_data.getString("citta"));
+					cellulare.setText(json_data.getString("cellulare"));
+					email.setText(json_data.getString("email"));
+					
+				}
+			} catch (JSONException e) {
 
-		if(result.moveToFirst()){
-			codUtente=result.getInt(1);
-			id=result.getInt(0);
-			System.out.println("Codice id: " + id);
-			codUtente=result.getInt(1);
-			System.out.println("Codice Account: " + codUtente);
-			TextView nome= (TextView)findViewById(R.id.nomecontatto);
-			nome.setText(result.getString(2));
-			TextView cognome= (TextView)findViewById(R.id.cognomecontatto);
-			cognome.setText(result.getString(3));
-			cellulare= (TextView)findViewById(R.id.telefonocellularecontatto);
-			cellulare.setText(result.getString(5));
-			casa= (TextView)findViewById(R.id.telefonocasacontatto);
-			casa.setText(result.getString(6));
-			TextView citta= (TextView)findViewById(R.id.cittacontatto);
-			citta.setText(result.getString(4));
-			TextView email= (TextView)findViewById(R.id.emailcontatto);
-			email.setText(result.getString(7));
+				e.printStackTrace();
+			}
 		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor result=Contatto.getDatiFromString(db, contatto);
+
+			if(result.moveToFirst()){
+				codUtente=result.getInt(1);
+				id=result.getInt(0);
+				System.out.println("Codice id: " + id);
+				codUtente=result.getInt(1);
+				System.out.println("Codice Account: " + codUtente);
+				nome= (TextView)findViewById(R.id.nomecontatto);
+				nome.setText(result.getString(2));
+				cognome= (TextView)findViewById(R.id.cognomecontatto);
+				cognome.setText(result.getString(3));
+				cellulare= (TextView)findViewById(R.id.telefonocellularecontatto);
+				cellulare.setText(result.getString(5));
+				casa= (TextView)findViewById(R.id.telefonocasacontatto);
+				casa.setText(result.getString(6));
+				citta= (TextView)findViewById(R.id.cittacontatto);
+				citta.setText(result.getString(4));
+				email= (TextView)findViewById(R.id.emailcontatto);
+				email.setText(result.getString(7));
+			}
+			dbd.close();
+		}
+
+
 
 		if(codUtente==id){
 			Button eliminaContatto=(Button) findViewById(R.id.eliminacontatto);
@@ -115,22 +217,6 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			}
 		});
 
-		ImageView stat = (ImageView) findViewById(R.id.status);
-		int online = R.drawable.online;
-		int offline = R.drawable.offline;
-		status = getIntent().getStringExtra("Status");
-		System.out.println("Status: "+status);
-		if(status!=null){
-			if(status.equals("true")){
-				stat.setImageResource(online);
-			}
-			if(status.equals("false")){
-				stat.setImageResource(offline);
-			}
-		}
-
-		status = getIntent().getStringExtra("Status");
-		System.out.println("Status Visualizza Contatto: "+status);
 
 	}
 
@@ -183,6 +269,6 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	private int codUtente;
 	private int id;
 	private String contatto;
-	private TextView casa, cellulare;
+	private TextView casa, cellulare, nome, cognome, citta, email;
 	String status;
 }
