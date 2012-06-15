@@ -62,6 +62,8 @@ public class Appuntamento {
 		Cursor c= db.rawQuery("select * from " + TABELLA + " where id_account ="+ codUtente +" and descrizione ='"+ appuntamento + "'", null);
 		return c;
 	}
+	
+	
 
 	public static Cursor getDatiFromId(SQLiteDatabase db, int codUtente, int id) {
 		Cursor c= db.rawQuery("select * from appuntamento where id_account='"+codUtente+"' and _id='"+id+"'", null);

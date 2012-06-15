@@ -97,7 +97,7 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 
 		status = getIntent().getStringExtra("Status");
 		System.out.println("Status Visualizza Contatto: "+status);
-		
+
 		codUtente = getIntent().getExtras().getInt("droidiary.app.MenuAppuntamentiActivity.codUtente");
 
 		System.out.println("Parametro appuntamento: "+appuntamento);
@@ -125,6 +125,7 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 				for(int i=0;i<jArray.length();i++){
 					JSONObject json_data = jArray.getJSONObject(i);
 					id=json_data.getInt("_id");
+					System.out.println("Codice id: " + id);
 					codUtente = json_data.getInt("id_account");
 					descr.setText(json_data.getString("descrizione"));
 					indirizzo.setText(json_data.getString("indirizzo"));
@@ -138,25 +139,37 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			}
 		}
 
-		Cursor result=Appuntamento.getDatiFromString(db, codUtente, appuntamento);
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
 
-		if(result.moveToFirst()){
-			id=result.getInt(0);
-			System.out.println("Codice id: " + id);
-			System.out.println("Codice Account: " + codUtente);
-			descr = (TextView)findViewById(R.id.descrizioneappuntamento);
-			descr.setText(appuntamento);
-			indirizzo  = (TextView)findViewById(R.id.indirizzoappuntamento);
-			indirizzo.setText(result.getString(3));
-			luogo = (TextView)findViewById(R.id.luogoappuntamento);
-			luogo.setText(result.getString(4));
-			data = (TextView)findViewById(R.id.dataappuntamento);
-			data.setText(result.getString(5));
-			ora = (TextView)findViewById(R.id.oraappuntamento);
-			ora.setText(result.getString(6));
+				throw sqle;
 
+			}
+
+			Cursor result=Appuntamento.getDatiFromString(db, codUtente, appuntamento);
+
+			if(result.moveToFirst()){
+				id=result.getInt(0);
+				System.out.println("Codice id: " + id);
+				System.out.println("Codice Account: " + codUtente);
+				descr = (TextView)findViewById(R.id.descrizioneappuntamento);
+				descr.setText(appuntamento);
+				indirizzo  = (TextView)findViewById(R.id.indirizzoappuntamento);
+				indirizzo.setText(result.getString(3));
+				luogo = (TextView)findViewById(R.id.luogoappuntamento);
+				luogo.setText(result.getString(4));
+				data = (TextView)findViewById(R.id.dataappuntamento);
+				data.setText(result.getString(5));
+				ora = (TextView)findViewById(R.id.oraappuntamento);
+				ora.setText(result.getString(6));
+
+			}
+			dbd.close();
 		}
-
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
 		img.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -176,11 +189,11 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 		modifica.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {
-					Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, ModificaAppuntamentoActivity.class);
-					intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.id", id);
-					intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente", codUtente);
-					intent.putExtra("Status", status);
-					startActivity(intent);
+				Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, ModificaAppuntamentoActivity.class);
+				intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.id", id);
+				intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.codUtente", codUtente);
+				intent.putExtra("Status", status);
+				startActivity(intent);
 			}
 		});
 

@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,6 +13,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import doirdiary.db.sync.AccountSync;
 import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Account;
+import droidiary.db.Appuntamento;
 import droidiary.db.Contatto;
 import droidiary.db.DroidiaryDatabaseHelper;
 
@@ -64,7 +68,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 				stat.setImageResource(offline);
 			}
 		}
-		
+
 		if(status.equals("true")){
 			String res=AccountSync.getContattoAccountById(codUtente);
 			try {
@@ -127,7 +131,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 					citta.setText(json_data.getString("citta"));
 					cellulare.setText(json_data.getString("cellulare"));
 					email.setText(json_data.getString("email"));
-					
+
 				}
 			} catch (JSONException e) {
 
@@ -200,13 +204,13 @@ public class MenuVisualizzaContattoActivity extends Activity {
 					Toast.makeText(getApplicationContext(),  "Per modificare devi sincronizzare i contatti", Toast.LENGTH_LONG).show();
 				}
 				if(status.equals("false")){		
-				Intent intent = new Intent(MenuVisualizzaContattoActivity.this, ModificaContattoActivity.class);
-				intent.putExtra("droidiary.app.contatto", contatto);
-				intent.putExtra("ID", id);
-				intent.putExtra("CodUtente", codUtente);
-				intent.putExtra("Status", status);
-				dbd.close();
-				startActivity(intent);
+					Intent intent = new Intent(MenuVisualizzaContattoActivity.this, ModificaContattoActivity.class);
+					intent.putExtra("droidiary.app.contatto", contatto);
+					intent.putExtra("ID", id);
+					intent.putExtra("CodUtente", codUtente);
+					intent.putExtra("Status", status);
+					dbd.close();
+					startActivity(intent);
 				}
 			}
 		});
@@ -221,11 +225,67 @@ public class MenuVisualizzaContattoActivity extends Activity {
 					Toast.makeText(getApplicationContext(),  "Per eliminare devi sincronizzare i contatti", Toast.LENGTH_LONG).show();
 				}
 				if(status.equals("false")){
-				onClickElimina();
+					onClickElimina();
 				}
 			}
 		});
 
+
+	}
+
+	//implementazione menu
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		if(status.equals("true")){
+			getMenuInflater().inflate(R.menu.menusync, menu);
+			return true;
+		}else{
+			System.out.println("Modalità offline non si sincronizza");
+			return true;
+		}
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_sync:runDialog(5); 
+		return true;
+		}
+		return true;
+	}
+
+	private void runDialog(final int seconds)
+	{
+		progressDialog = ProgressDialog.show(this, "Attendere Prego....", "Sincronizzazione in corso");
+
+		new Thread(new Runnable(){
+			public void run(){
+				int flag=sincronizza();
+				if(flag==1){
+					progressDialog.dismiss();
+				}
+			}
+		}).start();
+	}
+
+
+	//metodo sincronizzazione
+
+	public int sincronizza(){
+		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+		db=dbd.getWritableDatabase();
+		try {
+			dbd.openDataBase();
+		}catch(SQLException sqle){
+
+			throw sqle;
+
+		}
+		int flag=0;
+		flag=Contatto.SincronizzaContatto(db, codUtente);
+		flag=Appuntamento.SincronizzaAppuntamenti(db, codUtente);
+		flag=Account.SincronizzaAccount(db, codUtente);
+		dbd.close();
+		return flag;
 
 	}
 
@@ -280,4 +340,6 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	private String contatto;
 	private TextView casa, cellulare, nome, cognome, citta, email;
 	String status;
+	private ProgressDialog progressDialog;
+
 }

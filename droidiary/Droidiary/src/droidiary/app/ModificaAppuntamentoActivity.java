@@ -2,6 +2,10 @@ package droidiary.app;
 
 import java.util.Calendar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -13,6 +17,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -102,29 +107,71 @@ public class ModificaAppuntamentoActivity extends Activity {
 			throw sqle;
 
 		}
-		
-		Cursor result=Appuntamento.getDatiFromId(db, codUtente, id);
-		if(result.moveToFirst()){
-			TextView descr = (TextView)findViewById(R.id.descrizioneappuntamento);
-			descr.setText(result.getString(2));
-			TextView indirizzo = (TextView)findViewById(R.id.indirizzoappuntamento);
-			indirizzo.setText(result.getString(3));
-			TextView luogo = (TextView)findViewById(R.id.luogoappuntamento);
-			luogo.setText(result.getString(4));
 
-			if(result.getString(5).isEmpty())
-				mDateDisplay.setText("Data");
-			else
-				mDateDisplay.setText(result.getString(5));
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
 
-			if(result.getString(6).isEmpty())
-				mTimeDisplay.setText("Ora");
-			else
-				mTimeDisplay.setText(result.getString(6));
+				throw sqle;
 
-			db.close();
-			dbd.close();
+			}
+			Cursor result=Appuntamento.getDatiFromId(db, codUtente, id);
+			if(result.moveToFirst()){
+				TextView descr = (TextView)findViewById(R.id.descrizioneappuntamento);
+				descr.setText(result.getString(2));
+				TextView indirizzo = (TextView)findViewById(R.id.indirizzoappuntamento);
+				indirizzo.setText(result.getString(3));
+				TextView luogo = (TextView)findViewById(R.id.luogoappuntamento);
+				luogo.setText(result.getString(4));
+
+				if(result.getString(5).isEmpty())
+					mDateDisplay.setText("Data");
+				else
+					mDateDisplay.setText(result.getString(5));
+
+				if(result.getString(6).isEmpty())
+					mTimeDisplay.setText("Ora");
+				else
+					mTimeDisplay.setText(result.getString(6));
+
+				db.close();
+				dbd.close();
+			}
 		}
+
+		if(status.equals("true")){
+			String res=AppuntamentoSync.getDatiFromId(codUtente, id);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					TextView descr = (TextView)findViewById(R.id.descrizioneappuntamento);
+					descr.setText(json_data.getString("descrizione"));
+					TextView indirizzo = (TextView)findViewById(R.id.indirizzoappuntamento);
+					indirizzo.setText(json_data.getString("indirizzo"));
+					TextView luogo = (TextView)findViewById(R.id.luogoappuntamento);
+					luogo.setText(json_data.getString("luogo"));
+					
+					if(json_data.getString("data").isEmpty())
+						mDateDisplay.setText("Data");
+					else
+						mDateDisplay.setText(json_data.getString("data"));
+
+					if(json_data.getString("ora").isEmpty())
+						mTimeDisplay.setText("Ora");
+					else
+						mTimeDisplay.setText(json_data.getString("ora"));
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
 
 		Button salva=(Button)findViewById(R.id.salvappuntamento);
 		salva.setOnClickListener(new OnClickListener() {
@@ -172,6 +219,10 @@ public class ModificaAppuntamentoActivity extends Activity {
 
 		if(status.equals("true")){
 			AppuntamentoSync.modificaAppuntamento(id, codUtente, descrizione, indirizzo, luogo, mDateDisplay.getText().toString(), mTimeDisplay.getText().toString());
+			Intent intent = new Intent(ModificaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
+			intent.putExtra("droidiary.app.ModificaAppuntamentoActivity.codUtente", codUtente);
+			intent.putExtra("Status", status);
+			startActivity(intent);
 		}
 
 		tmp = new DroidiaryDatabaseHelper(this);
