@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import doirdiary.db.sync.AccountSync;
 import doirdiary.db.sync.AppuntamentoSync;
-import doirdiary.db.sync.ContattoSync;
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
 import droidiary.db.Contatto;
@@ -160,8 +160,15 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
 		img.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent dialIntent=new Intent(MenuVisualizzaAppuntamentoActivity.this, VisualizzaMappaActivity.class);
-				startActivity(dialIntent);
+				String ind = "";
+		    	ind = luogo.getText().toString();
+		    	ind = ind.replaceAll(" ","+"); //senza gli spazi
+		    	String lg = "";
+		    	ind = luogo.getText().toString();
+		    	ind = ind.replaceAll(" ","+"); //senza gli spazi
+		    	Uri uri = Uri.parse("http://maps.google.it/maps?q=" + ind + ",+" + lg + "&hl=it");
+		    	Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+		    	startActivity(intent);
 			}
 		});
 
