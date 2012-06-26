@@ -64,13 +64,13 @@ public class NuovoAppuntamentoActivity extends Activity{
 		}
 
 		Cursor c= Account.getAccountById(db, codUtente);
-		TextView utente = (TextView) findViewById(R.id.Utente);
 		System.out.println("Codice:" + codUtente);
-		while(c.moveToNext()){
-			String nome=c.getString(0);
-			String cognome=c.getString(1);
-			utente.setText("Utente: " + nome + " " + cognome);
-		}
+		TextView utente = (TextView) findViewById(R.id.Utente);
+//		while(c.moveToNext()){
+//			String nome=c.getString(0);
+//			String cognome=c.getString(1);
+//			utente.setText("Utente: " + nome + " " + cognome);
+//		}
 
 		// cattura di tutti i view del layout
 		mDateDisplay = (TextView) findViewById(R.id.dateDisplay);

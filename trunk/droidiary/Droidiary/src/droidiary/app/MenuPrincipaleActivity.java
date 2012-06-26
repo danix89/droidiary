@@ -90,7 +90,7 @@ public class MenuPrincipaleActivity extends Activity {
 					JSONObject json_data = jArray.getJSONObject(i);
 					String nome = json_data.getString("nome");
 					String cognome = json_data.getString("cognome");
-					utente.setText("Benvenuto, " + nome + " " + cognome);
+					utente.setText("Utente: " + nome + " " + cognome);
 				}
 			} catch (JSONException e) {
 
@@ -106,7 +106,7 @@ public class MenuPrincipaleActivity extends Activity {
 			while(c.moveToNext()){
 				String nome=c.getString(0);
 				String cognome=c.getString(1);
-				utente.setText("Benvenuto, " + nome + " " + cognome);
+				utente.setText("Utente: " + nome + " " + cognome);
 				dbd.close();
 			}
 			dbd.close();
@@ -120,10 +120,6 @@ public class MenuPrincipaleActivity extends Activity {
 			throw sqle;
 
 		}
-
-
-
-
 
 		// visualizzazione notifiche appuntamenti
 

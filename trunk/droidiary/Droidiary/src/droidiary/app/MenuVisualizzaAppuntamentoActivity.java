@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import doirdiary.db.sync.AccountSync;
 import doirdiary.db.sync.AppuntamentoSync;
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
@@ -43,7 +42,6 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 		}
 
 
-		TextView utente = (TextView) findViewById(R.id.Utente);
 		ImageView stat = (ImageView) findViewById(R.id.status);
 		int online = R.drawable.online;
 		int offline = R.drawable.offline;
@@ -58,42 +56,43 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			}
 		}
 
-		if(status.equals("true")){
-			String res=AccountSync.getContattoAccountById(codUtente);
-			try {
-				JSONArray jArray = new JSONArray(res);
-				for(int i=0;i<jArray.length();i++){
-					JSONObject json_data = jArray.getJSONObject(i);
-					String nome = json_data.getString("nome");
-					String cognome = json_data.getString("cognome");
-					utente.setText("Benvenuto, " + nome + " " + cognome);
-				}
-			} catch (JSONException e) {
-
-				e.printStackTrace();
-			}
-
-		}
-
-		if(status.equals("false")){
-			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-			db=dbd.getWritableDatabase();
-			try {
-				dbd.openDataBase();
-			}catch(SQLException sqle){
-
-				throw sqle;
-
-			}
-			Cursor res= Account.getAccountById(db, codUtente);
-			while(res.moveToNext()){
-				String nome=res.getString(0);
-				String cognome=res.getString(1);
-				utente.setText("Benvenuto, " + nome + " " + cognome);
-				dbd.close();
-			}
-			dbd.close();
-		}
+//		TextView utente = (TextView) findViewById(R.id.Utente);
+//		if(status.equals("true")){
+//			String res=AccountSync.getContattoAccountById(codUtente);
+//			try {
+//				JSONArray jArray = new JSONArray(res);
+//				for(int i=0;i<jArray.length();i++){
+//					JSONObject json_data = jArray.getJSONObject(i);
+//					String nome = json_data.getString("nome");
+//					String cognome = json_data.getString("cognome");
+//					utente.setText("Utente: " + nome + " " + cognome);
+//				}
+//			} catch (JSONException e) {
+//
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//		if(status.equals("false")){
+//			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+//			db=dbd.getWritableDatabase();
+//			try {
+//				dbd.openDataBase();
+//			}catch(SQLException sqle){
+//
+//				throw sqle;
+//
+//			}
+//			Cursor res= Account.getAccountById(db, codUtente);
+//			while(res.moveToNext()){
+//				String nome=res.getString(0);
+//				String cognome=res.getString(1);
+//				utente.setText("Utente: " + nome + " " + cognome);
+//				dbd.close();
+//			}
+//			dbd.close();
+//		}
 
 		status = getIntent().getStringExtra("Status");
 		System.out.println("Status Visualizza Contatto: "+status);
