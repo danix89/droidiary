@@ -45,10 +45,14 @@ public class DroidiaryActivity extends Activity{
 		online= (RadioButton) findViewById(R.id.online);
 		offline=(RadioButton) findViewById(R.id.offline);
 		access = (CheckBox)findViewById(R.id.access);
-
+		
+		boolean res=false;
 		//riempimento txt accesso
-
-		boolean res=checkMemorizzaAccesso();
+		try{
+			res=checkMemorizzaAccesso();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Memorizza Accesso: " + res);
 		if(res==true){
 			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
