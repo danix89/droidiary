@@ -49,7 +49,7 @@ public class ModificaContattoActivity extends Activity {
 
 		if(result.moveToFirst()){
 			TextView utente=(TextView) findViewById(R.id.Contatto);
-			utente.setText("Modifica Contatto");
+//			utente.setText("Modifica Contatto");
 			EditText nome= (EditText)findViewById(R.id.nomecontatto);
 			nome.setText(result.getString(2));
 			EditText cognome= (EditText)findViewById(R.id.cognomecontatto);
