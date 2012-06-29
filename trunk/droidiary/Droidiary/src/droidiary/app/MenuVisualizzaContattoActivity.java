@@ -312,6 +312,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		.setPositiveButton("Si", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				eliminaContattoOnline();
+				eliminaContatto();
 			}
 		})
 		.setNegativeButton("No", new DialogInterface.OnClickListener() {
