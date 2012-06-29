@@ -6,89 +6,94 @@
 
     <uses-sdk android:minSdkVersion="10" />
 
-    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" >
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
-    <application
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
-        <uses-library android:name="com.google.android.maps" />
+        <application
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name" >
+            <uses-library android:name="com.google.android.maps" />
 
-        <activity
-            android:name=".DroidiaryActivity"
-            android:label="@string/app_name"
-            android:launchMode="standard"
-            android:screenOrientation="fullSensor" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <activity
+                android:name=".DroidiaryActivity"
+                android:label="@string/app_name"
+                android:launchMode="standard"
+                android:screenOrientation="fullSensor" >
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="AboutActivity"
-            android:label="About"
-            android:screenOrientation="fullSensor" >
-        </activity>
-        <activity
-            android:name="MenuAppuntamentiActivity"
-            android:label="@string/titoloAppuntamenti"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name="MenuPrincipaleActivity"
-            android:label="@string/titolomenu"
-            android:screenOrientation="fullSensor" >
-        </activity>
-        <activity
-            android:name="MenuRubricaActivity"
-            android:label="@string/titoloRubrica"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name="MenuVisualizzaAppuntamentoActivity"
-            android:screenOrientation="fullSensor" android:label="Dettagli Appuntamento">
-        </activity>
-        <activity
-            android:name="ModificaAppuntamentoActivity"
-            android:label="Modifica Appuntamento"
-            android:screenOrientation="fullSensor" >
-        </activity>
-        <activity
-            android:name="VisualizzaMappaActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.NoTitleBar" >
-        </activity>
-        <activity
-            android:name="MenuVisualizzaContattoActivity"
-            android:label="Dettagli Contatto"
-            android:screenOrientation="fullSensor" >
-        </activity>
-        <activity
-            android:name="NuovoAppuntamentoActivity"
-            android:label="@string/nuovoappuntamento"
-            android:screenOrientation="fullSensor" >
-        </activity>
-        <activity
-            android:name="NuovoContattoActivity"
-            android:label="@string/titoloRubrica"
-            android:screenOrientation="fullSensor" >
-        </activity>
-        <activity
-            android:name="ModificaContattoActivity"
-            android:label="Modifica Contatto"
-            android:screenOrientation="fullSensor" >
-        </activity>
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+            <activity
+                android:name="AboutActivity"
+                android:label="About"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="MenuAppuntamentiActivity"
+                android:label="@string/titoloAppuntamenti"
+                android:screenOrientation="fullSensor"
+                android:windowSoftInputMode="stateHidden" >
+            </activity>
+            <activity
+                android:name="MenuPrincipaleActivity"
+                android:label="@string/titolomenu"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="MenuRubricaActivity"
+                android:label="@string/titoloRubrica"
+                android:screenOrientation="fullSensor"
+                android:windowSoftInputMode="stateHidden" >
+            </activity>
+            <activity
+                android:name="MenuVisualizzaAppuntamentoActivity"
+                android:label="Dettagli Appuntamento"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="ModificaAppuntamentoActivity"
+                android:label="Modifica Appuntamento"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="VisualizzaMappaActivity"
+                android:label="@string/app_name"
+                android:screenOrientation="fullSensor"
+                android:theme="@android:style/Theme.NoTitleBar" >
+            </activity>
+            <activity
+                android:name="MenuVisualizzaContattoActivity"
+                android:label="Dettagli Contatto"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="NuovoAppuntamentoActivity"
+                android:label="@string/nuovoappuntamento"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="NuovoContattoActivity"
+                android:label="@string/titoloRubrica"
+                android:screenOrientation="fullSensor" >
+            </activity>
+            <activity
+                android:name="ModificaContattoActivity"
+                android:label="Modifica Contatto"
+                android:screenOrientation="fullSensor" >
+            </activity>
 
-        <uses-library android:name="com.google.android.maps" />
+            <uses-library android:name="com.google.android.maps" />
 
-        <activity
-            android:name="NuovoAccountActivity"
-            android:screenOrientation="fullSensor" >
-        </activity>
-    </application>
+            <activity
+                android:name="NuovoAccountActivity"
+                android:screenOrientation="fullSensor" >
+            </activity>
+        </application>
+    </uses-permission>
 
 </manifest>

@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import doirdiary.db.sync.AccountSync;
 import doirdiary.db.sync.AppuntamentoSync;
 import droidiary.db.Account;
 import droidiary.db.Appuntamento;
@@ -56,44 +57,43 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			}
 		}
 
-//		TextView utente = (TextView) findViewById(R.id.Utente);
-//		if(status.equals("true")){
-//			String res=AccountSync.getContattoAccountById(codUtente);
-//			try {
-//				JSONArray jArray = new JSONArray(res);
-//				for(int i=0;i<jArray.length();i++){
-//					JSONObject json_data = jArray.getJSONObject(i);
-//					String nome = json_data.getString("nome");
-//					String cognome = json_data.getString("cognome");
-//					utente.setText("Utente: " + nome + " " + cognome);
-//				}
-//			} catch (JSONException e) {
-//
-//				e.printStackTrace();
-//			}
-//
-//		}
-//
-//		if(status.equals("false")){
-//			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-//			db=dbd.getWritableDatabase();
-//			try {
-//				dbd.openDataBase();
-//			}catch(SQLException sqle){
-//
-//				throw sqle;
-//
-//			}
-//			Cursor res= Account.getAccountById(db, codUtente);
-//			while(res.moveToNext()){
-//				String nome=res.getString(0);
-//				String cognome=res.getString(1);
-//				utente.setText("Utente: " + nome + " " + cognome);
-//				dbd.close();
-//			}
-//			dbd.close();
-//		}
+		TextView utente = (TextView) findViewById(R.id.Utente);
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Utente: " + nome + " " + cognome);
+			}
+			} catch (JSONException e) {
 
+				e.printStackTrace();
+			}
+
+		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor res= Account.getAccountById(db, codUtente);
+			while(res.moveToNext()){
+				String nome=res.getString(0);
+				String cognome=res.getString(1);
+				utente.setText("Utente: " + nome + " " + cognome);
+				dbd.close();
+			}
+			dbd.close();
+		}
 		status = getIntent().getStringExtra("Status");
 		System.out.println("Status Visualizza Contatto: "+status);
 
@@ -233,9 +233,12 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
-	public void eliminaAppuntamento(){
 
-		if(status.equals("true")){
+	public void eliminaAppuntamento(){
+		tmp2 = new DroidiaryDatabaseHelper(this);
+		db=tmp2.getWritableDatabase();
+		tmp2.openDataBase();
+		if(status.contains("true")){
 			AppuntamentoSync.eliminaAppuntamento(id, codUtente);
 			Intent intent = new Intent(MenuVisualizzaAppuntamentoActivity.this, MenuAppuntamentiActivity.class);
 			intent.putExtra("droidiary.app.MenuVisualizzaAppuntamentoActivity.id", id);
@@ -243,9 +246,7 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			intent.putExtra("Status", status);
 			startActivity(intent);
 		}
-		tmp2 = new DroidiaryDatabaseHelper(this);
-		db=tmp2.getWritableDatabase();
-		tmp2.openDataBase();
+		
 		int res=Appuntamento.eliminaAppuntamento(db, id, codUtente);
 		if(res>0){
 			Toast.makeText(getApplicationContext(),  "Appuntamento Elminato con Successo!", Toast.LENGTH_LONG).show();
@@ -265,7 +266,7 @@ public class MenuVisualizzaAppuntamentoActivity extends Activity {
 			getMenuInflater().inflate(R.menu.menusync, menu);
 			return true;
 		}else{
-			System.out.println("Modalit√† offline non si sincronizza");
+			System.out.println("Modalita'† offline non si sincronizza");
 			return true;
 		}
 	}
