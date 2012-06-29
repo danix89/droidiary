@@ -49,12 +49,12 @@
         android:divider="#000"
         android:textColor="#000000" >
     </ListView>
-
+
     <EditText
         android:id="@+id/EditText01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/listaappuntamenti"
+        android:layout_alignLeft="@+id/imageView1"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Utente"
         android:layout_marginTop="14dp"
