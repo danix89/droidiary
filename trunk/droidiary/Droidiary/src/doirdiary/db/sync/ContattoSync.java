@@ -100,9 +100,9 @@ public class ContattoSync {
 		return res;
 	}
 
-	public static String getDatiFromString(String contatto){
+	public static String getDatiFromString(int codUtente, String contatto){
 		String dati[]=contatto.split("-");
-		String c="select _id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"'";
+		String c="select _id, id_account, nome, cognome, citta, cellulare, numeroCasa, mail from contatto where nome='"+dati[0]+"' and cognome='"+dati[1]+"' and id_account='"+codUtente+"'";
 		String res=send(c);
 		return res;
 	}

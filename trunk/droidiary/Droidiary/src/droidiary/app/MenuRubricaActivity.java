@@ -115,44 +115,44 @@ public class MenuRubricaActivity extends Activity {
 
 		//passaggio codice utente
 
-//		TextView utente = (TextView) findViewById(R.id.Utente);
-//
-//		if(status.equals("true")){
-//			String res=AccountSync.getContattoAccountById(codUtente);
-//			try {
-//				JSONArray jArray = new JSONArray(res);
-//				for(int i=0;i<jArray.length();i++){
-//					JSONObject json_data = jArray.getJSONObject(i);
-//					String nome = json_data.getString("nome");
-//					String cognome = json_data.getString("cognome");
-//					utente.setText("Utente: " + nome + " " + cognome);
-//				}
-//			} catch (JSONException e) {
-//
-//				e.printStackTrace();
-//			}
-//
-//		}
-//
-//		if(status.equals("false")){
-//			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-//			db=dbd.getWritableDatabase();
-//			try {
-//				dbd.openDataBase();
-//			}catch(SQLException sqle){
-//
-//				throw sqle;
-//
-//			}
-//			Cursor res= Account.getAccountById(db, codUtente);
-//			while(res.moveToNext()){
-//				String nome=res.getString(0);
-//				String cognome=res.getString(1);
-//				utente.setText("Utente: " + nome + " " + cognome);
-//				dbd.close();
-//			}
-//			dbd.close();
-//		}
+		TextView utente = (TextView) findViewById(R.id.Utente);
+
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Utente: " + nome + " " + cognome);
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor res= Account.getAccountById(db, codUtente);
+			while(res.moveToNext()){
+				String nome=res.getString(0);
+				String cognome=res.getString(1);
+				utente.setText("Utente: " + nome + " " + cognome);
+				dbd.close();
+			}
+			dbd.close();
+		}
 		
 		
 		lv=(ListView) findViewById(R.id.listacontatti);

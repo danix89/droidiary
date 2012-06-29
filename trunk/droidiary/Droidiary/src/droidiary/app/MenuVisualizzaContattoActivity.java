@@ -40,11 +40,11 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		if(contatto==null){
 			contatto = getIntent().getExtras().getString("droidiary.app.ModificaContattoActivity");
 		}
-		
+
 		if(codUtente==0){
 			codUtente = getIntent().getExtras().getInt("codutente");
 		}
-		
+
 		System.out.println("Parametro Contatto: "+contatto);
 		System.out.println("Parametro account: "+codUtente);
 
@@ -72,43 +72,43 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			}
 		}
 
-//		TextView utente = (TextView) findViewById(R.id.Utente);
-//		if(status.equals("true")){
-//			String res=AccountSync.getContattoAccountById(codUtente);
-//			try {
-//				JSONArray jArray = new JSONArray(res);
-//				for(int i=0;i<jArray.length();i++){
-//					JSONObject json_data = jArray.getJSONObject(i);
-//					String nome = json_data.getString("nome");
-//					String cognome = json_data.getString("cognome");
-//					utente.setText("Benvenuto, " + nome + " " + cognome);
-//				}
-//			} catch (JSONException e) {
-//
-//				e.printStackTrace();
-//			}
-//
-//		}
-//
-//		if(status.equals("false")){
-//			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
-//			db=dbd.getWritableDatabase();
-//			try {
-//				dbd.openDataBase();
-//			}catch(SQLException sqle){
-//
-//				throw sqle;
-//
-//			}
-//			Cursor res= Account.getAccountById(db, codUtente);
-//			while(res.moveToNext()){
-//				String nome=res.getString(0);
-//				String cognome=res.getString(1);
-//				utente.setText("Benvenuto, " + nome + " " + cognome);
-//				dbd.close();
-//			}
-//			dbd.close();
-//		}
+		TextView utente = (TextView) findViewById(R.id.Utente);
+		if(status.equals("true")){
+			String res=AccountSync.getContattoAccountById(codUtente);
+			try {
+				JSONArray jArray = new JSONArray(res);
+				for(int i=0;i<jArray.length();i++){
+					JSONObject json_data = jArray.getJSONObject(i);
+					String nome = json_data.getString("nome");
+					String cognome = json_data.getString("cognome");
+					utente.setText("Utente, " + nome + " " + cognome);
+				}
+			} catch (JSONException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		if(status.equals("false")){
+			dbd = new DroidiaryDatabaseHelper(this); //collegamento database
+			db=dbd.getWritableDatabase();
+			try {
+				dbd.openDataBase();
+			}catch(SQLException sqle){
+
+				throw sqle;
+
+			}
+			Cursor res= Account.getAccountById(db, codUtente);
+			while(res.moveToNext()){
+				String nome=res.getString(0);
+				String cognome=res.getString(1);
+				utente.setText("Utente: " + nome + " " + cognome);
+				dbd.close();
+			}
+			dbd.close();
+		}
 
 		status = getIntent().getStringExtra("Status");
 		System.out.println("Status Visualizza Contatto: "+status);
@@ -184,12 +184,13 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			Button eliminaContatto=(Button) findViewById(R.id.eliminacontatto);
 			eliminaContatto.setVisibility(View.INVISIBLE);
 		}
-		
+
 		if(status.contains("true")){
 			Button modificaContatto=(Button) findViewById(R.id.modificacontatto);
 			modificaContatto.setVisibility(View.INVISIBLE);
 		}
 
+		System.out.println("Parametro ID: " + id);
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
 		img.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -278,8 +279,8 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	}
 
 
-	
-	
+
+
 	//metodo sincronizzazione
 
 	public int sincronizza(){
@@ -300,10 +301,10 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		return flag;
 
 	}
-	
-	
-	
-	
+
+
+
+
 	public void onClickEliminaOnline(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Vuoi Eliminare il Contatto?")
@@ -348,7 +349,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
-	
+
 	public void eliminaContatto(){
 
 		if(status.equals("true")){
@@ -368,17 +369,17 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			tmp2.close();
 		}
 	}
-	
+
 	public void eliminaContattoOnline(){
 		if(status.equals("true")){
 			ContattoSync.eliminaContatto(id, codUtente);
 		}
 		Toast.makeText(getApplicationContext(),  "Contatto Elminato con Successo!", Toast.LENGTH_LONG).show();
-			Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
-			System.out.println(codUtente);
-			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
-			intent.putExtra("Status", status);
-			startActivity(intent);
+		Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
+		System.out.println(codUtente);
+		intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
+		intent.putExtra("Status", status);
+		startActivity(intent);
 	}
 	private DroidiaryDatabaseHelper dbd, tmp2;
 	private SQLiteDatabase db;
