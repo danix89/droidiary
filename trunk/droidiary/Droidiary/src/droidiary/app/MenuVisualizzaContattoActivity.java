@@ -40,9 +40,13 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		if(contatto==null){
 			contatto = getIntent().getExtras().getString("droidiary.app.ModificaContattoActivity");
 		}
-
-
+		
+		if(codUtente==0){
+			codUtente = getIntent().getExtras().getInt("codutente");
+		}
+		
 		System.out.println("Parametro Contatto: "+contatto);
+		System.out.println("Parametro account: "+codUtente);
 
 		dbd = new DroidiaryDatabaseHelper(this); //collegamento database
 		db=dbd.getWritableDatabase();
@@ -119,11 +123,12 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		//id_account, nome, cognome, citta, cellulare, numeroCasa, email
 
 		if(status.equals("true")){
-			String res=ContattoSync.getDatiFromString(contatto);
+			String res=ContattoSync.getDatiFromString(codUtente, contatto);
 			try {
 				JSONArray jArray = new JSONArray(res);
 				for(int i=0;i<jArray.length();i++){
 					JSONObject json_data = jArray.getJSONObject(i);
+					id=json_data.getInt("_id");
 					codUtente = json_data.getInt("id_account");
 					nome.setText(json_data.getString("nome"));
 					cognome.setText(json_data.getString("cognome"));
@@ -179,6 +184,11 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			Button eliminaContatto=(Button) findViewById(R.id.eliminacontatto);
 			eliminaContatto.setVisibility(View.INVISIBLE);
 		}
+		
+		if(status.contains("true")){
+			Button modificaContatto=(Button) findViewById(R.id.modificacontatto);
+			modificaContatto.setVisibility(View.INVISIBLE);
+		}
 
 		ImageView img = (ImageView) findViewById(R.id.chiamatacasa);
 		img.setOnClickListener(new OnClickListener() {
@@ -222,7 +232,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 
 			public void onClick(View v) {
 				if(status.equals("true")){
-					Toast.makeText(getApplicationContext(),  "Per eliminare devi sincronizzare i contatti", Toast.LENGTH_LONG).show();
+					onClickEliminaOnline();
 				}
 				if(status.equals("false")){
 					onClickElimina();
@@ -240,7 +250,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			getMenuInflater().inflate(R.menu.menusync, menu);
 			return true;
 		}else{
-			System.out.println("ModalitÃ  offline non si sincronizza");
+			System.out.println("Modalita'  offline non si sincronizza");
 			return true;
 		}
 	}
@@ -268,6 +278,8 @@ public class MenuVisualizzaContattoActivity extends Activity {
 	}
 
 
+	
+	
 	//metodo sincronizzazione
 
 	public int sincronizza(){
@@ -286,6 +298,28 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		flag=Account.SincronizzaAccount(db, codUtente);
 		dbd.close();
 		return flag;
+
+	}
+	
+	
+	
+	
+	public void onClickEliminaOnline(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Vuoi Eliminare il Contatto?")
+		.setCancelable(false)
+		.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				eliminaContattoOnline();
+			}
+		})
+		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		});
+		AlertDialog alert = builder.create();
+		alert.show();
 
 	}
 
@@ -314,6 +348,7 @@ public class MenuVisualizzaContattoActivity extends Activity {
 		intent.putExtra("Status", status);
 		startActivity(intent);
 	}
+	
 	public void eliminaContatto(){
 
 		if(status.equals("true")){
@@ -332,6 +367,18 @@ public class MenuVisualizzaContattoActivity extends Activity {
 			startActivity(intent);
 			tmp2.close();
 		}
+	}
+	
+	public void eliminaContattoOnline(){
+		if(status.equals("true")){
+			ContattoSync.eliminaContatto(id, codUtente);
+		}
+		Toast.makeText(getApplicationContext(),  "Contatto Elminato con Successo!", Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(MenuVisualizzaContattoActivity.this, MenuRubricaActivity.class);
+			System.out.println(codUtente);
+			intent.putExtra("droidiary.app.ModificaContattoActivity", codUtente);
+			intent.putExtra("Status", status);
+			startActivity(intent);
 	}
 	private DroidiaryDatabaseHelper dbd, tmp2;
 	private SQLiteDatabase db;
