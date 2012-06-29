@@ -153,8 +153,8 @@ public class MenuRubricaActivity extends Activity {
 			}
 			dbd.close();
 		}
-		
-		
+
+
 		lv=(ListView) findViewById(R.id.listacontatti);
 		Cursor contatti;
 		String contattiSync;
@@ -172,12 +172,12 @@ public class MenuRubricaActivity extends Activity {
 			listview_array=getOneColumn(contatti);
 			dbd.close();
 		}
-		
+
 		if(status.equals("true")){
 			contattiSync=ContattoSync.getContattiById(codUtente);
 			listview_array=getOneColumn(contattiSync);
 		}
-		
+
 
 		lv.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, listview_array){
@@ -278,7 +278,7 @@ public class MenuRubricaActivity extends Activity {
 		myArray = myTitle.split(";");     
 		return myArray;
 	}
-	
+
 	private String[] getOneColumn(String res){ 
 		String myTitle = "";
 		String[] myArray = null;
