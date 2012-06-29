@@ -248,7 +248,7 @@ public class MenuRubricaActivity extends Activity {
 						Object o = lv.getItemAtPosition(position);
 						String contatto = o.toString();
 						Intent intent = new Intent(MenuRubricaActivity.this, MenuVisualizzaContattoActivity.class);
-						intent.putExtra("droidiary.app.MenuRubricaActivity", codUtente);
+						intent.putExtra("codutente", codUtente);
 						intent.putExtra("droidiary.app.MenuRubricaActivity", contatto);
 						intent.putExtra("Status", status);
 						dbd.close();
